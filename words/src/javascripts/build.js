@@ -21013,25 +21013,17 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _logo = __webpack_require__(37);
-
-var _logo2 = _interopRequireDefault(_logo);
-
 __webpack_require__(35);
-
-var _secretKeys = __webpack_require__(40);
-
-var _secretKeys2 = _interopRequireDefault(_secretKeys);
-
-var _firebase = __webpack_require__(48);
-
-var _firebase2 = _interopRequireDefault(_firebase);
 
 var _reactRouterDom = __webpack_require__(77);
 
-var _Landing = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Landing\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _Landing = __webpack_require__(107);
 
 var _Landing2 = _interopRequireDefault(_Landing);
+
+var _CreatedRoom = __webpack_require__(106);
+
+var _CreatedRoom2 = _interopRequireDefault(_CreatedRoom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21051,17 +21043,6 @@ var App = function (_Component) {
   }
 
   _createClass(App, [{
-    key: 'createGameRoom',
-    value: function createGameRoom() {
-      var app = _firebase2.default.initializeApp(_secretKeys2.default);
-      var db = app.database();
-      var reference = db.ref("Room").push({
-        players: [{ username: "John" }],
-        letters: ["0", "e", "i"],
-        words: []
-      }).key;
-    }
-  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -21070,7 +21051,8 @@ var App = function (_Component) {
         _react2.default.createElement(
           'header',
           null,
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Landing2.default })
+          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Landing2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/:id', component: _CreatedRoom2.default })
         )
       );
     }
@@ -21146,12 +21128,7 @@ exports.push([module.i, ".App {\n  text-align: center;\n}\n\n.App-logo {\n  anim
 
 
 /***/ }),
-/* 37 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 841.9 595.3\"><g fill=\"#61DAFB\"><path d=\"M666.3 296.5c0-32.5-40.7-63.3-103.1-82.4 14.4-63.6 8-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6 0 8.3.9 11.4 2.6 13.6 7.8 19.5 37.5 14.9 75.7-1.1 9.4-2.9 19.3-5.1 29.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50 32.6-30.3 63.2-46.9 84-46.9V78c-27.5 0-63.5 19.6-99.9 53.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7 0 51.4 16.5 84 46.6-14 14.7-28 31.4-41.3 49.9-22.6 2.4-44 6.1-63.6 11-2.3-10-4-19.7-5.2-29-4.7-38.2 1.1-67.9 14.6-75.8 3-1.8 6.9-2.6 11.5-2.6V78.5c-8.4 0-16 1.8-22.6 5.6-28.1 16.2-34.4 66.7-19.9 130.1-62.2 19.2-102.7 49.9-102.7 82.3 0 32.5 40.7 63.3 103.1 82.4-14.4 63.6-8 114.2 20.2 130.4 6.5 3.8 14.1 5.6 22.5 5.6 27.5 0 63.5-19.6 99.9-53.6 36.4 33.8 72.4 53.2 99.9 53.2 8.4 0 16-1.8 22.6-5.6 28.1-16.2 34.4-66.7 19.9-130.1 62-19.1 102.5-49.9 102.5-82.3zm-130.2-66.7c-3.7 12.9-8.3 26.2-13.5 39.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4 14.2 2.1 27.9 4.7 41 7.9zm-45.8 106.5c-7.8 13.5-15.8 26.3-24.1 38.2-14.9 1.3-30 2-45.2 2-15.1 0-30.2-.7-45-1.9-8.3-11.9-16.4-24.6-24.2-38-7.6-13.1-14.5-26.4-20.8-39.8 6.2-13.4 13.2-26.8 20.7-39.9 7.8-13.5 15.8-26.3 24.1-38.2 14.9-1.3 30-2 45.2-2 15.1 0 30.2.7 45 1.9 8.3 11.9 16.4 24.6 24.2 38 7.6 13.1 14.5 26.4 20.8 39.8-6.3 13.4-13.2 26.8-20.7 39.9zm32.3-13c5.4 13.4 10 26.8 13.8 39.8-13.1 3.2-26.9 5.9-41.2 8 4.9-7.7 9.8-15.6 14.4-23.7 4.6-8 8.9-16.1 13-24.1zM421.2 430c-9.3-9.6-18.6-20.3-27.8-32 9 .4 18.2.7 27.5.7 9.4 0 18.7-.2 27.8-.7-9 11.7-18.3 22.4-27.5 32zm-74.4-58.9c-14.2-2.1-27.9-4.7-41-7.9 3.7-12.9 8.3-26.2 13.5-39.5 4.1 8 8.4 16 13.1 24 4.7 8 9.5 15.8 14.4 23.4zM420.7 163c9.3 9.6 18.6 20.3 27.8 32-9-.4-18.2-.7-27.5-.7-9.4 0-18.7.2-27.8.7 9-11.7 18.3-22.4 27.5-32zm-74 58.9c-4.9 7.7-9.8 15.6-14.4 23.7-4.6 8-8.9 16-13 24-5.4-13.4-10-26.8-13.8-39.8 13.1-3.1 26.9-5.8 41.2-7.9zm-90.5 125.2c-35.4-15.1-58.3-34.9-58.3-50.6 0-15.7 22.9-35.6 58.3-50.6 8.6-3.7 18-7 27.7-10.1 5.7 19.6 13.2 40 22.5 60.9-9.2 20.8-16.6 41.1-22.2 60.6-9.9-3.1-19.3-6.5-28-10.2zM310 490c-13.6-7.8-19.5-37.5-14.9-75.7 1.1-9.4 2.9-19.3 5.1-29.4 19.6 4.8 41 8.5 63.5 10.9 13.5 18.5 27.5 35.3 41.6 50-32.6 30.3-63.2 46.9-84 46.9-4.5-.1-8.3-1-11.3-2.7zm237.2-76.2c4.7 38.2-1.1 67.9-14.6 75.8-3 1.8-6.9 2.6-11.5 2.6-20.7 0-51.4-16.5-84-46.6 14-14.7 28-31.4 41.3-49.9 22.6-2.4 44-6.1 63.6-11 2.3 10.1 4.1 19.8 5.2 29.1zm38.5-66.7c-8.6 3.7-18 7-27.7 10.1-5.7-19.6-13.2-40-22.5-60.9 9.2-20.8 16.6-41.1 22.2-60.6 9.9 3.1 19.3 6.5 28.1 10.2 35.4 15.1 58.3 34.9 58.3 50.6-.1 15.7-23 35.6-58.4 50.6zM320.8 78.4z\"></path><circle cx=\"420.9\" cy=\"296.5\" r=\"45.7\"></circle><path d=\"M520.5 78.1z\"></path></g></svg>"
-
-/***/ }),
+/* 37 */,
 /* 38 */,
 /* 39 */,
 /* 40 */
@@ -21192,6 +21169,13 @@ exports.default = config;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _firebase = __webpack_require__(48);
+
+var firebase = _interopRequireWildcard(_firebase);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 var config = {
   apiKey: "AIzaSyBT6XoxqMkwP4hJQ0tC_E5ESuW9zKtCybM",
   authDomain: "word-9b174.firebaseapp.com",
@@ -21201,7 +21185,7 @@ var config = {
   messagingSenderId: "1095596524420"
 };
 
-exports.default = config;
+exports.default = !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
 
 /***/ }),
 /* 43 */
@@ -70108,6 +70092,149 @@ var Root = function Root() {
   );
 };
 exports.default = Root;
+
+/***/ }),
+/* 105 */,
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'h1',
+      null,
+      'ZThis is a created room'
+    )
+  );
+};
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(77);
+
+var _secretKeys = __webpack_require__(40);
+
+var _secretKeys2 = _interopRequireDefault(_secretKeys);
+
+var _firebase = __webpack_require__(48);
+
+var _firebase2 = _interopRequireDefault(_firebase);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Landing = function (_Component) {
+  _inherits(Landing, _Component);
+
+  function Landing(props) {
+    _classCallCheck(this, Landing);
+
+    var _this = _possibleConstructorReturn(this, (Landing.__proto__ || Object.getPrototypeOf(Landing)).call(this, props));
+
+    _this.state = {
+      create: false,
+      back: false,
+      roomId: ''
+    };
+
+    _this.createRoom = _this.createRoom.bind(_this);
+    return _this;
+  }
+
+  _createClass(Landing, [{
+    key: 'updatecCreate',
+    value: function updatecCreate() {
+      this.setState({ create: true });
+    }
+  }, {
+    key: 'createRoom',
+    value: function createRoom() {
+      var db = _firebase2.default.database();
+      var reference = db.ref("Room").push({
+        players: [{ username: "John" }],
+        letters: ["0", "e", "i"],
+        words: []
+      }).key;
+
+      this.setState({
+        roomId: reference
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (!this.state.create) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h1',
+            null,
+            'Welcome to Word'
+          ),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.updatecCreate.bind(this) },
+            'Create Game'
+          )
+        );
+      } else {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: this.state.roomId, replace: true },
+            _react2.default.createElement(
+              'button',
+              { onClick: this.createRoom },
+              'Create a Room'
+            )
+          )
+        );
+      }
+    }
+  }]);
+
+  return Landing;
+}(_react.Component);
+
+exports.default = Landing;
 
 /***/ })
 /******/ ]);

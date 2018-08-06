@@ -1,4 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import config from '../firebase/secretKeys';
+import firebase from 'firebase';
 
 class Landing extends Component {
   constructor(props) {
@@ -6,12 +9,28 @@ class Landing extends Component {
 
     this.state = {
       create: false,
-      back: false
+      back: false,
+      roomId: ''
     }
+
+    this.createRoom = this.createRoom.bind(this);
   }
 
   updatecCreate() {
     this.setState({ create: true })
+  }
+
+  createRoom(){
+    let db = firebase.database();
+    let reference = db.ref("Room").push({
+        players: [{ username: "John" }],
+        letters: ["0", "e", "i"],
+        words: []
+    }).key;
+
+    this.setState({
+      roomId: reference
+    })
   }
   render() {
     if (!this.state.create) {
@@ -23,7 +42,9 @@ class Landing extends Component {
       )
     } else {
       return (
-        <div>Again</div>
+        <div>
+          <Link to={this.state.roomId} replace><button onClick={this.createRoom}>Create a Room</button></Link>
+        </div>
       )
     }
   }
