@@ -21165,25 +21165,26 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _firebaseConfig = __webpack_require__(41);
+var _firebaseConfigs = __webpack_require__(42);
 
-var _firebaseConfig2 = _interopRequireDefault(_firebaseConfig);
+var _firebaseConfigs2 = _interopRequireDefault(_firebaseConfigs);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var config = {
-  apiKey: _firebaseConfig2.default.apiKey,
-  authDomain: _firebaseConfig2.default.authDomain,
-  databaseURL: _firebaseConfig2.default.databaseURL,
-  projectId: _firebaseConfig2.default.projectId,
-  storageBucket: _firebaseConfig2.default.storageBucket,
-  messagingSenderId: _firebaseConfig2.default.messagingSenderId
+  apiKey: _firebaseConfigs2.default.apiKey,
+  authDomain: _firebaseConfigs2.default.authDomain,
+  databaseURL: _firebaseConfigs2.default.databaseURL,
+  projectId: _firebaseConfigs2.default.projectId,
+  storageBucket: _firebaseConfigs2.default.storageBucket,
+  messagingSenderId: _firebaseConfigs2.default.messagingSenderId
 };
 
 exports.default = config;
 
 /***/ }),
-/* 41 */
+/* 41 */,
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21193,12 +21194,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var config = {
-  apiKey: "AIzaSyAUo5FEmxVhWL2Os9JENj8tVRgCvyKULH8",
-  authDomain: "code-79979.firebaseapp.com",
-  databaseURL: "https://code-79979.firebaseio.com",
-  projectId: "code-79979",
-  storageBucket: "code-79979.appspot.com",
-  messagingSenderId: "802485271216"
+  apiKey: "AIzaSyBT6XoxqMkwP4hJQ0tC_E5ESuW9zKtCybM",
+  authDomain: "word-9b174.firebaseapp.com",
+  databaseURL: "https://word-9b174.firebaseio.com",
+  projectId: "word-9b174",
+  storageBucket: "",
+  messagingSenderId: "1095596524420"
 };
 
 exports.default = config;

@@ -1,4 +1,4 @@
-import Config from './firebaseConfig.js';
+import Config from './firebaseConfigs.js';
 
 let config = {
   apiKey: Config.apiKey,
