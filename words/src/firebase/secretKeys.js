@@ -1,6 +1,6 @@
 import Config from './firebaseConfig.js';
 
-config = {
+let config = {
   apiKey: Config.apiKey,
   authDomain: Config.authDomain,
   databaseURL: Config.databaseURL,
@@ -8,3 +8,5 @@ config = {
   storageBucket: Config.storageBucket,
   messagingSenderId: Config.messagingSenderId
 };
+
+export default config;
