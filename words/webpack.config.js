@@ -22,8 +22,9 @@ module.exports = {
         test: /\.svg$/,
         loader: 'svg-inline-loader'
     }
-      ]
+      ],
   },
+  resolve: { extensions: ['.js', '.jsx'] },
   output: {
       path: __dirname + "/src/javascripts",
       filename: "build.js"

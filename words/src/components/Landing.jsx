@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import config from '../firebase/secretKeys';
-import firebase from 'firebase';
+import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
+import firebase from "../firebase/secretKeys";
 
 class Landing extends Component {
   constructor(props) {
@@ -10,28 +9,66 @@ class Landing extends Component {
     this.state = {
       create: false,
       back: false,
-      roomId: ''
-    }
+      roomId: "",
+      username: "",
+      currentUser: "",
+      userId: ""
+    };
 
-    this.createRoom = this.createRoom.bind(this);
+    this.currentUserUid = "";
+    this.update = this.update.bind(this);
+    this.createUser = this.createUser.bind(this);
+  }
+
+  componentDidMount() {
+    let db = firebase.database();
+    let roomRefKey = db.ref("Room").push().key;
+    this.setState({
+      roomId: roomRefKey
+    });
   }
 
   updatecCreate() {
-    this.setState({ create: true })
+    this.setState({ create: true });
   }
 
-  createRoom(){
-    let db = firebase.database();
-    let reference = db.ref("Room").push({
-        players: [{ username: "John" }],
-        letters: ["0", "e", "i"],
-        words: []
-    }).key;
+  createUser() {
+    const loginPromise = new Promise((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          window.user = user;
 
-    this.setState({
-      roomId: reference
-    })
+          resolve(user.uid);
+        } else {
+          firebase
+            .auth()
+            .signInAnonymously()
+            .then(() => {
+              console.log("logged in");
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      });
+    });
+    loginPromise.then(id => {
+      let db = firebase.database();
+      let playersRef = db.ref(`Room/${this.state.roomId}/players`);
+      playersRef.child(`${id}`).set(`${this.state.username}`);
+      let player = db.ref(`Room/${this.state.roomId}/players/${id}`);
+      player.onDisconnect().remove();
+    });
   }
+
+  update(field) {
+    return e => {
+      this.setState({
+        [field]: e.target.value
+      });
+    };
+  }
+
   render() {
     if (!this.state.create) {
       return (
@@ -39,13 +76,20 @@ class Landing extends Component {
           <h1>Welcome to Word</h1>
           <button onClick={this.updatecCreate.bind(this)}>Create Game</button>
         </div>
-      )
+      );
     } else {
       return (
         <div>
-          <Link to={this.state.roomId} replace><button onClick={this.createRoom}>Create a Room</button></Link>
+          <input
+            type="text"
+            placeholder="Enter a username"
+            onChange={this.update("username")}
+          />
+          <Link to={this.state.roomId} replace>
+            <button onClick={this.createUser}>Create a Room</button>
+          </Link>
         </div>
-      )
+      );
     }
   }
 }

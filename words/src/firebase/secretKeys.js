@@ -1,4 +1,5 @@
-import Config from './firebaseConfigs.js';
+import * as firebase from "firebase";
+import Config from "./firebaseConfigs.js";
 
 let config = {
   apiKey: Config.apiKey,
@@ -9,4 +10,6 @@ let config = {
   messagingSenderId: Config.messagingSenderId
 };
 
-export default config;
+export default (!firebase.apps.length
+  ? firebase.initializeApp(config)
+  : firebase.app());
