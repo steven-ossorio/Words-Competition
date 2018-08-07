@@ -20,7 +20,7 @@ module.exports = {
         use: [
           "style-loader", // creates style nodes from JS strings
           "css-loader", // translates CSS into CommonJS
-          "sass-loader" // compiles Sass to CSS, using Node Sass by default
+          "sass-loader"
         ]
       },
       {
@@ -29,7 +29,7 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: [".js", ".jsx"] },
+  resolve: { extensions: [".js", ".jsx", ".sass"] },
   output: {
     path: __dirname + "/src/javascripts",
     filename: "build.js"

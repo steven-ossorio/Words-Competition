@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import firebase from "../firebase/secretKeys";
+import "./Landing.css";
 
 class Landing extends Component {
   constructor(props) {
@@ -72,9 +73,14 @@ class Landing extends Component {
   render() {
     if (!this.state.create) {
       return (
-        <div>
-          <h1>Welcome to Word</h1>
-          <button onClick={this.updatecCreate.bind(this)}>Create Game</button>
+        <div className="landing">
+          <h1 className="landing-header">Welcome to Word</h1>
+          <button
+            className="landing-button"
+            onClick={this.updatecCreate.bind(this)}
+          >
+            Create Game
+          </button>
         </div>
       );
     } else {
