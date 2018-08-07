@@ -27980,6 +27980,7 @@ var Landing = function (_Component) {
       userId: ""
     };
 
+    _this.userId = "";
     _this.currentUserUid = "";
     _this.update = _this.update.bind(_this);
     _this.createUser = _this.createUser.bind(_this);
@@ -28009,7 +28010,6 @@ var Landing = function (_Component) {
         _secretKeys2.default.auth().onAuthStateChanged(function (user) {
           if (user) {
             window.user = user;
-
             resolve(user.uid);
           } else {
             _secretKeys2.default.auth().signInAnonymously().then(function () {
@@ -70262,6 +70262,10 @@ var _Players = __webpack_require__(99);
 
 var _Players2 = _interopRequireDefault(_Players);
 
+var _JoinRoom = __webpack_require__(100);
+
+var _JoinRoom2 = _interopRequireDefault(_JoinRoom);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -70279,21 +70283,82 @@ var CreatedRoom = function (_Component) {
     var _this = _possibleConstructorReturn(this, (CreatedRoom.__proto__ || Object.getPrototypeOf(CreatedRoom)).call(this, props));
 
     _this.state = {
-      players: []
+      players: [],
+      playersID: {},
+      loggedIn: false
     };
+
+    _this.checkIfLoggedIn = _this.checkIfLoggedIn.bind(_this);
+    _this.checkIfInCurrentGame = _this.checkIfInCurrentGame.bind(_this);
     return _this;
   }
 
   _createClass(CreatedRoom, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.checkIfLoggedIn();
+      // let playerObj;
+      // let playersKeysObj = {};
+      // let gameID = this.props.match.params.id;
+      // let db = firebase.database();
+      // db.ref(`Room/${gameID}`).on("value", snapshot => {
+      //   this.setState({
+      //     players: []
+      //   });
+      //   snapshot.forEach(snap => {
+      //     playerObj = snap.val();
+      //   });
+
+      //   let newArray = [];
+      //   Object.keys(playerObj).forEach(id => {
+      //     newArray.push(playerObj[id]);
+      //     playersKeysObj[id] = true;
+      //   });
+
+      //   this.setState({
+      //     players: newArray,
+      //     playersID: playersKeysObj
+      //   });
+      // });
+
+      // this.checkIfLoggedIn();
+    }
+  }, {
+    key: "checkIfLoggedIn",
+    value: function checkIfLoggedIn() {
       var _this2 = this;
 
+      var loginPromise = new Promise(function (resolve, reject) {
+        _secretKeys2.default.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            window.user = user;
+            console.log("CHecked in");
+            resolve(user.uid);
+          } else {
+            _secretKeys2.default.auth().signInAnonymously().then(function () {
+              console.log("logged in");
+            }).catch(function (err) {
+              console.log(err);
+            });
+          }
+        });
+      });
+      loginPromise.then(function (id) {
+        _this2.checkIfInCurrentGame(id);
+      });
+    }
+  }, {
+    key: "checkIfInCurrentGame",
+    value: function checkIfInCurrentGame(userId) {
+      var _this3 = this;
+
+      console.log("checking");
       var playerObj = void 0;
+      var playersKeysObj = {};
       var gameID = this.props.match.params.id;
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).on("value", function (snapshot) {
-        _this2.setState({
+        _this3.setState({
           players: []
         });
         snapshot.forEach(function (snap) {
@@ -70302,24 +70367,37 @@ var CreatedRoom = function (_Component) {
 
         var newArray = [];
         Object.keys(playerObj).forEach(function (id) {
+          if (id === userId) {
+            console.log("Logged in Became true");
+            _this3.setState({ loggedIn: true });
+          }
           newArray.push(playerObj[id]);
+          playersKeysObj[id] = true;
         });
 
-        _this2.setState({
-          players: newArray
+        _this3.setState({
+          players: newArray,
+          playersID: playersKeysObj
         });
       });
     }
   }, {
     key: "render",
     value: function render() {
-      console.log(this.state.players);
-      return _react2.default.createElement(
-        "div",
-        null,
-        "This is a created Room",
-        _react2.default.createElement(_Players2.default, { players: this.state.players })
-      );
+      if (this.state.loggedIn) {
+        return _react2.default.createElement(
+          "div",
+          null,
+          "This is a created Room",
+          _react2.default.createElement(_Players2.default, { players: this.state.players })
+        );
+      } else {
+        return _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement(_JoinRoom2.default, { roomId: this.props.match.params.id })
+        );
+      }
     }
   }]);
 
@@ -70359,6 +70437,129 @@ exports.default = function (props) {
     playerList
   );
 };
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _secretKeys = __webpack_require__(37);
+
+var _secretKeys2 = _interopRequireDefault(_secretKeys);
+
+var _reactRouterDom = __webpack_require__(18);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var JoinRoom = function (_Component) {
+  _inherits(JoinRoom, _Component);
+
+  function JoinRoom(props) {
+    _classCallCheck(this, JoinRoom);
+
+    var _this = _possibleConstructorReturn(this, (JoinRoom.__proto__ || Object.getPrototypeOf(JoinRoom)).call(this, props));
+
+    _this.state = {
+      username: "",
+      roomId: ""
+    };
+
+    _this.update = _this.update.bind(_this);
+    _this.addUserToRoom = _this.addUserToRoom.bind(_this);
+    return _this;
+  }
+
+  _createClass(JoinRoom, [{
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        roomId: this.props.roomId
+      });
+    }
+  }, {
+    key: "addUserToRoom",
+    value: function addUserToRoom() {
+      var _this3 = this;
+
+      var loginPromise = new Promise(function (resolve, reject) {
+        _secretKeys2.default.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            window.user = user;
+            resolve(user.uid);
+          } else {
+            _secretKeys2.default.auth().signInAnonymously().then(function () {
+              console.log("logged in");
+            }).catch(function (err) {
+              console.log(err);
+            });
+          }
+        });
+      });
+      loginPromise.then(function (id) {
+        var db = _secretKeys2.default.database();
+        var playersRef = db.ref("Room/" + _this3.state.roomId + "/players");
+        playersRef.child("" + id).set("" + _this3.state.username);
+        var player = db.ref("Room/" + _this3.state.roomId + "/players/" + id);
+        player.onDisconnect().remove();
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement("input", {
+          type: "text",
+          placeholder: "Enter a username",
+          onChange: this.update("username")
+        }),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: this.state.roomId, replace: true },
+          _react2.default.createElement(
+            "button",
+            { onClick: this.addUserToRoom },
+            "Join"
+          )
+        )
+      );
+    }
+  }]);
+
+  return JoinRoom;
+}(_react.Component);
+
+exports.default = JoinRoom;
 
 /***/ })
 /******/ ]);

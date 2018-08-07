@@ -15,6 +15,7 @@ class Landing extends Component {
       userId: ""
     };
 
+    this.userId = "";
     this.currentUserUid = "";
     this.update = this.update.bind(this);
     this.createUser = this.createUser.bind(this);
@@ -37,7 +38,6 @@ class Landing extends Component {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           window.user = user;
-
           resolve(user.uid);
         } else {
           firebase
