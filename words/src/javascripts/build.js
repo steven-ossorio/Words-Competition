@@ -28077,18 +28077,22 @@ var Landing = function (_Component) {
         return _react2.default.createElement(
           "div",
           null,
-          _react2.default.createElement("input", {
-            type: "text",
-            placeholder: "Enter a username",
-            onChange: this.update("username")
-          }),
           _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: this.state.roomId, replace: true },
+            "form",
+            null,
+            _react2.default.createElement("input", {
+              type: "text",
+              placeholder: "Enter a username",
+              onChange: this.update("username")
+            }),
             _react2.default.createElement(
-              "button",
-              { onClick: this.createUser },
-              "Create a Room"
+              _reactRouterDom.Link,
+              { to: this.state.roomId, replace: true },
+              _react2.default.createElement(
+                "button",
+                { onClick: this.createUser },
+                "Create a Room"
+              )
             )
           )
         );
@@ -70640,7 +70644,7 @@ exports = module.exports = __webpack_require__(30)(false);
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: \"crackman\";\n  src: url(" + escape(__webpack_require__(105)) + "); }\n\n.landing-container {\n  margin: 20% auto;\n  width: 800px;\n  height: 200px; }\n  .landing-container-header {\n    border-top: 1px dashed grey;\n    padding-top: 25px;\n    font-size: 50px;\n    text-align: center;\n    font-family: crackman;\n    letter-spacing: 1rem; }\n  .landing-container-buttons {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px dashed grey;\n    padding-bottom: 50px; }\n  .landing-container-button {\n    font-size: 15px;\n    background-color: transparent;\n    border: 1px solid #bbb;\n    height: 38px;\n    padding: 0 30px;\n    margin: 0 auto;\n    line-height: 38px;\n    letter-spacing: 0.2rem;\n    text-transform: uppercase;\n    white-space: nowrap;\n    box-sizing: border-box; }\n    .landing-container-button:hover {\n      cursor: pointer; }\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: \"crackman\";\n  src: url(" + escape(__webpack_require__(105)) + "); }\n\n@font-face {\n  font-family: \"animals\";\n  src: url(" + escape(__webpack_require__(106)) + "); }\n\n@font-face {\n  font-family: \"answer\";\n  src: url(" + escape(__webpack_require__(107)) + "); }\n\n@font-face {\n  font-family: \"answer3d\";\n  src: url(" + escape(__webpack_require__(108)) + "); }\n\n@font-face {\n  font-family: \"assyrian\";\n  src: url(" + escape(__webpack_require__(109)) + "); }\n\n@font-face {\n  font-family: \"assyrian3d\";\n  src: url(" + escape(__webpack_require__(110)) + "); }\n\n@font-face {\n  font-family: \"facon\";\n  src: url(" + escape(__webpack_require__(111)) + "); }\n\n.landing-container {\n  margin: 20% auto;\n  width: 900px;\n  height: 200px; }\n  .landing-container-header {\n    border-top: 1px dashed grey;\n    padding-top: 25px;\n    font-size: 55px;\n    text-align: center;\n    font-family: facon;\n    letter-spacing: 1rem; }\n  .landing-container-buttons {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px dashed grey;\n    padding-bottom: 50px; }\n  .landing-container-button {\n    font-family: crackman;\n    font-size: 35px;\n    background-color: transparent;\n    border: 1px solid #bbb;\n    height: 38px;\n    padding: 0 30px;\n    margin: 0 auto;\n    line-height: 38px;\n    letter-spacing: 0.2rem;\n    text-transform: uppercase;\n    white-space: nowrap;\n    box-sizing: border-box; }\n    .landing-container-button:hover {\n      cursor: pointer; }\n", ""]);
 
 // exports
 
@@ -70669,6 +70673,42 @@ module.exports = function escape(url) {
 
 /***/ }),
 /* 105 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected character '\u0000' (1:0)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
+
+/***/ }),
+/* 106 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected character '\u0000' (1:0)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected character '\u0000' (1:0)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected character '\u0000' (1:0)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected character '\u0000' (1:0)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected character '\u0000' (1:0)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
+
+/***/ }),
+/* 111 */
 /***/ (function(module, exports) {
 
 throw new Error("Module parse failed: Unexpected character '\u0000' (1:0)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");

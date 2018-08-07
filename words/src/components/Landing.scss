@@ -3,20 +3,50 @@
   src: url(../fonts/crackman.ttf);
 }
 
+@font-face {
+  font-family: "animals";
+  src: url(../fonts/Animales.ttf);
+}
+
+@font-face {
+  font-family: "answer";
+  src: url(../fonts/Answer.ttf);
+}
+
+@font-face {
+  font-family: "answer3d";
+  src: url(../fonts/Answer3DFilled-Italic.ttf);
+}
+
+@font-face {
+  font-family: "assyrian";
+  src: url(../fonts/Assyrian.ttf);
+}
+
+@font-face {
+  font-family: "assyrian3d";
+  src: url(../fonts/Assyrian3D.ttf);
+}
+
+@font-face {
+  font-family: "facon";
+  src: url(../fonts/Facon.ttf);
+}
+
 .landing {
   // background-color: blue;
   &-container {
     // background-color: red;
     margin: 20% auto;
-    width: 800px;
+    width: 900px;
     height: 200px;
 
     &-header {
       border-top: 1px dashed grey;
       padding-top: 25px;
-      font-size: 50px;
+      font-size: 55px;
       text-align: center;
-      font-family: crackman;
+      font-family: facon;
       letter-spacing: 1rem;
     }
 
@@ -28,7 +58,8 @@
     }
 
     &-button {
-      font-size: 15px;
+      font-family: crackman;
+      font-size: 35px;
       background-color: transparent;
       border: 1px solid #bbb;
       height: 38px;

@@ -91,14 +91,16 @@ class Landing extends Component {
     } else {
       return (
         <div>
-          <input
-            type="text"
-            placeholder="Enter a username"
-            onChange={this.update("username")}
-          />
-          <Link to={this.state.roomId} replace>
-            <button onClick={this.createUser}>Create a Room</button>
-          </Link>
+          <form>
+            <input
+              type="text"
+              placeholder="Enter a username"
+              onChange={this.update("username")}
+            />
+            <Link to={this.state.roomId} replace>
+              <button onClick={this.createUser}>Create a Room</button>
+            </Link>
+          </form>
         </div>
       );
     }
