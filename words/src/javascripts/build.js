@@ -25331,11 +25331,8 @@ var App = function (_Component) {
           "header",
           null,
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _Landing2.default }),
-          " ",
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/: id ", component: _CreatedRoom2.default }),
-          " "
-        ),
-        " "
+          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/:id", component: _CreatedRoom2.default })
+        )
       );
     }
   }]);
@@ -70289,46 +70286,29 @@ var CreatedRoom = function (_Component) {
 
   _createClass(CreatedRoom, [{
     key: "componentDidMount",
-    value: function componentDidMount(props) {
+    value: function componentDidMount() {
+      var _this2 = this;
+
       var playerObj = void 0;
       var gameID = this.props.match.params.id;
       var db = _secretKeys2.default.database();
-      // db.ref(`Room/${gameID}`).on("value", snapshot => {
-      //   this.setState({
-      //     players: []
-      //   })
-      //   snapshot.forEach(snap => {
-      //     playerObj = snap.val();
-      //   })
+      db.ref("Room/" + gameID).on("value", function (snapshot) {
+        _this2.setState({
+          players: []
+        });
+        snapshot.forEach(function (snap) {
+          playerObj = snap.val();
+        });
 
-      //   let newArray = [];
-      //   Object.keys(playerObj).forEach(id => {
-      //     newArray.push(playerObj[id])
-      //   })
+        var newArray = [];
+        Object.keys(playerObj).forEach(function (id) {
+          newArray.push(playerObj[id]);
+        });
 
-      //   this.setState({
-      //     players: newArray
-      //   })
-
-      // });
-
-      // firebase.auth().onAuthStateChanged(user => {
-      //   if (user) {
-      //     window.user = user;
-      //     console.log(user.isAnonymous);
-      //     console.log("User:", user.uid);
-      //   } else {
-      //     firebase
-      //       .auth()
-      //       .signInAnonymously()
-      //       .then(() => {
-      //         console.log("logged in");
-      //       })
-      //       .catch(err => {
-      //         console.log(err);
-      //       });
-      //   }
-      // });
+        _this2.setState({
+          players: newArray
+        });
+      });
     }
   }, {
     key: "render",

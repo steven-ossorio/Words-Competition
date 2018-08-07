@@ -9,9 +9,9 @@ class App extends Component {
     return (
       <div>
         <header>
-          <Route exact path="/" component={Landing} />{" "}
-          <Route exact path="/: id " component={CreatedRoom} />{" "}
-        </header>{" "}
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/:id" component={CreatedRoom} />
+        </header>
       </div>
     );
   }

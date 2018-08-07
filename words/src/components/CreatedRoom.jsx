@@ -10,46 +10,27 @@ class CreatedRoom extends Component {
       players: []
     };
   }
-  componentDidMount(props) {
+  componentDidMount() {
     let playerObj;
     let gameID = this.props.match.params.id;
     let db = firebase.database();
-    // db.ref(`Room/${gameID}`).on("value", snapshot => {
-    //   this.setState({
-    //     players: []
-    //   })
-    //   snapshot.forEach(snap => {
-    //     playerObj = snap.val();
-    //   })
+    db.ref(`Room/${gameID}`).on("value", snapshot => {
+      this.setState({
+        players: []
+      });
+      snapshot.forEach(snap => {
+        playerObj = snap.val();
+      });
 
-    //   let newArray = [];
-    //   Object.keys(playerObj).forEach(id => {
-    //     newArray.push(playerObj[id])
-    //   })
+      let newArray = [];
+      Object.keys(playerObj).forEach(id => {
+        newArray.push(playerObj[id]);
+      });
 
-    //   this.setState({
-    //     players: newArray
-    //   })
-
-    // });
-
-    // firebase.auth().onAuthStateChanged(user => {
-    //   if (user) {
-    //     window.user = user;
-    //     console.log(user.isAnonymous);
-    //     console.log("User:", user.uid);
-    //   } else {
-    //     firebase
-    //       .auth()
-    //       .signInAnonymously()
-    //       .then(() => {
-    //         console.log("logged in");
-    //       })
-    //       .catch(err => {
-    //         console.log(err);
-    //       });
-    //   }
-    // });
+      this.setState({
+        players: newArray
+      });
+    });
   }
 
   render() {
