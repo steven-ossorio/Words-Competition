@@ -28047,17 +28047,30 @@ var Landing = function (_Component) {
           "div",
           { className: "landing" },
           _react2.default.createElement(
-            "h1",
-            { className: "landing-header" },
-            "Welcome to Word"
-          ),
-          _react2.default.createElement(
-            "button",
-            {
-              className: "landing-button",
-              onClick: this.updatecCreate.bind(this)
-            },
-            "Create Game"
+            "div",
+            { className: "landing-container" },
+            _react2.default.createElement(
+              "h1",
+              { className: "landing-container-header" },
+              "Welcome to Word"
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "landing-container-buttons" },
+              _react2.default.createElement(
+                "button",
+                {
+                  className: "landing-container-button",
+                  onClick: this.updatecCreate.bind(this)
+                },
+                "Create Game"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "landing-container-button" },
+                "Join a room"
+              )
+            )
           )
         );
       } else {
@@ -70621,15 +70634,44 @@ if(false) {
 /* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var escape = __webpack_require__(104);
 exports = module.exports = __webpack_require__(30)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".landing {\n  background-color: blue;\n  margin: 0 auto; }\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: \"crackman\";\n  src: url(" + escape(__webpack_require__(105)) + "); }\n\n.landing-container {\n  margin: 20% auto;\n  width: 800px;\n  height: 200px; }\n  .landing-container-header {\n    border-top: 1px dashed grey;\n    padding-top: 25px;\n    font-size: 50px;\n    text-align: center;\n    font-family: crackman;\n    letter-spacing: 1rem; }\n  .landing-container-buttons {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px dashed grey;\n    padding-bottom: 50px; }\n  .landing-container-button {\n    font-size: 15px;\n    background-color: transparent;\n    border: 1px solid #bbb;\n    height: 38px;\n    padding: 0 30px;\n    margin: 0 auto;\n    line-height: 38px;\n    letter-spacing: 0.2rem;\n    text-transform: uppercase;\n    white-space: nowrap;\n    box-sizing: border-box; }\n    .landing-container-button:hover {\n      cursor: pointer; }\n", ""]);
 
 // exports
 
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports) {
+
+module.exports = function escape(url) {
+    if (typeof url !== 'string') {
+        return url
+    }
+    // If url is already wrapped in quotes, remove them
+    if (/^['"].*['"]$/.test(url)) {
+        url = url.slice(1, -1);
+    }
+    // Should url be wrapped?
+    // See https://drafts.csswg.org/css-values-3/#urls
+    if (/["'() \t\n]/.test(url)) {
+        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
+    }
+
+    return url
+}
+
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected character '\u0000' (1:0)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
 
 /***/ })
 /******/ ]);

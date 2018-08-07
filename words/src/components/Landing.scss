@@ -1,4 +1,48 @@
+@font-face {
+  font-family: "crackman";
+  src: url(../fonts/crackman.ttf);
+}
+
 .landing {
-  background-color: blue;
-  margin: 0 auto;
+  // background-color: blue;
+  &-container {
+    // background-color: red;
+    margin: 20% auto;
+    width: 800px;
+    height: 200px;
+
+    &-header {
+      border-top: 1px dashed grey;
+      padding-top: 25px;
+      font-size: 50px;
+      text-align: center;
+      font-family: crackman;
+      letter-spacing: 1rem;
+    }
+
+    &-buttons {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed grey;
+      padding-bottom: 50px;
+    }
+
+    &-button {
+      font-size: 15px;
+      background-color: transparent;
+      border: 1px solid #bbb;
+      height: 38px;
+      padding: 0 30px;
+      margin: 0 auto;
+      line-height: 38px;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-sizing: border-box;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }

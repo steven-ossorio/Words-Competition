@@ -74,13 +74,18 @@ class Landing extends Component {
     if (!this.state.create) {
       return (
         <div className="landing">
-          <h1 className="landing-header">Welcome to Word</h1>
-          <button
-            className="landing-button"
-            onClick={this.updatecCreate.bind(this)}
-          >
-            Create Game
-          </button>
+          <div className="landing-container">
+            <h1 className="landing-container-header">Welcome to Word</h1>
+            <div className="landing-container-buttons">
+              <button
+                className="landing-container-button"
+                onClick={this.updatecCreate.bind(this)}
+              >
+                Create Game
+              </button>
+              <button className="landing-container-button">Join a room</button>
+            </div>
+          </div>
         </div>
       );
     } else {
