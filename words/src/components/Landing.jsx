@@ -20,6 +20,7 @@ class Landing extends Component {
     this.currentUserUid = "";
     this.update = this.update.bind(this);
     this.createUser = this.createUser.bind(this);
+    this.updateCreate = this.updateCreate.bind(this);
   }
 
   componentDidMount() {
@@ -30,11 +31,14 @@ class Landing extends Component {
     });
   }
 
-  updatecCreate() {
-    this.setState({ create: true });
+  updateCreate(e) {
+    e.preventDefault();
+    let create = !this.state.create;
+    this.setState({ create });
   }
 
-  createUser() {
+  createUser(e) {
+    e.preventDefault();
     const loginPromise = new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -79,7 +83,7 @@ class Landing extends Component {
             <div className="landing-container-buttons">
               <button
                 className="landing-container-button"
-                onClick={this.updatecCreate.bind(this)}
+                onClick={this.updateCreate.bind(this)}
               >
                 Create Game
               </button>
@@ -90,17 +94,35 @@ class Landing extends Component {
       );
     } else {
       return (
-        <div>
-          <form>
-            <input
-              type="text"
-              placeholder="Enter a username"
-              onChange={this.update("username")}
-            />
-            <Link to={this.state.roomId} replace>
-              <button onClick={this.createUser}>Create a Room</button>
-            </Link>
-          </form>
+        <div className="landing">
+          <div className="landing-container">
+            <h1 className="landing-container-header">Welcome to Word</h1>
+            <form className="landing-container-form">
+              <input
+                type="text"
+                placeholder="Enter a username"
+                onChange={this.update("username")}
+              />
+              <div className="landing-container-form-buttons">
+                <Link to={this.state.roomId} replace>
+                  <button
+                    className="landing-container-form-button"
+                    onClick={this.createUser}
+                  >
+                    Create a Room
+                  </button>
+                </Link>
+                <Link to="/" replace>
+                  <button
+                    className="landing-container-form-button"
+                    onClick={this.updateCreate}
+                  >
+                    Go Back
+                  </button>
+                </Link>
+              </div>
+            </form>
+          </div>
         </div>
       );
     }

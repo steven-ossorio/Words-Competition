@@ -27986,6 +27986,7 @@ var Landing = function (_Component) {
     _this.currentUserUid = "";
     _this.update = _this.update.bind(_this);
     _this.createUser = _this.createUser.bind(_this);
+    _this.updateCreate = _this.updateCreate.bind(_this);
     return _this;
   }
 
@@ -27999,15 +28000,18 @@ var Landing = function (_Component) {
       });
     }
   }, {
-    key: "updatecCreate",
-    value: function updatecCreate() {
-      this.setState({ create: true });
+    key: "updateCreate",
+    value: function updateCreate(e) {
+      e.preventDefault();
+      var create = !this.state.create;
+      this.setState({ create: create });
     }
   }, {
     key: "createUser",
-    value: function createUser() {
+    value: function createUser(e) {
       var _this2 = this;
 
+      e.preventDefault();
       var loginPromise = new Promise(function (resolve, reject) {
         _secretKeys2.default.auth().onAuthStateChanged(function (user) {
           if (user) {
@@ -28061,7 +28065,7 @@ var Landing = function (_Component) {
                 "button",
                 {
                   className: "landing-container-button",
-                  onClick: this.updatecCreate.bind(this)
+                  onClick: this.updateCreate.bind(this)
                 },
                 "Create Game"
               ),
@@ -28076,22 +28080,50 @@ var Landing = function (_Component) {
       } else {
         return _react2.default.createElement(
           "div",
-          null,
+          { className: "landing" },
           _react2.default.createElement(
-            "form",
-            null,
-            _react2.default.createElement("input", {
-              type: "text",
-              placeholder: "Enter a username",
-              onChange: this.update("username")
-            }),
+            "div",
+            { className: "landing-container" },
             _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: this.state.roomId, replace: true },
+              "h1",
+              { className: "landing-container-header" },
+              "Welcome to Word"
+            ),
+            _react2.default.createElement(
+              "form",
+              { className: "landing-container-form" },
+              _react2.default.createElement("input", {
+                type: "text",
+                placeholder: "Enter a username",
+                onChange: this.update("username")
+              }),
               _react2.default.createElement(
-                "button",
-                { onClick: this.createUser },
-                "Create a Room"
+                "div",
+                { className: "landing-container-form-buttons" },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: this.state.roomId, replace: true },
+                  _react2.default.createElement(
+                    "button",
+                    {
+                      className: "landing-container-form-button",
+                      onClick: this.createUser
+                    },
+                    "Create a Room"
+                  )
+                ),
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: "/", replace: true },
+                  _react2.default.createElement(
+                    "button",
+                    {
+                      className: "landing-container-form-button",
+                      onClick: this.updateCreate
+                    },
+                    "Go Back"
+                  )
+                )
               )
             )
           )
@@ -70644,7 +70676,7 @@ exports = module.exports = __webpack_require__(30)(false);
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: \"crackman\";\n  src: url(" + escape(__webpack_require__(105)) + "); }\n\n@font-face {\n  font-family: \"animals\";\n  src: url(" + escape(__webpack_require__(106)) + "); }\n\n@font-face {\n  font-family: \"answer\";\n  src: url(" + escape(__webpack_require__(107)) + "); }\n\n@font-face {\n  font-family: \"answer3d\";\n  src: url(" + escape(__webpack_require__(108)) + "); }\n\n@font-face {\n  font-family: \"assyrian\";\n  src: url(" + escape(__webpack_require__(109)) + "); }\n\n@font-face {\n  font-family: \"assyrian3d\";\n  src: url(" + escape(__webpack_require__(110)) + "); }\n\n@font-face {\n  font-family: \"facon\";\n  src: url(" + escape(__webpack_require__(111)) + "); }\n\n.landing-container {\n  margin: 20% auto;\n  width: 900px;\n  height: 200px; }\n  .landing-container-header {\n    border-top: 1px dashed grey;\n    padding-top: 25px;\n    font-size: 55px;\n    text-align: center;\n    font-family: facon;\n    letter-spacing: 1rem; }\n  .landing-container-buttons {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px dashed grey;\n    padding-bottom: 50px; }\n  .landing-container-button {\n    font-family: crackman;\n    font-size: 35px;\n    background-color: transparent;\n    border: 1px solid #bbb;\n    height: 38px;\n    padding: 0 30px;\n    margin: 0 auto;\n    line-height: 38px;\n    letter-spacing: 0.2rem;\n    text-transform: uppercase;\n    white-space: nowrap;\n    box-sizing: border-box; }\n    .landing-container-button:hover {\n      cursor: pointer; }\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: \"crackman\";\n  src: url(" + escape(__webpack_require__(105)) + "); }\n\n@font-face {\n  font-family: \"animals\";\n  src: url(" + escape(__webpack_require__(106)) + "); }\n\n@font-face {\n  font-family: \"answer\";\n  src: url(" + escape(__webpack_require__(107)) + "); }\n\n@font-face {\n  font-family: \"answer3d\";\n  src: url(" + escape(__webpack_require__(108)) + "); }\n\n@font-face {\n  font-family: \"assyrian\";\n  src: url(" + escape(__webpack_require__(109)) + "); }\n\n@font-face {\n  font-family: \"assyrian3d\";\n  src: url(" + escape(__webpack_require__(110)) + "); }\n\n@font-face {\n  font-family: \"facon\";\n  src: url(" + escape(__webpack_require__(111)) + "); }\n\n.landing-container {\n  margin: 20% auto;\n  width: 900px;\n  height: 200px; }\n  .landing-container-header {\n    border-top: 1px dashed grey;\n    padding-top: 25px;\n    font-size: 55px;\n    text-align: center;\n    font-family: facon;\n    letter-spacing: 1rem; }\n  .landing-container-buttons {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px dashed grey;\n    padding-bottom: 50px; }\n  .landing-container-button {\n    outline: none;\n    font-family: crackman;\n    font-size: 35px;\n    background-color: transparent;\n    border: 1px solid #bbb;\n    height: 38px;\n    padding: 0 30px;\n    margin: 0 auto;\n    line-height: 38px;\n    letter-spacing: 0.2rem;\n    text-transform: uppercase;\n    white-space: nowrap;\n    box-sizing: border-box; }\n    .landing-container-button:hover {\n      cursor: pointer; }\n  .landing-container-form {\n    text-align: center;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    flex-direction: column; }\n    .landing-container-form input[type=\"text\"] {\n      margin: 0 auto;\n      text-align: center;\n      letter-spacing: 0.2rem;\n      box-sizing: border-box;\n      border-radius: 5px;\n      width: 280px;\n      height: 48px;\n      font-size: 20px; }\n      .landing-container-form input[type=\"text\"]:hover {\n        cursor: default; }\n    .landing-container-form-buttons {\n      border-bottom: 1px dashed grey;\n      padding-bottom: 50px;\n      margin: 30px 0; }\n    .landing-container-form-button {\n      outline: none;\n      border-radius: 10px;\n      font-family: answer3d;\n      font-size: 25px;\n      background-color: transparent;\n      border: 1px solid #bbb;\n      height: 38px;\n      padding: 0 30px;\n      margin: 0 auto;\n      line-height: 38px;\n      letter-spacing: 0.2rem;\n      text-transform: uppercase;\n      white-space: nowrap;\n      box-sizing: border-box; }\n      .landing-container-form-button:first-child {\n        margin-right: 20px; }\n      .landing-container-form-button:hover {\n        cursor: pointer; }\n", ""]);
 
 // exports
 

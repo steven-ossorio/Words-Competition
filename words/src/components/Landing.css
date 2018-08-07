@@ -43,6 +43,7 @@
     border-bottom: 1px dashed grey;
     padding-bottom: 50px; }
   .landing-container-button {
+    outline: none;
     font-family: crackman;
     font-size: 35px;
     background-color: transparent;
@@ -57,3 +58,43 @@
     box-sizing: border-box; }
     .landing-container-button:hover {
       cursor: pointer; }
+  .landing-container-form {
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; }
+    .landing-container-form input[type="text"] {
+      margin: 0 auto;
+      text-align: center;
+      letter-spacing: 0.2rem;
+      box-sizing: border-box;
+      border-radius: 5px;
+      width: 280px;
+      height: 48px;
+      font-size: 20px; }
+      .landing-container-form input[type="text"]:hover {
+        cursor: default; }
+    .landing-container-form-buttons {
+      border-bottom: 1px dashed grey;
+      padding-bottom: 50px;
+      margin: 30px 0; }
+    .landing-container-form-button {
+      outline: none;
+      border-radius: 10px;
+      font-family: answer3d;
+      font-size: 25px;
+      background-color: transparent;
+      border: 1px solid #bbb;
+      height: 38px;
+      padding: 0 30px;
+      margin: 0 auto;
+      line-height: 38px;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-sizing: border-box; }
+      .landing-container-form-button:first-child {
+        margin-right: 20px; }
+      .landing-container-form-button:hover {
+        cursor: pointer; }
