@@ -29,6 +29,7 @@ class CreatedRoom extends Component {
         "kitty",
         "footer"
       ],
+      wordsObj: {},
       playersScore: { mike: 3 }
     };
 
@@ -36,6 +37,7 @@ class CreatedRoom extends Component {
     this.checkIfInCurrentGame = this.checkIfInCurrentGame.bind(this);
     this.startGame = this.startGame.bind(this);
     this.generateLetters = this.generateLetters.bind(this);
+    this.wordCollection = this.wordCollection.bind(this);
   }
   componentDidMount() {
     this.checkIfLoggedIn();
@@ -63,11 +65,38 @@ class CreatedRoom extends Component {
     });
     loginPromise.then(id => {
       this.checkIfInCurrentGame(id);
+      this.wordCollection();
+    });
+  }
+
+  wordCollection() {
+    let words = [];
+    let wordsObj = {};
+    let gameID = this.props.match.params.id;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}`).on("value", snapshot => {
+      this.setState({
+        words: []
+      });
+
+      let collection = snapshot.val();
+      let wordsCollection = collection["words"];
+
+      if (wordsCollection) {
+        Object.keys(wordsCollection).forEach(wordKey => {
+          words.push(wordsCollection[wordKey]);
+          wordsObj[wordsCollection[wordKey]] = true;
+        });
+      }
+
+      this.setState({
+        words,
+        wordsObj
+      });
     });
   }
 
   checkIfInCurrentGame(userId) {
-    let playerObj;
     let playersKeysObj = {};
     let gameID = this.props.match.params.id;
     let db = firebase.database();
@@ -75,20 +104,20 @@ class CreatedRoom extends Component {
       this.setState({
         players: []
       });
-      snapshot.forEach(snap => {
-        playerObj = snap.val();
-      });
 
+      let collection = snapshot.val();
+      let players = collection["players"];
       let newArray = [];
-      if (playerObj === undefined) {
+
+      if (players === undefined) {
         this.props.history.push("/");
         return;
       }
-      Object.keys(playerObj).forEach(id => {
+      Object.keys(players).forEach(id => {
         if (id === userId) {
           this.setState({ loggedIn: true });
         }
-        newArray.push(playerObj[id]);
+        newArray.push(players[id]);
         playersKeysObj[id] = true;
       });
 
@@ -160,6 +189,9 @@ class CreatedRoom extends Component {
               players={this.state.players}
               playersScore={this.state.playersScore}
             />
+          </div>
+          <div className="input-box">
+            <input type="text" placeholder="Type Word Here" />
           </div>
         </div>
       );

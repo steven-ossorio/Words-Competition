@@ -73998,6 +73998,7 @@ var CreatedRoom = function (_Component) {
       startGame: false,
       letters: "",
       words: ["Cow", "Book", "Corner", "Milk", "Justify", "jimmy", "kitty", "footer"],
+      wordsObj: {},
       playersScore: { mike: 3 }
     };
 
@@ -74005,6 +74006,7 @@ var CreatedRoom = function (_Component) {
     _this.checkIfInCurrentGame = _this.checkIfInCurrentGame.bind(_this);
     _this.startGame = _this.startGame.bind(_this);
     _this.generateLetters = _this.generateLetters.bind(_this);
+    _this.wordCollection = _this.wordCollection.bind(_this);
     return _this;
   }
 
@@ -74035,39 +74037,69 @@ var CreatedRoom = function (_Component) {
       });
       loginPromise.then(function (id) {
         _this2.checkIfInCurrentGame(id);
+        _this2.wordCollection();
+      });
+    }
+  }, {
+    key: "wordCollection",
+    value: function wordCollection() {
+      var _this3 = this;
+
+      var words = [];
+      var wordsObj = {};
+      var gameID = this.props.match.params.id;
+      var db = _secretKeys2.default.database();
+      db.ref("Room/" + gameID).on("value", function (snapshot) {
+        _this3.setState({
+          words: []
+        });
+
+        var collection = snapshot.val();
+        var wordsCollection = collection["words"];
+
+        if (wordsCollection) {
+          Object.keys(wordsCollection).forEach(function (wordKey) {
+            words.push(wordsCollection[wordKey]);
+            wordsObj[wordsCollection[wordKey]] = true;
+          });
+        }
+
+        _this3.setState({
+          words: words,
+          wordsObj: wordsObj
+        });
       });
     }
   }, {
     key: "checkIfInCurrentGame",
     value: function checkIfInCurrentGame(userId) {
-      var _this3 = this;
+      var _this4 = this;
 
-      var playerObj = void 0;
       var playersKeysObj = {};
       var gameID = this.props.match.params.id;
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).on("value", function (snapshot) {
-        _this3.setState({
+        _this4.setState({
           players: []
         });
-        snapshot.forEach(function (snap) {
-          playerObj = snap.val();
-        });
 
+        var collection = snapshot.val();
+        var players = collection["players"];
         var newArray = [];
-        if (playerObj === undefined) {
-          _this3.props.history.push("/");
+
+        if (players === undefined) {
+          _this4.props.history.push("/");
           return;
         }
-        Object.keys(playerObj).forEach(function (id) {
+        Object.keys(players).forEach(function (id) {
           if (id === userId) {
-            _this3.setState({ loggedIn: true });
+            _this4.setState({ loggedIn: true });
           }
-          newArray.push(playerObj[id]);
+          newArray.push(players[id]);
           playersKeysObj[id] = true;
         });
 
-        _this3.setState({
+        _this4.setState({
           players: newArray,
           playersID: playersKeysObj
         });
@@ -74118,6 +74150,11 @@ var CreatedRoom = function (_Component) {
               players: this.state.players,
               playersScore: this.state.playersScore
             })
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "input-box" },
+            _react2.default.createElement("input", { type: "text", placeholder: "Type Word Here" })
           )
         );
       } else if (this.state.loggedIn) {
@@ -74412,7 +74449,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, ".created-room-container .game-start-container {\n  display: flex;\n  justify-content: space-around; }\n\n.created-room-container-inner {\n  padding: 15%;\n  margin: 0 auto;\n  text-align: center; }\n\n.created-room-container-inner-header {\n  border-top: 1px dashed grey;\n  padding-top: 25px;\n  font-size: 70px;\n  text-align: center;\n  font-family: crackman;\n  letter-spacing: 1rem;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.created-room-container-inner-header-sub {\n  font-size: 20px;\n  line-height: 38px;\n  letter-spacing: 0.2rem;\n  text-transform: uppercase;\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.created-room-container-inner-header-sub span {\n  color: black; }\n", ""]);
+exports.push([module.i, ".created-room-container .game-start-container {\n  display: flex;\n  justify-content: space-around; }\n\n.created-room-container-inner {\n  padding: 15%;\n  margin: 0 auto;\n  text-align: center;\n  width: 900px; }\n\n.created-room-container-inner-header {\n  border-top: 1px dashed grey;\n  padding-top: 25px;\n  font-size: 70px;\n  text-align: center;\n  font-family: crackman;\n  letter-spacing: 1rem;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.created-room-container-inner-header-sub {\n  font-size: 20px;\n  line-height: 38px;\n  letter-spacing: 0.2rem;\n  text-transform: uppercase;\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.created-room-container-inner-header-sub span {\n  color: black; }\n", ""]);
 
 // exports
 

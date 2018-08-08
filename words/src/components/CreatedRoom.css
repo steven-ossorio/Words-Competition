@@ -5,7 +5,8 @@
 .created-room-container-inner {
   padding: 15%;
   margin: 0 auto;
-  text-align: center; }
+  text-align: center;
+  width: 900px; }
   .created-room-container-inner-header {
     border-top: 1px dashed grey;
     padding-top: 25px;
