@@ -1,8 +1,15 @@
-table {
-  width: 300px;
+.players-score-container {
+  h1 {
+    text-align: center;
+    font-size: 50px;
+  }
+  table {
+    width: 400px;
 
-  tr {
-    display: flex;
-    justify-content: space-between;
+    tr {
+      display: flex;
+      justify-content: space-between;
+      font-size: 30px;
+    }
   }
 }

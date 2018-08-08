@@ -18,7 +18,7 @@ class CreatedRoom extends Component {
       playersID: {},
       loggedIn: false,
       startGame: false,
-      letters: ["a", "b", "c", "d", "e", "f", "g", "h", "i"],
+      letters: "",
       words: [
         "Cow",
         "Book",
@@ -35,6 +35,7 @@ class CreatedRoom extends Component {
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
     this.checkIfInCurrentGame = this.checkIfInCurrentGame.bind(this);
     this.startGame = this.startGame.bind(this);
+    this.generateLetters = this.generateLetters.bind(this);
   }
   componentDidMount() {
     this.checkIfLoggedIn();
@@ -98,7 +99,52 @@ class CreatedRoom extends Component {
     });
   }
 
+  generateLetters() {
+    let letters = [];
+    let vowels = ["a", "e", "i", "o", "u"];
+    let constant = [
+      "b",
+      "c",
+      "d",
+      "f",
+      "g",
+      "h",
+      "j",
+      "k",
+      "l",
+      "m",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z"
+    ];
+
+    let option = ["vowels", "constant"];
+    for (let i = 0; i < 9; i++) {
+      let selected = option[Math.floor(Math.random() * option.length)];
+      if (selected === "vowels") {
+        letters.push(vowels[Math.floor(Math.random() * vowels.length)]);
+      } else {
+        letters.push(constant[Math.floor(Math.random() * constant.length)]);
+      }
+    }
+
+    this.setState({ letters });
+    let gameID = this.props.match.params.id;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}`)
+      .child("letters")
+      .set(`${letters}`);
+  }
+
   startGame() {
+    this.generateLetters();
     this.setState({ startGame: true });
   }
 

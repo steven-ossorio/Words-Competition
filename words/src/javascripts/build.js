@@ -71808,7 +71808,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: \"crackman\";\n  src: url(" + escape(__webpack_require__(114)) + "); }\n\n@font-face {\n  font-family: \"animals\";\n  src: url(" + escape(__webpack_require__(143)) + "); }\n\n@font-face {\n  font-family: \"answer\";\n  src: url(" + escape(__webpack_require__(144)) + "); }\n\n@font-face {\n  font-family: \"answer3d\";\n  src: url(" + escape(__webpack_require__(145)) + "); }\n\n@font-face {\n  font-family: \"assyrian\";\n  src: url(" + escape(__webpack_require__(146)) + "); }\n\n@font-face {\n  font-family: \"assyrian3d\";\n  src: url(" + escape(__webpack_require__(147)) + "); }\n\n@font-face {\n  font-family: \"facon\";\n  src: url(" + escape(__webpack_require__(148)) + "); }\n\nhtml {\n  background-image: url(" + escape(__webpack_require__(149)) + ");\n  background-size: cover; }\n\n.landing-container {\n  margin: 15% auto;\n  width: 900px;\n  height: 200px; }\n\n.landing-container-header {\n  border-top: 1px dashed grey;\n  padding-top: 25px;\n  font-size: 70px;\n  text-align: center;\n  font-family: crackman;\n  letter-spacing: 1rem;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.landing-container-buttons {\n  display: flex;\n  justify-content: space-between;\n  border-bottom: 1px dashed grey;\n  padding-bottom: 50px; }\n\n.landing-container-button {\n  outline: none;\n  font-family: crackman;\n  font-size: 45px;\n  border: none;\n  height: 38px;\n  padding: 0 30px;\n  margin: 0 auto;\n  line-height: 38px;\n  letter-spacing: 0.2rem;\n  text-transform: uppercase;\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.landing-container-button:hover {\n  cursor: pointer; }\n\n.landing-container-form {\n  text-align: center;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n  flex-direction: column; }\n\n.landing-container-form input[type=\"text\"] {\n  outline: none;\n  font-family: assyrian;\n  margin: 10px auto;\n  text-align: center;\n  letter-spacing: 0.2rem;\n  box-sizing: border-box;\n  border-radius: 5px;\n  width: 280px;\n  height: 48px;\n  font-size: 20px; }\n\n.landing-container-form input[type=\"text\"]:hover {\n  cursor: default; }\n\n.landing-container-form-buttons {\n  border-bottom: 1px dashed grey;\n  padding-bottom: 50px;\n  margin: 40px 0; }\n\n.landing-container-form-button {\n  outline: none;\n  border-radius: 10px;\n  font-family: answer3d;\n  font-size: 45px;\n  border: none;\n  height: 38px;\n  padding: 0 50px;\n  margin: 0 auto;\n  line-height: 38px;\n  letter-spacing: 0.2rem;\n  text-transform: uppercase;\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.landing-container-form-button:first-child {\n  margin-right: 20px; }\n\n.landing-container-form-button:hover {\n  cursor: pointer; }\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: \"crackman\";\n  src: url(" + escape(__webpack_require__(114)) + "); }\n\n@font-face {\n  font-family: \"animals\";\n  src: url(" + escape(__webpack_require__(143)) + "); }\n\n@font-face {\n  font-family: \"answer\";\n  src: url(" + escape(__webpack_require__(144)) + "); }\n\n@font-face {\n  font-family: \"answer3d\";\n  src: url(" + escape(__webpack_require__(145)) + "); }\n\n@font-face {\n  font-family: \"assyrian\";\n  src: url(" + escape(__webpack_require__(146)) + "); }\n\n@font-face {\n  font-family: \"assyrian3d\";\n  src: url(" + escape(__webpack_require__(147)) + "); }\n\n@font-face {\n  font-family: \"facon\";\n  src: url(" + escape(__webpack_require__(148)) + "); }\n\nhtml {\n  background-image: url(" + escape(__webpack_require__(149)) + ");\n  background-size: cover; }\n\n.landing-container {\n  margin: 15% auto;\n  width: 900px;\n  height: 245px;\n  background-color: lightcyan;\n  border-left: 5px solid;\n  border-right: 5px solid; }\n\n.landing-container-header {\n  border-top: 5px dashed black;\n  padding-top: 25px;\n  font-size: 70px;\n  text-align: center;\n  font-family: crackman;\n  letter-spacing: 1rem;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.landing-container-buttons {\n  display: flex;\n  justify-content: space-between;\n  border-bottom: 5px dashed black;\n  padding-bottom: 41px; }\n\n.landing-container-button {\n  outline: none;\n  font-family: crackman;\n  font-size: 45px;\n  border: none;\n  height: 38px;\n  padding: 0 30px;\n  margin: 0 auto;\n  line-height: 38px;\n  letter-spacing: 0.2rem;\n  text-transform: uppercase;\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.landing-container-button:hover {\n  cursor: pointer; }\n\n.landing-container-form {\n  text-align: center;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n  flex-direction: column; }\n\n.landing-container-form input[type=\"text\"] {\n  outline: none;\n  font-family: assyrian;\n  margin: 10px auto;\n  text-align: center;\n  letter-spacing: 0.2rem;\n  box-sizing: border-box;\n  border-radius: 5px;\n  width: 280px;\n  height: 48px;\n  font-size: 20px; }\n\n.landing-container-form input[type=\"text\"]:hover {\n  cursor: default; }\n\n.landing-container-form-buttons {\n  border-bottom: 1px dashed grey;\n  padding-bottom: 50px;\n  margin: 40px 0; }\n\n.landing-container-form-button {\n  outline: none;\n  border-radius: 10px;\n  font-family: answer3d;\n  font-size: 45px;\n  border: none;\n  height: 38px;\n  padding: 0 50px;\n  margin: 0 auto;\n  line-height: 38px;\n  letter-spacing: 0.2rem;\n  text-transform: uppercase;\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.landing-container-form-button:first-child {\n  margin-right: 20px; }\n\n.landing-container-form-button:hover {\n  cursor: pointer; }\n", ""]);
 
 // exports
 
@@ -73996,7 +73996,7 @@ var CreatedRoom = function (_Component) {
       playersID: {},
       loggedIn: false,
       startGame: false,
-      letters: ["a", "b", "c", "d", "e", "f", "g", "h", "i"],
+      letters: "",
       words: ["Cow", "Book", "Corner", "Milk", "Justify", "jimmy", "kitty", "footer"],
       playersScore: { mike: 3 }
     };
@@ -74004,6 +74004,7 @@ var CreatedRoom = function (_Component) {
     _this.checkIfLoggedIn = _this.checkIfLoggedIn.bind(_this);
     _this.checkIfInCurrentGame = _this.checkIfInCurrentGame.bind(_this);
     _this.startGame = _this.startGame.bind(_this);
+    _this.generateLetters = _this.generateLetters.bind(_this);
     return _this;
   }
 
@@ -74073,8 +74074,31 @@ var CreatedRoom = function (_Component) {
       });
     }
   }, {
+    key: "generateLetters",
+    value: function generateLetters() {
+      var letters = [];
+      var vowels = ["a", "e", "i", "o", "u"];
+      var constant = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"];
+
+      var option = ["vowels", "constant"];
+      for (var i = 0; i < 9; i++) {
+        var selected = option[Math.floor(Math.random() * option.length)];
+        if (selected === "vowels") {
+          letters.push(vowels[Math.floor(Math.random() * vowels.length)]);
+        } else {
+          letters.push(constant[Math.floor(Math.random() * constant.length)]);
+        }
+      }
+
+      this.setState({ letters: letters });
+      var gameID = this.props.match.params.id;
+      var db = _secretKeys2.default.database();
+      db.ref("Room/" + gameID).child("letters").set("" + letters);
+    }
+  }, {
     key: "startGame",
     value: function startGame() {
+      this.generateLetters();
       this.setState({ startGame: true });
     }
   }, {
@@ -74716,31 +74740,40 @@ exports.default = function (props) {
     );
   });
   return _react2.default.createElement(
-    "table",
-    null,
+    "div",
+    { className: "players-score-container" },
     _react2.default.createElement(
-      "tbody",
+      "h1",
+      null,
+      "Score Board"
+    ),
+    _react2.default.createElement(
+      "table",
       null,
       _react2.default.createElement(
-        "tr",
+        "tbody",
         null,
         _react2.default.createElement(
-          "th",
+          "tr",
           null,
-          "#"
+          _react2.default.createElement(
+            "th",
+            null,
+            "#"
+          ),
+          _react2.default.createElement(
+            "th",
+            null,
+            "Username"
+          ),
+          _react2.default.createElement(
+            "th",
+            null,
+            "Score"
+          )
         ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Username"
-        ),
-        _react2.default.createElement(
-          "th",
-          null,
-          "Score"
-        )
-      ),
-      playerList
+        playerList
+      )
     )
   );
   // <ul className="players-container">scoreBoard {playerList}</ul>)
@@ -75019,7 +75052,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, "table {\n  width: 300px; }\n\ntable tr {\n  display: flex;\n  justify-content: space-between; }\n", ""]);
+exports.push([module.i, ".players-score-container h1 {\n  text-align: center;\n  font-size: 50px; }\n\n.players-score-container table {\n  width: 400px; }\n\n.players-score-container table tr {\n  display: flex;\n  justify-content: space-between;\n  font-size: 30px; }\n", ""]);
 
 // exports
 

@@ -42,10 +42,13 @@ html {
   &-container {
     margin: 15% auto;
     width: 900px;
-    height: 200px;
+    height: 245px;
+    background-color: lightcyan;
+    border-left: 5px solid;
+    border-right: 5px solid;
 
     &-header {
-      border-top: 1px dashed grey;
+      border-top: 5px dashed black;
       padding-top: 25px;
       font-size: 70px;
       text-align: center;
@@ -63,8 +66,8 @@ html {
     &-buttons {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px dashed grey;
-      padding-bottom: 50px;
+      border-bottom: 5px dashed black;
+      padding-bottom: 41px;
     }
 
     &-button {

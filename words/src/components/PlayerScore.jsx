@@ -15,16 +15,19 @@ export default props => {
     );
   });
   return (
-    <table>
-      <tbody>
-        <tr>
-          <th>#</th>
-          <th>Username</th>
-          <th>Score</th>
-        </tr>
-        {playerList}
-      </tbody>
-    </table>
+    <div className="players-score-container">
+      <h1>Score Board</h1>
+      <table>
+        <tbody>
+          <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Score</th>
+          </tr>
+          {playerList}
+        </tbody>
+      </table>
+    </div>
   );
   // <ul className="players-container">scoreBoard {playerList}</ul>)
 };
