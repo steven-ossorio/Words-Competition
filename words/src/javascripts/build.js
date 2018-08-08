@@ -27975,6 +27975,7 @@ var Landing = function (_Component) {
 
     _this.state = {
       create: false,
+      joinRoom: false,
       back: false,
       roomId: "",
       username: "",
@@ -27987,6 +27988,7 @@ var Landing = function (_Component) {
     _this.update = _this.update.bind(_this);
     _this.createUser = _this.createUser.bind(_this);
     _this.updateCreate = _this.updateCreate.bind(_this);
+    _this.updateJoinRoom = _this.updateJoinRoom.bind(_this);
     return _this;
   }
 
@@ -27995,6 +27997,7 @@ var Landing = function (_Component) {
     value: function componentDidMount() {
       var db = _secretKeys2.default.database();
       var roomRefKey = db.ref("Room").push().key;
+
       this.setState({
         roomId: roomRefKey
       });
@@ -28007,19 +28010,26 @@ var Landing = function (_Component) {
       this.setState({ create: create });
     }
   }, {
+    key: "updateJoinRoom",
+    value: function updateJoinRoom(e) {
+      e.preventDefault();
+      var joinRoom = !this.state.joinRoom;
+      this.setState({ joinRoom: joinRoom });
+    }
+  }, {
     key: "createUser",
-    value: function createUser(e) {
+    value: function createUser() {
       var _this2 = this;
 
-      e.preventDefault();
       var loginPromise = new Promise(function (resolve, reject) {
         _secretKeys2.default.auth().onAuthStateChanged(function (user) {
           if (user) {
             window.user = user;
             resolve(user.uid);
           } else {
-            _secretKeys2.default.auth().signInAnonymously().then(function () {
+            _secretKeys2.default.auth().signInAnonymously().then(function (user) {
               console.log("logged in");
+              console.log(user);
             }).catch(function (err) {
               console.log(err);
             });
@@ -28046,7 +28056,7 @@ var Landing = function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      if (!this.state.create) {
+      if (!this.state.create && !this.state.joinRoom) {
         return _react2.default.createElement(
           "div",
           { className: "landing" },
@@ -28065,19 +28075,78 @@ var Landing = function (_Component) {
                 "button",
                 {
                   className: "landing-container-button",
-                  onClick: this.updateCreate.bind(this)
+                  onClick: this.updateCreate
                 },
                 "Create Game"
               ),
               _react2.default.createElement(
                 "button",
-                { className: "landing-container-button" },
+                {
+                  className: "landing-container-button",
+                  onClick: this.updateJoinRoom
+                },
                 "Join a room"
               )
             )
           )
         );
-      } else {
+      } else if (this.state.joinRoom && !this.state.create) {
+        return _react2.default.createElement(
+          "div",
+          { className: "landing" },
+          _react2.default.createElement(
+            "div",
+            { className: "landing-container" },
+            _react2.default.createElement(
+              "h1",
+              { className: "landing-container-header" },
+              "Welcome to Word"
+            ),
+            _react2.default.createElement(
+              "form",
+              { className: "landing-container-form" },
+              _react2.default.createElement("input", {
+                type: "text",
+                placeholder: "Enter a username",
+                onChange: this.update("username")
+              }),
+              _react2.default.createElement("input", {
+                type: "text",
+                placeholder: "Enter Access Code",
+                onChange: this.update("username")
+              }),
+              _react2.default.createElement(
+                "div",
+                { className: "landing-container-form-buttons" },
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: this.state.roomId, replace: true },
+                  _react2.default.createElement(
+                    "button",
+                    {
+                      className: "landing-container-form-button",
+                      onClick: this.createUser
+                    },
+                    "Create a Room"
+                  )
+                ),
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: "/", replace: true },
+                  _react2.default.createElement(
+                    "button",
+                    {
+                      className: "landing-container-form-button",
+                      onClick: this.updateJoinRoom
+                    },
+                    "Go Back"
+                  )
+                )
+              )
+            )
+          )
+        );
+      } else if (this.state.create && !this.state.joinRoom) {
         return _react2.default.createElement(
           "div",
           { className: "landing" },
@@ -70420,6 +70489,10 @@ var CreatedRoom = function (_Component) {
         });
 
         var newArray = [];
+        if (playerObj === undefined) {
+          _this3.props.history.push("/");
+          return;
+        }
         Object.keys(playerObj).forEach(function (id) {
           if (id === userId) {
             console.log("Logged in Became true");
@@ -70441,8 +70514,18 @@ var CreatedRoom = function (_Component) {
       if (this.state.loggedIn) {
         return _react2.default.createElement(
           "div",
-          null,
-          "This is a created Room",
+          { className: "created-room-container" },
+          _react2.default.createElement(
+            "h1",
+            null,
+            "Waiting for players..."
+          ),
+          _react2.default.createElement(
+            "h3",
+            null,
+            "Access Code: ",
+            this.props.match.params.id
+          ),
           _react2.default.createElement(_Players2.default, { players: this.state.players })
         );
       } else {
@@ -70480,13 +70563,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function (props) {
   var playerList = props.players.map(function (player, i) {
     return _react2.default.createElement(
-      "h2",
+      "li",
       { key: i },
-      player
+      _react2.default.createElement(
+        "div",
+        null,
+        i + 1
+      ),
+      _react2.default.createElement(
+        "div",
+        null,
+        player
+      )
     );
   });
   return _react2.default.createElement(
-    "div",
+    "ul",
     null,
     playerList
   );
@@ -70555,9 +70647,11 @@ var JoinRoom = function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.setState({
-        roomId: this.props.roomId
-      });
+      if (this.props.roomId) {
+        this.setState({
+          roomId: this.props.roomId
+        });
+      }
     }
   }, {
     key: "addUserToRoom",
@@ -70676,7 +70770,7 @@ exports = module.exports = __webpack_require__(30)(false);
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: \"crackman\";\n  src: url(" + escape(__webpack_require__(105)) + "); }\n\n@font-face {\n  font-family: \"animals\";\n  src: url(" + escape(__webpack_require__(106)) + "); }\n\n@font-face {\n  font-family: \"answer\";\n  src: url(" + escape(__webpack_require__(107)) + "); }\n\n@font-face {\n  font-family: \"answer3d\";\n  src: url(" + escape(__webpack_require__(108)) + "); }\n\n@font-face {\n  font-family: \"assyrian\";\n  src: url(" + escape(__webpack_require__(109)) + "); }\n\n@font-face {\n  font-family: \"assyrian3d\";\n  src: url(" + escape(__webpack_require__(110)) + "); }\n\n@font-face {\n  font-family: \"facon\";\n  src: url(" + escape(__webpack_require__(111)) + "); }\n\n.landing-container {\n  margin: 20% auto;\n  width: 900px;\n  height: 200px; }\n  .landing-container-header {\n    border-top: 1px dashed grey;\n    padding-top: 25px;\n    font-size: 55px;\n    text-align: center;\n    font-family: facon;\n    letter-spacing: 1rem; }\n  .landing-container-buttons {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px dashed grey;\n    padding-bottom: 50px; }\n  .landing-container-button {\n    outline: none;\n    font-family: crackman;\n    font-size: 35px;\n    background-color: transparent;\n    border: 1px solid #bbb;\n    height: 38px;\n    padding: 0 30px;\n    margin: 0 auto;\n    line-height: 38px;\n    letter-spacing: 0.2rem;\n    text-transform: uppercase;\n    white-space: nowrap;\n    box-sizing: border-box; }\n    .landing-container-button:hover {\n      cursor: pointer; }\n  .landing-container-form {\n    text-align: center;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    flex-direction: column; }\n    .landing-container-form input[type=\"text\"] {\n      margin: 0 auto;\n      text-align: center;\n      letter-spacing: 0.2rem;\n      box-sizing: border-box;\n      border-radius: 5px;\n      width: 280px;\n      height: 48px;\n      font-size: 20px; }\n      .landing-container-form input[type=\"text\"]:hover {\n        cursor: default; }\n    .landing-container-form-buttons {\n      border-bottom: 1px dashed grey;\n      padding-bottom: 50px;\n      margin: 30px 0; }\n    .landing-container-form-button {\n      outline: none;\n      border-radius: 10px;\n      font-family: answer3d;\n      font-size: 25px;\n      background-color: transparent;\n      border: 1px solid #bbb;\n      height: 38px;\n      padding: 0 30px;\n      margin: 0 auto;\n      line-height: 38px;\n      letter-spacing: 0.2rem;\n      text-transform: uppercase;\n      white-space: nowrap;\n      box-sizing: border-box; }\n      .landing-container-form-button:first-child {\n        margin-right: 20px; }\n      .landing-container-form-button:hover {\n        cursor: pointer; }\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: \"crackman\";\n  src: url(" + escape(__webpack_require__(105)) + "); }\n\n@font-face {\n  font-family: \"animals\";\n  src: url(" + escape(__webpack_require__(106)) + "); }\n\n@font-face {\n  font-family: \"answer\";\n  src: url(" + escape(__webpack_require__(107)) + "); }\n\n@font-face {\n  font-family: \"answer3d\";\n  src: url(" + escape(__webpack_require__(108)) + "); }\n\n@font-face {\n  font-family: \"assyrian\";\n  src: url(" + escape(__webpack_require__(109)) + "); }\n\n@font-face {\n  font-family: \"assyrian3d\";\n  src: url(" + escape(__webpack_require__(110)) + "); }\n\n@font-face {\n  font-family: \"facon\";\n  src: url(" + escape(__webpack_require__(111)) + "); }\n\nhtml {\n  background-image: url(" + escape(__webpack_require__(113)) + ");\n  background-size: cover; }\n\n.landing-container {\n  margin: 15% auto;\n  width: 900px;\n  height: 200px; }\n  .landing-container-header {\n    border-top: 1px dashed grey;\n    padding-top: 25px;\n    font-size: 70px;\n    text-align: center;\n    font-family: crackman;\n    letter-spacing: 1rem;\n    text-transform: uppercase;\n    font-weight: 700;\n    background-image: linear-gradient(to right, blue, red);\n    -webkit-background-clip: text;\n    color: transparent;\n    letter-spacing: 0.2rem;\n    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n  .landing-container-buttons {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px dashed grey;\n    padding-bottom: 50px; }\n  .landing-container-button {\n    outline: none;\n    font-family: crackman;\n    font-size: 45px;\n    border: none;\n    height: 38px;\n    padding: 0 30px;\n    margin: 0 auto;\n    line-height: 38px;\n    letter-spacing: 0.2rem;\n    text-transform: uppercase;\n    white-space: nowrap;\n    box-sizing: border-box;\n    text-transform: uppercase;\n    font-weight: 700;\n    background-image: linear-gradient(to right, blue, red);\n    -webkit-background-clip: text;\n    color: transparent;\n    letter-spacing: 0.2rem;\n    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n    .landing-container-button:hover {\n      cursor: pointer; }\n  .landing-container-form {\n    text-align: center;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    flex-direction: column; }\n    .landing-container-form input[type=\"text\"] {\n      outline: none;\n      font-family: assyrian;\n      margin: 10px auto;\n      text-align: center;\n      letter-spacing: 0.2rem;\n      box-sizing: border-box;\n      border-radius: 5px;\n      width: 280px;\n      height: 48px;\n      font-size: 20px; }\n      .landing-container-form input[type=\"text\"]:hover {\n        cursor: default; }\n    .landing-container-form-buttons {\n      border-bottom: 1px dashed grey;\n      padding-bottom: 50px;\n      margin: 40px 0; }\n    .landing-container-form-button {\n      outline: none;\n      border-radius: 10px;\n      font-family: answer3d;\n      font-size: 45px;\n      border: none;\n      height: 38px;\n      padding: 0 50px;\n      margin: 0 auto;\n      line-height: 38px;\n      letter-spacing: 0.2rem;\n      text-transform: uppercase;\n      white-space: nowrap;\n      box-sizing: border-box;\n      text-transform: uppercase;\n      font-weight: 700;\n      background-image: linear-gradient(to right, blue, red);\n      -webkit-background-clip: text;\n      color: transparent;\n      letter-spacing: 0.2rem;\n      text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n      .landing-container-form-button:first-child {\n        margin-right: 20px; }\n      .landing-container-form-button:hover {\n        cursor: pointer; }\n", ""]);
 
 // exports
 
@@ -70744,6 +70838,13 @@ throw new Error("Module parse failed: Unexpected character '\u0000' (1:0)\nYou m
 /***/ (function(module, exports) {
 
 throw new Error("Module parse failed: Unexpected character '\u0000' (1:0)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
+
+/***/ }),
+/* 112 */,
+/* 113 */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected character '�' (1:0)\nYou may need an appropriate loader to handle this file type.\n(Source code omitted for this binary file)");
 
 /***/ })
 /******/ ]);

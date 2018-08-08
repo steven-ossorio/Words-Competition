@@ -9,6 +9,7 @@ class Landing extends Component {
 
     this.state = {
       create: false,
+      joinRoom: false,
       back: false,
       roomId: "",
       username: "",
@@ -21,11 +22,13 @@ class Landing extends Component {
     this.update = this.update.bind(this);
     this.createUser = this.createUser.bind(this);
     this.updateCreate = this.updateCreate.bind(this);
+    this.updateJoinRoom = this.updateJoinRoom.bind(this);
   }
 
   componentDidMount() {
     let db = firebase.database();
     let roomRefKey = db.ref("Room").push().key;
+
     this.setState({
       roomId: roomRefKey
     });
@@ -37,8 +40,13 @@ class Landing extends Component {
     this.setState({ create });
   }
 
-  createUser(e) {
+  updateJoinRoom(e) {
     e.preventDefault();
+    let joinRoom = !this.state.joinRoom;
+    this.setState({ joinRoom });
+  }
+
+  createUser() {
     const loginPromise = new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -48,8 +56,9 @@ class Landing extends Component {
           firebase
             .auth()
             .signInAnonymously()
-            .then(() => {
+            .then(user => {
               console.log("logged in");
+              console.log(user);
             })
             .catch(err => {
               console.log(err);
@@ -75,7 +84,7 @@ class Landing extends Component {
   }
 
   render() {
-    if (!this.state.create) {
+    if (!this.state.create && !this.state.joinRoom) {
       return (
         <div className="landing">
           <div className="landing-container">
@@ -83,16 +92,59 @@ class Landing extends Component {
             <div className="landing-container-buttons">
               <button
                 className="landing-container-button"
-                onClick={this.updateCreate.bind(this)}
+                onClick={this.updateCreate}
               >
                 Create Game
               </button>
-              <button className="landing-container-button">Join a room</button>
+              <button
+                className="landing-container-button"
+                onClick={this.updateJoinRoom}
+              >
+                Join a room
+              </button>
             </div>
           </div>
         </div>
       );
-    } else {
+    } else if (this.state.joinRoom && !this.state.create) {
+      return (
+        <div className="landing">
+          <div className="landing-container">
+            <h1 className="landing-container-header">Welcome to Word</h1>
+            <form className="landing-container-form">
+              <input
+                type="text"
+                placeholder="Enter a username"
+                onChange={this.update("username")}
+              />
+              <input
+                type="text"
+                placeholder="Enter Access Code"
+                onChange={this.update("username")}
+              />
+              <div className="landing-container-form-buttons">
+                <Link to={this.state.roomId} replace>
+                  <button
+                    className="landing-container-form-button"
+                    onClick={this.createUser}
+                  >
+                    Create a Room
+                  </button>
+                </Link>
+                <Link to="/" replace>
+                  <button
+                    className="landing-container-form-button"
+                    onClick={this.updateJoinRoom}
+                  >
+                    Go Back
+                  </button>
+                </Link>
+              </div>
+            </form>
+          </div>
+        </div>
+      );
+    } else if (this.state.create && !this.state.joinRoom) {
       return (
         <div className="landing">
           <div className="landing-container">

@@ -85,6 +85,10 @@ class CreatedRoom extends Component {
       });
 
       let newArray = [];
+      if (playerObj === undefined) {
+        this.props.history.push("/");
+        return;
+      }
       Object.keys(playerObj).forEach(id => {
         if (id === userId) {
           console.log("Logged in Became true");
@@ -104,8 +108,9 @@ class CreatedRoom extends Component {
   render() {
     if (this.state.loggedIn) {
       return (
-        <div>
-          This is a created Room
+        <div className="created-room-container">
+          <h1>Waiting for players...</h1>
+          <h3>Access Code: {this.props.match.params.id}</h3>
           <Players players={this.state.players} />
         </div>
       );

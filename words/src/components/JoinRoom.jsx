@@ -24,9 +24,11 @@ class JoinRoom extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      roomId: this.props.roomId
-    });
+    if (this.props.roomId) {
+      this.setState({
+        roomId: this.props.roomId
+      });
+    }
   }
 
   addUserToRoom() {

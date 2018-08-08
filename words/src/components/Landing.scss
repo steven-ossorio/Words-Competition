@@ -33,21 +33,31 @@
   src: url(../fonts/Facon.ttf);
 }
 
+html {
+  background-image: url("../img/background.png");
+  background-size: cover;
+}
+
 .landing {
-  // background-color: blue;
   &-container {
-    // background-color: red;
-    margin: 20% auto;
+    margin: 15% auto;
     width: 900px;
     height: 200px;
 
     &-header {
       border-top: 1px dashed grey;
       padding-top: 25px;
-      font-size: 55px;
+      font-size: 70px;
       text-align: center;
-      font-family: facon;
+      font-family: crackman;
       letter-spacing: 1rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      background-image: linear-gradient(to right, blue, red);
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: 0.2rem;
+      text-shadow: 0.5rem 1rem 2rem rgba(black, 0.2);
     }
 
     &-buttons {
@@ -60,9 +70,10 @@
     &-button {
       outline: none;
       font-family: crackman;
-      font-size: 35px;
-      background-color: transparent;
-      border: 1px solid #bbb;
+      font-size: 45px;
+      // background-color: transparent;
+      // border: 1px solid #bbb;
+      border: none;
       height: 38px;
       padding: 0 30px;
       margin: 0 auto;
@@ -71,6 +82,13 @@
       text-transform: uppercase;
       white-space: nowrap;
       box-sizing: border-box;
+      text-transform: uppercase;
+      font-weight: 700;
+      background-image: linear-gradient(to right, blue, red);
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: 0.2rem;
+      text-shadow: 0.5rem 1rem 2rem rgba(black, 0.2);
 
       &:hover {
         cursor: pointer;
@@ -85,7 +103,9 @@
       flex-direction: column;
 
       input[type="text"] {
-        margin: 0 auto;
+        outline: none;
+        font-family: assyrian;
+        margin: 10px auto;
         text-align: center;
         letter-spacing: 0.2rem;
         box-sizing: border-box;
@@ -102,24 +122,32 @@
       &-buttons {
         border-bottom: 1px dashed grey;
         padding-bottom: 50px;
-        margin: 30px 0;
+        margin: 40px 0;
       }
 
       &-button {
         outline: none;
         border-radius: 10px;
         font-family: answer3d;
-        font-size: 25px;
-        background-color: transparent;
-        border: 1px solid #bbb;
+        font-size: 45px;
+        // background-color: transparent;
+        // border: 1px solid #bbb;
+        border: none;
         height: 38px;
-        padding: 0 30px;
+        padding: 0 50px;
         margin: 0 auto;
         line-height: 38px;
         letter-spacing: 0.2rem;
         text-transform: uppercase;
         white-space: nowrap;
         box-sizing: border-box;
+        text-transform: uppercase;
+        font-weight: 700;
+        background-image: linear-gradient(to right, blue, red);
+        -webkit-background-clip: text;
+        color: transparent;
+        letter-spacing: 0.2rem;
+        text-shadow: 0.5rem 1rem 2rem rgba(black, 0.2);
 
         &:first-child {
           margin-right: 20px;
