@@ -74063,13 +74063,18 @@ var CreatedRoom = function (_Component) {
             { className: "created-room-container-inner" },
             _react2.default.createElement(
               "h1",
-              null,
+              { className: "created-room-container-inner-header" },
               "Waiting for players..."
             ),
             _react2.default.createElement(
               "h3",
-              null,
-              "Access Code: ",
+              { className: "created-room-container-inner-header-sub" },
+              _react2.default.createElement(
+                "span",
+                null,
+                "Access Code:"
+              ),
+              " ",
               this.props.match.params.id
             ),
             _react2.default.createElement(_Players2.default, { players: this.state.players })
@@ -74315,7 +74320,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, ".created-room-container-inner {\n  padding: 20%;\n  margin: 0 auto;\n  width: 500px;\n  text-align: center; }\n", ""]);
+exports.push([module.i, ".created-room-container-inner {\n  padding: 15%;\n  margin: 0 auto;\n  text-align: center; }\n\n.created-room-container-inner-header {\n  border-top: 1px dashed grey;\n  padding-top: 25px;\n  font-size: 70px;\n  text-align: center;\n  font-family: crackman;\n  letter-spacing: 1rem;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.created-room-container-inner-header-sub {\n  font-size: 20px;\n  line-height: 38px;\n  letter-spacing: 0.2rem;\n  text-transform: uppercase;\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.created-room-container-inner-header-sub span {\n  color: black; }\n", ""]);
 
 // exports
 

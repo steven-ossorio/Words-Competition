@@ -1,5 +1,34 @@
 .created-room-container-inner {
-  padding: 20%;
+  padding: 15%;
   margin: 0 auto;
-  width: 500px;
   text-align: center; }
+  .created-room-container-inner-header {
+    border-top: 1px dashed grey;
+    padding-top: 25px;
+    font-size: 70px;
+    text-align: center;
+    font-family: crackman;
+    letter-spacing: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-image: linear-gradient(to right, blue, red);
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 0.2rem;
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+  .created-room-container-inner-header-sub {
+    font-size: 20px;
+    line-height: 38px;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-image: linear-gradient(to right, blue, red);
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 0.2rem;
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+    .created-room-container-inner-header-sub span {
+      color: black; }

@@ -86,8 +86,12 @@ class CreatedRoom extends Component {
       return (
         <div className="created-room-container">
           <div className="created-room-container-inner">
-            <h1>Waiting for players...</h1>
-            <h3>Access Code: {this.props.match.params.id}</h3>
+            <h1 className="created-room-container-inner-header">
+              Waiting for players...
+            </h1>
+            <h3 className="created-room-container-inner-header-sub">
+              <span>Access Code:</span> {this.props.match.params.id}
+            </h3>
             <Players players={this.state.players} />
           </div>
         </div>
