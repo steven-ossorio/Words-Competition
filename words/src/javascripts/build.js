@@ -74727,16 +74727,30 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+__webpack_require__(166);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
+  var letters = props.letters.map(function (letter, i) {
+    return _react2.default.createElement(
+      "div",
+      { key: i },
+      letter
+    );
+  });
   return _react2.default.createElement(
     "div",
-    null,
+    { className: "letters-container" },
     _react2.default.createElement(
       "h1",
       null,
-      "THIS WILL BE LETTERS"
+      "Letters"
+    ),
+    _react2.default.createElement(
+      "div",
+      { className: "letters-container-inner" },
+      letters
     )
   );
 };
@@ -74769,6 +74783,70 @@ exports.default = function (props) {
     )
   );
 };
+
+/***/ }),
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(167);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(19)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./Letters.css", function() {
+		var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./Letters.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 167 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(18)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".letters-container {\n  width: 300px; }\n\n.letters-container h1 {\n  text-align: center;\n  font-size: 50px; }\n\n.letters-container-inner {\n  display: flex;\n  flex-wrap: wrap;\n  font-size: 55px;\n  padding: 10px; }\n\n.letters-container-inner div {\n  padding: 10px; }\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
