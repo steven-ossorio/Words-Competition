@@ -74187,7 +74187,8 @@ var CreatedRoom = function (_Component) {
             _react2.default.createElement("input", {
               onChange: this.update("writtenWord"),
               type: "text",
-              placeholder: "Type Word Here"
+              placeholder: "Type Word Here",
+              value: this.state.writtenWord
             }),
             _react2.default.createElement(
               "button",

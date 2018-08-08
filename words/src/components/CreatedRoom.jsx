@@ -212,6 +212,7 @@ class CreatedRoom extends Component {
               onChange={this.update("writtenWord")}
               type="text"
               placeholder="Type Word Here"
+              value={this.state.writtenWord}
             />
             <button onClick={this.addWord}>Click Me TO Send</button>
           </div>
