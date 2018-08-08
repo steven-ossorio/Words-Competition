@@ -74139,7 +74139,8 @@ __webpack_require__(157);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
-  var playerList = props.players.map(function (player, i) {
+  var playerList = props.players.reverse();
+  playerList = props.players.map(function (player, i) {
     return _react2.default.createElement(
       "li",
       { className: "players-container-list", key: i },
@@ -74476,7 +74477,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, ".players-container {\n  width: 500px;\n  margin: 0 auto;\n  font-size: 50px;\n  color: red; }\n\n.players-container-list {\n  display: flex;\n  justify-content: space-around; }\n", ""]);
+exports.push([module.i, ".players-container {\n  width: 500px;\n  margin: 0 auto;\n  font-size: 50px;\n  color: red; }\n\n.players-container-list {\n  display: flex;\n  justify-content: space-between; }\n", ""]);
 
 // exports
 
