@@ -1,4 +1,5 @@
 import React from "react";
+import "./PlayersScore.css";
 
 export default props => {
   let playerList = props.players.reverse();
@@ -15,12 +16,14 @@ export default props => {
   });
   return (
     <table>
-      <tr>
-        <th>#</th>
-        <th>Username</th>
-        <th>Score</th>
-      </tr>
-      {playerList}
+      <tbody>
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Score</th>
+        </tr>
+        {playerList}
+      </tbody>
     </table>
   );
   // <ul className="players-container">scoreBoard {playerList}</ul>)

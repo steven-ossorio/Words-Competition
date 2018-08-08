@@ -74388,7 +74388,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, ".created-room-container .game-start-container {\n  display: flex; }\n\n.created-room-container-inner {\n  padding: 15%;\n  margin: 0 auto;\n  text-align: center; }\n\n.created-room-container-inner-header {\n  border-top: 1px dashed grey;\n  padding-top: 25px;\n  font-size: 70px;\n  text-align: center;\n  font-family: crackman;\n  letter-spacing: 1rem;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.created-room-container-inner-header-sub {\n  font-size: 20px;\n  line-height: 38px;\n  letter-spacing: 0.2rem;\n  text-transform: uppercase;\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.created-room-container-inner-header-sub span {\n  color: black; }\n", ""]);
+exports.push([module.i, ".created-room-container .game-start-container {\n  display: flex;\n  justify-content: space-around; }\n\n.created-room-container-inner {\n  padding: 15%;\n  margin: 0 auto;\n  text-align: center; }\n\n.created-room-container-inner-header {\n  border-top: 1px dashed grey;\n  padding-top: 25px;\n  font-size: 70px;\n  text-align: center;\n  font-family: crackman;\n  letter-spacing: 1rem;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.created-room-container-inner-header-sub {\n  font-size: 20px;\n  line-height: 38px;\n  letter-spacing: 0.2rem;\n  text-transform: uppercase;\n  white-space: nowrap;\n  box-sizing: border-box;\n  text-transform: uppercase;\n  font-weight: 700;\n  background-image: linear-gradient(to right, blue, red);\n  -webkit-background-clip: text;\n  color: transparent;\n  letter-spacing: 0.2rem;\n  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }\n\n.created-room-container-inner-header-sub span {\n  color: black; }\n", ""]);
 
 // exports
 
@@ -74516,7 +74516,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, ".players-container {\n  width: 500px;\n  margin: 0 auto;\n  font-size: 50px;\n  color: red; }\n\n.players-container-list {\n  display: flex;\n  justify-content: space-between; }\n\ntable {\n  width: 500px; }\n\ntable tr {\n  display: flex;\n  justify-content: space-between; }\n", ""]);
+exports.push([module.i, ".players-container {\n  width: 500px;\n  margin: 0 auto;\n  font-size: 50px;\n  color: red; }\n\n.players-container-list {\n  display: flex;\n  justify-content: space-between; }\n", ""]);
 
 // exports
 
@@ -74686,6 +74686,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+__webpack_require__(170);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
@@ -74717,25 +74719,29 @@ exports.default = function (props) {
     "table",
     null,
     _react2.default.createElement(
-      "tr",
+      "tbody",
       null,
       _react2.default.createElement(
-        "th",
+        "tr",
         null,
-        "#"
+        _react2.default.createElement(
+          "th",
+          null,
+          "#"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Username"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Score"
+        )
       ),
-      _react2.default.createElement(
-        "th",
-        null,
-        "Username"
-      ),
-      _react2.default.createElement(
-        "th",
-        null,
-        "Score"
-      )
-    ),
-    playerList
+      playerList
+    )
   );
   // <ul className="players-container">scoreBoard {playerList}</ul>)
 };
@@ -74950,6 +74956,70 @@ exports = module.exports = __webpack_require__(18)(false);
 
 // module
 exports.push([module.i, ".words-container {\n  width: 400px; }\n\n.words-container-header {\n  text-align: center; }\n\n.words-container-list {\n  display: flex;\n  justify-content: space-between; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 170 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(171);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(19)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./PlayersScore.css", function() {
+		var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./PlayersScore.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(18)(false);
+// imports
+
+
+// module
+exports.push([module.i, "table {\n  width: 500px; }\n\ntable tr {\n  display: flex;\n  justify-content: space-between; }\n", ""]);
 
 // exports
 

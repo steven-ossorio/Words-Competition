@@ -1,5 +1,6 @@
 .created-room-container .game-start-container {
-  display: flex; }
+  display: flex;
+  justify-content: space-around; }
 
 .created-room-container-inner {
   padding: 15%;
