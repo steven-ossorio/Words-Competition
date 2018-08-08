@@ -74011,6 +74011,7 @@ var CreatedRoom = function (_Component) {
     _this.generateLetters = _this.generateLetters.bind(_this);
     _this.wordCollection = _this.wordCollection.bind(_this);
     _this.addWord = _this.addWord.bind(_this);
+    _this.update = _this.update.bind(_this);
     return _this;
   }
 
@@ -74078,6 +74079,7 @@ var CreatedRoom = function (_Component) {
     key: "addWord",
     value: function addWord() {
       var word = this.state.writtenWord;
+      console.log(word);
       if (this.state.wordsObj[word]) {
         return;
       }
@@ -74088,8 +74090,6 @@ var CreatedRoom = function (_Component) {
       this.setState({
         writtenWord: ""
       });
-
-      console.log(this.state.writtenWord);
     }
   }, {
     key: "update",

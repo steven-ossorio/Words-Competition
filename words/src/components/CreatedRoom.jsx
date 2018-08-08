@@ -31,6 +31,7 @@ class CreatedRoom extends Component {
     this.generateLetters = this.generateLetters.bind(this);
     this.wordCollection = this.wordCollection.bind(this);
     this.addWord = this.addWord.bind(this);
+    this.update = this.update.bind(this);
   }
   componentDidMount() {
     this.checkIfLoggedIn();
@@ -91,6 +92,7 @@ class CreatedRoom extends Component {
 
   addWord() {
     let word = this.state.writtenWord;
+    console.log(word);
     if (this.state.wordsObj[word]) {
       return;
     }
@@ -101,8 +103,6 @@ class CreatedRoom extends Component {
     this.setState({
       writtenWord: ""
     });
-
-    console.log(this.state.writtenWord);
   }
 
   update(field) {
