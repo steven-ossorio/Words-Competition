@@ -19,18 +19,10 @@ class CreatedRoom extends Component {
       loggedIn: false,
       startGame: false,
       letters: "",
-      words: [
-        "Cow",
-        "Book",
-        "Corner",
-        "Milk",
-        "Justify",
-        "jimmy",
-        "kitty",
-        "footer"
-      ],
+      words: [],
       wordsObj: {},
-      playersScore: { mike: 3 }
+      playersScore: { mike: 3 },
+      writtenWord: ""
     };
 
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
@@ -38,6 +30,7 @@ class CreatedRoom extends Component {
     this.startGame = this.startGame.bind(this);
     this.generateLetters = this.generateLetters.bind(this);
     this.wordCollection = this.wordCollection.bind(this);
+    this.addWord = this.addWord.bind(this);
   }
   componentDidMount() {
     this.checkIfLoggedIn();
@@ -94,6 +87,30 @@ class CreatedRoom extends Component {
         wordsObj
       });
     });
+  }
+
+  addWord() {
+    let word = this.state.writtenWord;
+    if (this.state.wordsObj[word]) {
+      return;
+    }
+    let gameID = this.props.match.params.id;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}/words`).push(word);
+
+    this.setState({
+      writtenWord: ""
+    });
+
+    console.log(this.state.writtenWord);
+  }
+
+  update(field) {
+    return e => {
+      this.setState({
+        [field]: e.target.value
+      });
+    };
   }
 
   checkIfInCurrentGame(userId) {
@@ -191,7 +208,12 @@ class CreatedRoom extends Component {
             />
           </div>
           <div className="input-box">
-            <input type="text" placeholder="Type Word Here" />
+            <input
+              onChange={this.update("writtenWord")}
+              type="text"
+              placeholder="Type Word Here"
+            />
+            <button onClick={this.addWord}>Click Me TO Send</button>
           </div>
         </div>
       );

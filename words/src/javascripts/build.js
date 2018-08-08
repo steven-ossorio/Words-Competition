@@ -73977,6 +73977,8 @@ __webpack_require__(153);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -73997,9 +73999,10 @@ var CreatedRoom = function (_Component) {
       loggedIn: false,
       startGame: false,
       letters: "",
-      words: ["Cow", "Book", "Corner", "Milk", "Justify", "jimmy", "kitty", "footer"],
+      words: [],
       wordsObj: {},
-      playersScore: { mike: 3 }
+      playersScore: { mike: 3 },
+      writtenWord: ""
     };
 
     _this.checkIfLoggedIn = _this.checkIfLoggedIn.bind(_this);
@@ -74007,6 +74010,7 @@ var CreatedRoom = function (_Component) {
     _this.startGame = _this.startGame.bind(_this);
     _this.generateLetters = _this.generateLetters.bind(_this);
     _this.wordCollection = _this.wordCollection.bind(_this);
+    _this.addWord = _this.addWord.bind(_this);
     return _this;
   }
 
@@ -74071,15 +74075,41 @@ var CreatedRoom = function (_Component) {
       });
     }
   }, {
+    key: "addWord",
+    value: function addWord() {
+      var word = this.state.writtenWord;
+      if (this.state.wordsObj[word]) {
+        return;
+      }
+      var gameID = this.props.match.params.id;
+      var db = _secretKeys2.default.database();
+      db.ref("Room/" + gameID + "/words").push(word);
+
+      this.setState({
+        writtenWord: ""
+      });
+
+      console.log(this.state.writtenWord);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this4 = this;
+
+      return function (e) {
+        _this4.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
     key: "checkIfInCurrentGame",
     value: function checkIfInCurrentGame(userId) {
-      var _this4 = this;
+      var _this5 = this;
 
       var playersKeysObj = {};
       var gameID = this.props.match.params.id;
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).on("value", function (snapshot) {
-        _this4.setState({
+        _this5.setState({
           players: []
         });
 
@@ -74088,18 +74118,18 @@ var CreatedRoom = function (_Component) {
         var newArray = [];
 
         if (players === undefined) {
-          _this4.props.history.push("/");
+          _this5.props.history.push("/");
           return;
         }
         Object.keys(players).forEach(function (id) {
           if (id === userId) {
-            _this4.setState({ loggedIn: true });
+            _this5.setState({ loggedIn: true });
           }
           newArray.push(players[id]);
           playersKeysObj[id] = true;
         });
 
-        _this4.setState({
+        _this5.setState({
           players: newArray,
           playersID: playersKeysObj
         });
@@ -74154,7 +74184,16 @@ var CreatedRoom = function (_Component) {
           _react2.default.createElement(
             "div",
             { className: "input-box" },
-            _react2.default.createElement("input", { type: "text", placeholder: "Type Word Here" })
+            _react2.default.createElement("input", {
+              onChange: this.update("writtenWord"),
+              type: "text",
+              placeholder: "Type Word Here"
+            }),
+            _react2.default.createElement(
+              "button",
+              { onClick: this.addWord },
+              "Click Me TO Send"
+            )
           )
         );
       } else if (this.state.loggedIn) {
