@@ -6,3 +6,9 @@
   .players-container-list {
     display: flex;
     justify-content: space-between; }
+
+table {
+  width: 500px; }
+  table tr {
+    display: flex;
+    justify-content: space-between; }

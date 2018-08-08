@@ -19,7 +19,8 @@ class CreatedRoom extends Component {
       loggedIn: false,
       startGame: false,
       letters: ["a", "b", "c", "d", "e", "f", "g", "h", "i"],
-      words: ["Cow", "Book", "Corner", "Milk", "Justify"]
+      words: ["Cow", "Book", "Corner", "Milk", "Justify"],
+      playersScore: { mike: 3 }
     };
 
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
@@ -56,7 +57,6 @@ class CreatedRoom extends Component {
   }
 
   checkIfInCurrentGame(userId) {
-    console.log("checking");
     let playerObj;
     let playersKeysObj = {};
     let gameID = this.props.match.params.id;
@@ -76,7 +76,6 @@ class CreatedRoom extends Component {
       }
       Object.keys(playerObj).forEach(id => {
         if (id === userId) {
-          console.log("Logged in Became true");
           this.setState({ loggedIn: true });
         }
         newArray.push(playerObj[id]);
@@ -99,10 +98,13 @@ class CreatedRoom extends Component {
       return (
         <div className="created-room-container">
           <Timer />
-          <div>
+          <div className="game-start-container">
             <Letters letters={this.state.letters} />
             <WordList words={this.state.words} />
-            <PlayerScore players={this.state.players} />
+            <PlayerScore
+              players={this.state.players}
+              playersScore={this.state.playersScore}
+            />
           </div>
         </div>
       );

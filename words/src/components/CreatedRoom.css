@@ -1,3 +1,6 @@
+.created-room-container .game-start-container {
+  display: flex; }
+
 .created-room-container-inner {
   padding: 15%;
   margin: 0 auto;

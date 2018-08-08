@@ -1,0 +1,11 @@
+.words-container {
+  width: 400px;
+  &-header {
+    text-align: center;
+  }
+
+  &-list {
+    display: flex;
+    justify-content: space-between;
+  }
+}

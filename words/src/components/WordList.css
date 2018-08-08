@@ -1,0 +1,7 @@
+.words-container {
+  width: 400px; }
+  .words-container-header {
+    text-align: center; }
+  .words-container-list {
+    display: flex;
+    justify-content: space-between; }

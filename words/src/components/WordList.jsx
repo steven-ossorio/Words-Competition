@@ -1,9 +1,14 @@
 import React from "react";
+import "./WordList.css";
 
 export default props => {
+  let words = props.words.map((word, i) => {
+    return <li key={i}>{word}</li>;
+  });
   return (
-    <div>
-      <h1>WILL BE BOX FOR ALL WORDS SEND</h1>
+    <div className="words-container">
+      <h1 className="words-container-header">Words</h1>
+      <ul className="words-container-list">{words}</ul>
     </div>
   );
 };
