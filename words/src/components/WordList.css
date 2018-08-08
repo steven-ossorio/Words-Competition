@@ -1,7 +1,12 @@
 .words-container {
-  width: 400px; }
+  width: 600px; }
   .words-container-header {
-    text-align: center; }
+    text-align: center;
+    font-size: 50px; }
   .words-container-list {
     display: flex;
-    justify-content: space-between; }
+    list-style-type: none;
+    flex-wrap: wrap; }
+    .words-container-list li {
+      font-size: 30px;
+      margin: 15px; }

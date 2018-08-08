@@ -73997,7 +73997,7 @@ var CreatedRoom = function (_Component) {
       loggedIn: false,
       startGame: false,
       letters: ["a", "b", "c", "d", "e", "f", "g", "h", "i"],
-      words: ["Cow", "Book", "Corner", "Milk", "Justify"],
+      words: ["Cow", "Book", "Corner", "Milk", "Justify", "jimmy", "kitty", "footer"],
       playersScore: { mike: 3 }
     };
 
@@ -74955,7 +74955,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, ".words-container {\n  width: 400px; }\n\n.words-container-header {\n  text-align: center; }\n\n.words-container-list {\n  display: flex;\n  justify-content: space-between; }\n", ""]);
+exports.push([module.i, ".words-container {\n  width: 600px; }\n\n.words-container-header {\n  text-align: center;\n  font-size: 50px; }\n\n.words-container-list {\n  display: flex;\n  list-style-type: none;\n  flex-wrap: wrap; }\n\n.words-container-list li {\n  font-size: 30px;\n  margin: 15px; }\n", ""]);
 
 // exports
 
@@ -75019,7 +75019,7 @@ exports = module.exports = __webpack_require__(18)(false);
 
 
 // module
-exports.push([module.i, "table {\n  width: 500px; }\n\ntable tr {\n  display: flex;\n  justify-content: space-between; }\n", ""]);
+exports.push([module.i, "table {\n  width: 300px; }\n\ntable tr {\n  display: flex;\n  justify-content: space-between; }\n", ""]);
 
 // exports
 

@@ -1,11 +1,18 @@
 .words-container {
-  width: 400px;
+  width: 600px;
   &-header {
     text-align: center;
+    font-size: 50px;
   }
 
   &-list {
     display: flex;
-    justify-content: space-between;
+    list-style-type: none;
+    flex-wrap: wrap;
+
+    li {
+      font-size: 30px;
+      margin: 15px;
+    }
   }
 }

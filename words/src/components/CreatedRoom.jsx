@@ -19,7 +19,16 @@ class CreatedRoom extends Component {
       loggedIn: false,
       startGame: false,
       letters: ["a", "b", "c", "d", "e", "f", "g", "h", "i"],
-      words: ["Cow", "Book", "Corner", "Milk", "Justify"],
+      words: [
+        "Cow",
+        "Book",
+        "Corner",
+        "Milk",
+        "Justify",
+        "jimmy",
+        "kitty",
+        "footer"
+      ],
       playersScore: { mike: 3 }
     };
 
