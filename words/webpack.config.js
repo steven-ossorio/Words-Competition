@@ -26,10 +26,34 @@ module.exports = {
       {
         test: /\.svg$/,
         loader: "svg-inline-loader"
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          "file-loader",
+          {
+            loader: "image-webpack-loader",
+            options: {
+              bypassOnDebug: true, // webpack@1.x
+              disable: true // webpack@2.x and newer
+            }
+          }
+        ]
+      },
+      {
+        test: /\.ttf$/,
+        use: [
+          {
+            loader: "ttf-loader",
+            options: {
+              name: "./font/[hash].[ext]"
+            }
+          }
+        ]
       }
     ]
   },
-  resolve: { extensions: [".js", ".jsx", ".sass"] },
+  resolve: { extensions: [".js", ".jsx", ".scss", ".png"] },
   output: {
     path: __dirname + "/src/javascripts",
     filename: "build.js"
