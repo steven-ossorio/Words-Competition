@@ -73955,6 +73955,22 @@ var _JoinRoom = __webpack_require__(152);
 
 var _JoinRoom2 = _interopRequireDefault(_JoinRoom);
 
+var _Timer = __webpack_require__(159);
+
+var _Timer2 = _interopRequireDefault(_Timer);
+
+var _PlayerScore = __webpack_require__(163);
+
+var _PlayerScore2 = _interopRequireDefault(_PlayerScore);
+
+var _Letters = __webpack_require__(164);
+
+var _Letters2 = _interopRequireDefault(_Letters);
+
+var _WordList = __webpack_require__(165);
+
+var _WordList2 = _interopRequireDefault(_WordList);
+
 var _reactRouterDom = __webpack_require__(20);
 
 __webpack_require__(153);
@@ -73978,11 +73994,15 @@ var CreatedRoom = function (_Component) {
     _this.state = {
       players: [],
       playersID: {},
-      loggedIn: false
+      loggedIn: false,
+      startGame: false,
+      letters: ["a", "b", "c", "d", "e", "f", "g", "h", "i"],
+      words: ["Cow", "Book", "Corner", "Milk", "Justify"]
     };
 
     _this.checkIfLoggedIn = _this.checkIfLoggedIn.bind(_this);
     _this.checkIfInCurrentGame = _this.checkIfInCurrentGame.bind(_this);
+    _this.startGame = _this.startGame.bind(_this);
     return _this;
   }
 
@@ -74054,9 +74074,27 @@ var CreatedRoom = function (_Component) {
       });
     }
   }, {
+    key: "startGame",
+    value: function startGame() {
+      this.setState({ startGame: true });
+    }
+  }, {
     key: "render",
     value: function render() {
-      if (this.state.loggedIn) {
+      if (this.state.startGame) {
+        return _react2.default.createElement(
+          "div",
+          { className: "created-room-container" },
+          _react2.default.createElement(_Timer2.default, null),
+          _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement(_Letters2.default, { letters: this.state.letters }),
+            _react2.default.createElement(_WordList2.default, { words: this.state.words }),
+            _react2.default.createElement(_PlayerScore2.default, { players: this.state.players })
+          )
+        );
+      } else if (this.state.loggedIn) {
         return _react2.default.createElement(
           "div",
           { className: "created-room-container" },
@@ -74084,13 +74122,12 @@ var CreatedRoom = function (_Component) {
               "div",
               { className: "landing-container-form-buttons" },
               _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: "/", replace: true },
-                _react2.default.createElement(
-                  "button",
-                  { className: "landing-container-form-button" },
-                  "Start Game"
-                )
+                "button",
+                {
+                  className: "landing-container-form-button",
+                  onClick: this.startGame
+                },
+                "Start Game"
               ),
               _react2.default.createElement(
                 _reactRouterDom.Link,
@@ -74481,6 +74518,257 @@ exports.push([module.i, ".players-container {\n  width: 500px;\n  margin: 0 auto
 
 // exports
 
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(160);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Timer = function (_Component) {
+  _inherits(Timer, _Component);
+
+  function Timer(props) {
+    _classCallCheck(this, Timer);
+
+    var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, props));
+
+    _this.state = {
+      time: 60
+    };
+    return _this;
+  }
+
+  _createClass(Timer, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var countDown = setInterval(function () {
+        _this2.setState({ time: _this2.state.time - 1 });
+        if (_this2.state.time === 0) {
+          clearInterval(countDown);
+        }
+      }, 1000);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(
+          "div",
+          { className: "time" },
+          this.state.time
+        )
+      );
+    }
+  }]);
+
+  return Timer;
+}(_react.Component);
+
+exports.default = Timer;
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(161);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(19)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {
+	module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./Timer.css", function() {
+		var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./Timer.css");
+
+		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+		var locals = (function(a, b) {
+			var key, idx = 0;
+
+			for(key in a) {
+				if(!b || a[key] !== b[key]) return false;
+				idx++;
+			}
+
+			for(key in b) idx--;
+
+			return idx === 0;
+		}(content.locals, newContent.locals));
+
+		if(!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+
+		update(newContent);
+	});
+
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__(113);
+exports = module.exports = __webpack_require__(18)(false);
+// imports
+
+
+// module
+exports.push([module.i, "@font-face {\n  font-family: \"time\";\n  src: url(" + escape(__webpack_require__(162)) + "); }\n\n.time {\n  font-family: time;\n  font-size: 80px;\n  text-align: center; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var createFontFamily = __webpack_require__(7);
+
+module.exports = createFontFamily({
+  ttf: __webpack_require__.p + "./font/473912e5d88d97b1c902a747c7b52df3.ttf",
+  woff: __webpack_require__.p + "./font/601bcfe0aa287797ceaef7ae7e9e82ca.woff",
+});
+
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+  var playerList = props.players.reverse();
+  playerList = props.players.map(function (player, i) {
+    return _react2.default.createElement(
+      "li",
+      { className: "players-container-list", key: i },
+      _react2.default.createElement(
+        "div",
+        null,
+        i + 1
+      ),
+      _react2.default.createElement(
+        "div",
+        null,
+        player
+      )
+    );
+  });
+  return _react2.default.createElement(
+    "ul",
+    { className: "players-container" },
+    "scoreBoard ",
+    playerList
+  );
+};
+
+/***/ }),
+/* 164 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+  return _react2.default.createElement(
+    "div",
+    null,
+    _react2.default.createElement(
+      "h1",
+      null,
+      "THIS WILL BE LETTERS"
+    )
+  );
+};
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (props) {
+  return _react2.default.createElement(
+    "div",
+    null,
+    _react2.default.createElement(
+      "h1",
+      null,
+      "WILL BE BOX FOR ALL WORDS SEND"
+    )
+  );
+};
 
 /***/ })
 /******/ ]);

@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "time";
+  src: url(../fonts/time.ttf); }
+
+.time {
+  font-family: time;
+  font-size: 80px;
+  text-align: center; }

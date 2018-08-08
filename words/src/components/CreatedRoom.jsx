@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import firebase from "../firebase/secretKeys";
 import Players from "./Players";
 import JoinRoom from "./JoinRoom";
+import Timer from "./Timer";
+import PlayerScore from "./PlayerScore";
+import Letters from "./Letters";
+import WordList from "./WordList";
 import { Link } from "react-router-dom";
 import "./CreatedRoom.css";
 
@@ -12,11 +16,15 @@ class CreatedRoom extends Component {
     this.state = {
       players: [],
       playersID: {},
-      loggedIn: false
+      loggedIn: false,
+      startGame: false,
+      letters: ["a", "b", "c", "d", "e", "f", "g", "h", "i"],
+      words: ["Cow", "Book", "Corner", "Milk", "Justify"]
     };
 
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
     this.checkIfInCurrentGame = this.checkIfInCurrentGame.bind(this);
+    this.startGame = this.startGame.bind(this);
   }
   componentDidMount() {
     this.checkIfLoggedIn();
@@ -82,8 +90,23 @@ class CreatedRoom extends Component {
     });
   }
 
+  startGame() {
+    this.setState({ startGame: true });
+  }
+
   render() {
-    if (this.state.loggedIn) {
+    if (this.state.startGame) {
+      return (
+        <div className="created-room-container">
+          <Timer />
+          <div>
+            <Letters letters={this.state.letters} />
+            <WordList words={this.state.words} />
+            <PlayerScore players={this.state.players} />
+          </div>
+        </div>
+      );
+    } else if (this.state.loggedIn) {
       return (
         <div className="created-room-container">
           <div className="created-room-container-inner">
@@ -95,11 +118,12 @@ class CreatedRoom extends Component {
             </h3>
             <Players players={this.state.players} />
             <div className="landing-container-form-buttons">
-              <Link to="/" replace>
-                <button className="landing-container-form-button">
-                  Start Game
-                </button>
-              </Link>
+              <button
+                className="landing-container-form-button"
+                onClick={this.startGame}
+              >
+                Start Game
+              </button>
               <Link to="/" replace>
                 <button className="landing-container-form-button">
                   Go Back
