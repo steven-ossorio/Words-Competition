@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../firebase/secretKeys";
 import { Link } from "react-router-dom";
+import "./JoinRoom.css";
 
 class JoinRoom extends Component {
   constructor(props) {

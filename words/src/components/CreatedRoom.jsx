@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import firebase from "../firebase/secretKeys";
 import Players from "./Players";
 import JoinRoom from "./JoinRoom";
+import { Link } from "react-router-dom";
 import "./CreatedRoom.css";
 
 class CreatedRoom extends Component {
@@ -93,6 +94,18 @@ class CreatedRoom extends Component {
               <span>Access Code:</span> {this.props.match.params.id}
             </h3>
             <Players players={this.state.players} />
+            <div className="landing-container-form-buttons">
+              <Link to="/" replace>
+                <button className="landing-container-form-button">
+                  Start Game
+                </button>
+              </Link>
+              <Link to="/" replace>
+                <button className="landing-container-form-button">
+                  Go Back
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       );

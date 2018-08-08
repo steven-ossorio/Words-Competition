@@ -1,0 +1,8 @@
+.players-container {
+  width: 500px;
+  margin: 0 auto;
+  font-size: 50px;
+  color: red; }
+  .players-container-list {
+    display: flex;
+    justify-content: space-around; }
