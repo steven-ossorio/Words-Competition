@@ -109,7 +109,7 @@ class Landing extends Component {
     } else if (this.state.joinRoom && !this.state.create) {
       return (
         <div className="landing">
-          <div className="landing-container">
+          <div className="landing-container join-room">
             <h1 className="landing-container-header">Welcome to Word</h1>
             <form className="landing-container-form">
               <input
@@ -147,7 +147,7 @@ class Landing extends Component {
     } else if (this.state.create && !this.state.joinRoom) {
       return (
         <div className="landing">
-          <div className="landing-container">
+          <div className="landing-container create-room">
             <h1 className="landing-container-header">Welcome to Word</h1>
             <form className="landing-container-form">
               <input

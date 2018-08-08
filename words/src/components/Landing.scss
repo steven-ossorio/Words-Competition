@@ -38,6 +38,14 @@ html {
   background-size: cover;
 }
 
+.join-room {
+  height: 423px !important;
+}
+
+.create-room {
+  height: 355px !important;
+}
+
 .landing {
   &-container {
     margin: 15% auto;
@@ -123,9 +131,9 @@ html {
       }
 
       &-buttons {
-        border-bottom: 1px dashed grey;
-        padding-bottom: 50px;
-        margin: 40px 0;
+        border-bottom: 5px dashed black;
+        padding-bottom: 40px;
+        margin: 43px 0;
       }
 
       &-button {
