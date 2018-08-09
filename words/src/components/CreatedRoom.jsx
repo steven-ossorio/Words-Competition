@@ -42,7 +42,6 @@ class CreatedRoom extends Component {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           window.user = user;
-          console.log("CHecked in");
           resolve(user.uid);
         } else {
           firebase
@@ -69,10 +68,7 @@ class CreatedRoom extends Component {
     let gameID = this.props.match.params.id;
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
-      this.setState({
-        words: []
-      });
-
+      words = [];
       let collection = snapshot.val();
       let wordsCollection = collection["words"];
 
@@ -92,8 +88,7 @@ class CreatedRoom extends Component {
 
   addWord() {
     let word = this.state.writtenWord;
-    console.log(word);
-    if (this.state.wordsObj[word]) {
+    if (this.state.wordsObj[word] || word === "") {
       return;
     }
     let gameID = this.props.match.params.id;

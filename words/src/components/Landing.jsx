@@ -72,6 +72,13 @@ class Landing extends Component {
       playersRef.child(`${id}`).set(`${this.state.username}`);
       let player = db.ref(`Room/${this.state.roomId}/players/${id}`);
       player.onDisconnect().remove();
+
+      let scoreBoard = db.ref(`Room/${this.state.roomId}/scoreBoard`);
+      scoreBoard.child(`${this.state.username}`).set(0);
+      let playerScore = db.ref(
+        `Room/${this.state.roomId}/scoreBoard/${this.state.username}`
+      );
+      playerScore.onDisconnect().remove();
     });
   }
 
