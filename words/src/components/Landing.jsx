@@ -79,6 +79,10 @@ class Landing extends Component {
         `Room/${this.state.roomId}/scoreBoard/${this.state.username}`
       );
       playerScore.onDisconnect().remove();
+
+      db.ref(`Room/${this.state.roomId}`)
+        .child("gameStarted")
+        .set(false);
     });
   }
 

@@ -32,9 +32,27 @@ class CreatedRoom extends Component {
     this.wordCollection = this.wordCollection.bind(this);
     this.addWord = this.addWord.bind(this);
     this.update = this.update.bind(this);
+    this.gameStarted = this.gameStarted.bind(this);
+    this.setLetters = this.setLetters.bind(this);
   }
   componentDidMount() {
+    this.setLetters();
     this.checkIfLoggedIn();
+    this.gameStarted();
+    this.generateLetters();
+  }
+
+  gameStarted() {
+    let gameID = this.props.match.params.id;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}`).on("value", snapshot => {
+      let collection = snapshot.val();
+      let startGame = collection["gameStarted"];
+
+      this.setState({
+        startGame
+      });
+    });
   }
 
   checkIfLoggedIn() {
@@ -140,6 +158,20 @@ class CreatedRoom extends Component {
     });
   }
 
+  setLetters() {
+    let gameID = this.props.match.params.id;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}`).on("value", snapshot => {
+      let collection = snapshot.val();
+      console.log(collection);
+      let letters = collection["letters"];
+      console.log(letters);
+      this.setState({
+        letters
+      });
+    });
+  }
+
   generateLetters() {
     let letters = [];
     let vowels = ["a", "e", "i", "o", "u"];
@@ -185,12 +217,17 @@ class CreatedRoom extends Component {
   }
 
   startGame() {
+    let gameID = this.props.match.params.id;
+    let db = firebase.database();
+    let updateObj = { gameStarted: true };
+    db.ref(`Room/${gameID}`).update(updateObj);
     this.generateLetters();
     this.setState({ startGame: true });
   }
 
   render() {
     if (this.state.startGame) {
+      console.log(this.state.letters);
       return (
         <div className="created-room-container">
           <Timer />

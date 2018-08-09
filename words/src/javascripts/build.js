@@ -29457,6 +29457,8 @@ var Landing = function (_Component) {
         scoreBoard.child("" + _this2.state.username).set(0);
         var playerScore = db.ref("Room/" + _this2.state.roomId + "/scoreBoard/" + _this2.state.username);
         playerScore.onDisconnect().remove();
+
+        db.ref("Room/" + _this2.state.roomId).child("gameStarted").set(false);
       });
     }
   }, {
@@ -74017,18 +74019,39 @@ var CreatedRoom = function (_Component) {
     _this.wordCollection = _this.wordCollection.bind(_this);
     _this.addWord = _this.addWord.bind(_this);
     _this.update = _this.update.bind(_this);
+    _this.gameStarted = _this.gameStarted.bind(_this);
+    _this.setLetters = _this.setLetters.bind(_this);
     return _this;
   }
 
   _createClass(CreatedRoom, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.setLetters();
       this.checkIfLoggedIn();
+      this.gameStarted();
+      this.generateLetters();
+    }
+  }, {
+    key: "gameStarted",
+    value: function gameStarted() {
+      var _this2 = this;
+
+      var gameID = this.props.match.params.id;
+      var db = _secretKeys2.default.database();
+      db.ref("Room/" + gameID).on("value", function (snapshot) {
+        var collection = snapshot.val();
+        var startGame = collection["gameStarted"];
+
+        _this2.setState({
+          startGame: startGame
+        });
+      });
     }
   }, {
     key: "checkIfLoggedIn",
     value: function checkIfLoggedIn() {
-      var _this2 = this;
+      var _this3 = this;
 
       var loginPromise = new Promise(function (resolve, reject) {
         _secretKeys2.default.auth().onAuthStateChanged(function (user) {
@@ -74045,14 +74068,14 @@ var CreatedRoom = function (_Component) {
         });
       });
       loginPromise.then(function (id) {
-        _this2.checkIfInCurrentGame(id);
-        _this2.wordCollection();
+        _this3.checkIfInCurrentGame(id);
+        _this3.wordCollection();
       });
     }
   }, {
     key: "wordCollection",
     value: function wordCollection() {
-      var _this3 = this;
+      var _this4 = this;
 
       var words = [];
       var wordsObj = {};
@@ -74070,7 +74093,7 @@ var CreatedRoom = function (_Component) {
           });
         }
 
-        _this3.setState({
+        _this4.setState({
           words: words,
           wordsObj: wordsObj
         });
@@ -74094,22 +74117,22 @@ var CreatedRoom = function (_Component) {
   }, {
     key: "update",
     value: function update(field) {
-      var _this4 = this;
+      var _this5 = this;
 
       return function (e) {
-        _this4.setState(_defineProperty({}, field, e.target.value));
+        _this5.setState(_defineProperty({}, field, e.target.value));
       };
     }
   }, {
     key: "checkIfInCurrentGame",
     value: function checkIfInCurrentGame(userId) {
-      var _this5 = this;
+      var _this6 = this;
 
       var playersKeysObj = {};
       var gameID = this.props.match.params.id;
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).on("value", function (snapshot) {
-        _this5.setState({
+        _this6.setState({
           players: []
         });
 
@@ -74118,20 +74141,37 @@ var CreatedRoom = function (_Component) {
         var newArray = [];
 
         if (players === undefined) {
-          _this5.props.history.push("/");
+          _this6.props.history.push("/");
           return;
         }
         Object.keys(players).forEach(function (id) {
           if (id === userId) {
-            _this5.setState({ loggedIn: true });
+            _this6.setState({ loggedIn: true });
           }
           newArray.push(players[id]);
           playersKeysObj[id] = true;
         });
 
-        _this5.setState({
+        _this6.setState({
           players: newArray,
           playersID: playersKeysObj
+        });
+      });
+    }
+  }, {
+    key: "setLetters",
+    value: function setLetters() {
+      var _this7 = this;
+
+      var gameID = this.props.match.params.id;
+      var db = _secretKeys2.default.database();
+      db.ref("Room/" + gameID).on("value", function (snapshot) {
+        var collection = snapshot.val();
+        console.log(collection);
+        var letters = collection["letters"];
+        console.log(letters);
+        _this7.setState({
+          letters: letters
         });
       });
     }
@@ -74160,6 +74200,10 @@ var CreatedRoom = function (_Component) {
   }, {
     key: "startGame",
     value: function startGame() {
+      var gameID = this.props.match.params.id;
+      var db = _secretKeys2.default.database();
+      var updateObj = { gameStarted: true };
+      db.ref("Room/" + gameID).update(updateObj);
       this.generateLetters();
       this.setState({ startGame: true });
     }
@@ -74167,6 +74211,7 @@ var CreatedRoom = function (_Component) {
     key: "render",
     value: function render() {
       if (this.state.startGame) {
+        console.log(this.state.letters);
         return _react2.default.createElement(
           "div",
           { className: "created-room-container" },
@@ -74876,7 +74921,7 @@ __webpack_require__(165);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
-  var letters = props.letters.map(function (letter, i) {
+  var letters = props.letters.split(",").map(function (letter, i) {
     return _react2.default.createElement(
       "div",
       { key: i },
