@@ -125,7 +125,7 @@ class CreatedRoom extends Component {
       let newArray = [];
 
       if (players === undefined) {
-        this.props.history.push("/");
+        this.props.history.push("/join-room");
         return;
       }
       Object.keys(players).forEach(id => {
@@ -135,6 +135,11 @@ class CreatedRoom extends Component {
         newArray.push(players[id]);
         playersKeysObj[id] = true;
       });
+
+      if (!this.state.loggedIn) {
+        this.props.history.push("/join-room");
+        return;
+      }
 
       this.setState({
         players: newArray,
@@ -171,39 +176,39 @@ class CreatedRoom extends Component {
       );
     } else if (this.state.loggedIn) {
       return (
-        <div className="created-room-container">
-          <div className="created-room-container-inner">
-            <h1 className="created-room-container-inner-header">
-              Waiting for players{" "}
-              <span>
-                <PacmanLoader color={"#123abc"} />
-              </span>
-            </h1>
-            <h3 className="created-room-container-inner-header-sub">
-              <span>Access Code:</span> {this.props.match.params.id}
-            </h3>
-            <Players players={this.state.players} />
-            <div className="landing-container-form-buttons">
-              <button
-                className="landing-container-form-button"
-                onClick={this.startGame}
-              >
-                Start Game
-              </button>
-              <Link to="/" replace>
-                <button className="landing-container-form-button">
-                  Go Back
+        <div className="created-room">
+          <div className="created-room-container">
+            <div className="created-room-container-inner">
+              <h1 className="created-room-container-inner-header">
+                Waiting for players{" "}
+                <span>
+                  <PacmanLoader color={"#123abc"} />
+                </span>
+              </h1>
+              <h3 className="created-room-container-inner-header-sub">
+                <span>Access Code:</span> {this.props.match.params.id}
+              </h3>
+              <Players players={this.state.players} />
+              <div className="landing-container-form-buttons">
+                <button
+                  className="landing-container-form-button"
+                  onClick={this.startGame}
+                >
+                  Start Game
                 </button>
-              </Link>
+                <Link to="/" replace>
+                  <button className="landing-container-form-button">
+                    Go Back
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       );
     } else {
       return (
-        <div>
-          <Join accesscode={this.props.match.params.id} />
-        </div>
+        <div>{/* <Join accesscode={this.props.match.params.id} /> */}</div>
       );
     }
   }

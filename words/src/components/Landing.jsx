@@ -44,10 +44,7 @@ class Landing extends Component {
                 Create Game
               </button>
               <Link to="/join-room">
-                <button
-                  className="landing-container-button"
-                  onClick={this.updateJoinRoom}
-                >
+                <button className="landing-container-button">
                   Join a room
                 </button>
               </Link>
