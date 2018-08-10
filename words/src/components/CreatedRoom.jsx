@@ -9,6 +9,7 @@ import * as Papa from "papaparse";
 import WordList from "./WordList";
 import { Link } from "react-router-dom";
 import "./CreatedRoom.css";
+import LettersList from "./LettersList";
 
 class CreatedRoom extends Component {
   constructor(props) {
@@ -19,7 +20,6 @@ class CreatedRoom extends Component {
       playersID: {},
       loggedIn: false,
       startGame: false,
-      letters: "",
       words: [],
       wordsObj: {},
       playersScore: { mike: 3 },
@@ -30,22 +30,18 @@ class CreatedRoom extends Component {
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
     this.checkIfInCurrentGame = this.checkIfInCurrentGame.bind(this);
     this.startGame = this.startGame.bind(this);
-    this.generateLetters = this.generateLetters.bind(this);
     this.wordCollection = this.wordCollection.bind(this);
     this.addWord = this.addWord.bind(this);
     this.update = this.update.bind(this);
     this.gameStarted = this.gameStarted.bind(this);
-    this.setLetters = this.setLetters.bind(this);
     this.dictionaryParse = this.dictionaryParse.bind(this);
     this.updateData = this.updateData.bind(this);
     this.setHash = this.setHash.bind(this);
   }
   componentDidMount() {
     this.dictionaryParse();
-    this.setLetters();
     this.checkIfLoggedIn();
     this.gameStarted();
-    this.generateLetters();
   }
 
   dictionaryParse() {
@@ -211,68 +207,11 @@ class CreatedRoom extends Component {
     });
   }
 
-  setLetters() {
-    let gameID = this.props.match.params.id;
-    let db = firebase.database();
-    db.ref(`Room/${gameID}`).on("value", snapshot => {
-      let collection = snapshot.val();
-      let letters = collection["letters"];
-      this.setState({
-        letters
-      });
-    });
-  }
-
-  generateLetters() {
-    let letters = [];
-    let vowels = ["a", "e", "i", "o", "u"];
-    let constant = [
-      "b",
-      "c",
-      "d",
-      "f",
-      "g",
-      "h",
-      "j",
-      "k",
-      "l",
-      "m",
-      "p",
-      "q",
-      "r",
-      "s",
-      "t",
-      "v",
-      "w",
-      "x",
-      "y",
-      "z"
-    ];
-
-    let option = ["vowels", "constant"];
-    for (let i = 0; i < 9; i++) {
-      let selected = option[Math.floor(Math.random() * option.length)];
-      if (selected === "vowels") {
-        letters.push(vowels[Math.floor(Math.random() * vowels.length)]);
-      } else {
-        letters.push(constant[Math.floor(Math.random() * constant.length)]);
-      }
-    }
-
-    this.setState({ letters });
-    let gameID = this.props.match.params.id;
-    let db = firebase.database();
-    db.ref(`Room/${gameID}`)
-      .child("letters")
-      .set(`${letters}`);
-  }
-
   startGame() {
     let gameID = this.props.match.params.id;
     let db = firebase.database();
     let updateObj = { gameStarted: true };
     db.ref(`Room/${gameID}`).update(updateObj);
-    this.generateLetters();
     this.setState({ startGame: true });
   }
 
@@ -282,7 +221,7 @@ class CreatedRoom extends Component {
         <div className="created-room-container">
           <Timer />
           <div className="game-start-container">
-            <Letters letters={this.state.letters} />
+            <Letters gameID={this.props.match.params.id} />
             <WordList words={this.state.words} />
             <PlayerScore
               players={this.state.players}
