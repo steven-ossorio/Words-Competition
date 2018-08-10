@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../firebase/secretKeys";
 import Players from "./Players";
-import JoinRoom from "./JoinRoom";
+import Join from "./Join";
 import Timer from "./Timer";
 import PlayerScore from "./PlayerScore";
 import Letters from "./Letters";
@@ -200,7 +200,7 @@ class CreatedRoom extends Component {
     } else {
       return (
         <div>
-          <JoinRoom roomId={this.props.match.params.id} />
+          <Join accesscode={this.props.match.params.id} />
         </div>
       );
     }

@@ -15,6 +15,12 @@ class Join extends Component {
     this.update = this.update.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.accesscode) {
+      this.setState({ accesscode: this.props.accesscode });
+    }
+  }
+
   createUser() {
     const loginPromise = new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
@@ -37,19 +43,19 @@ class Join extends Component {
     });
     loginPromise.then(id => {
       let db = firebase.database();
-      let playersRef = db.ref(`Room/${this.state.roomId}/players`);
+      let playersRef = db.ref(`Room/${this.state.accesscode}/players`);
       playersRef.child(`${id}`).set(`${this.state.username}`);
-      let player = db.ref(`Room/${this.state.roomId}/players/${id}`);
+      let player = db.ref(`Room/${this.state.accesscode}/players/${id}`);
       player.onDisconnect().remove();
 
-      let scoreBoard = db.ref(`Room/${this.state.roomId}/scoreBoard`);
+      let scoreBoard = db.ref(`Room/${this.state.accesscode}/scoreBoard`);
       scoreBoard.child(`${this.state.username}`).set(0);
       let playerScore = db.ref(
-        `Room/${this.state.roomId}/scoreBoard/${this.state.username}`
+        `Room/${this.state.accesscode}/scoreBoard/${this.state.username}`
       );
       playerScore.onDisconnect().remove();
 
-      db.ref(`Room/${this.state.roomId}`)
+      db.ref(`Room/${this.state.accesscode}`)
         .child("gameStarted")
         .set(false);
     });
@@ -73,11 +79,13 @@ class Join extends Component {
               type="text"
               placeholder="Enter a username"
               onChange={this.update("username")}
+              value={this.state.username}
             />
             <input
               type="text"
               placeholder="Enter Access Code"
               onChange={this.update("accesscode")}
+              value={this.state.accesscode}
             />
             <div className="landing-container-form-buttons">
               <Link to={this.state.accesscode} replace>
@@ -85,7 +93,7 @@ class Join extends Component {
                   className="landing-container-form-button"
                   onClick={this.createUser}
                 >
-                  Create a Room
+                  Join a Room
                 </button>
               </Link>
               <Link to="/" replace>
