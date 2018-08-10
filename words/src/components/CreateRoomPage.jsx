@@ -52,6 +52,11 @@ class CreateRoomPage extends Component {
       let player = db.ref(`Room/${this.state.roomId}/players/${id}`);
       player.onDisconnect().remove();
 
+      let allPlayers = db.ref(`Room/${this.state.roomId}/all-players`);
+      allPlayers.child(`${id}`).set(true);
+      let allPlayer = db.ref(`Room/${this.state.roomId}/all-players/${id}`);
+      allPlayer.onDisconnect().remove();
+
       let scoreBoard = db.ref(`Room/${this.state.roomId}/scoreBoard`);
       scoreBoard.child(`${this.state.username}`).set(0);
       let playerScore = db.ref(
@@ -85,7 +90,7 @@ class CreateRoomPage extends Component {
               onChange={this.update("username")}
             />
             <div className="landing-container-form-buttons">
-              <Link to={this.state.roomId} replace>
+              <Link to={`/waiting-room/${this.state.roomId}`} replace>
                 <button
                   className="landing-container-form-button"
                   onClick={this.createUser}
@@ -94,10 +99,7 @@ class CreateRoomPage extends Component {
                 </button>
               </Link>
               <Link to="/" replace>
-                <button
-                  className="landing-container-form-button"
-                  onClick={this.props.updateCreate}
-                >
+                <button className="landing-container-form-button">
                   Go Back
                 </button>
               </Link>

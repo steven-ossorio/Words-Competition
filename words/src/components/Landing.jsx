@@ -15,7 +15,6 @@ class Landing extends Component {
     };
 
     this.updateCreate = this.updateCreate.bind(this);
-    this.updateJoinRoom = this.updateJoinRoom.bind(this);
   }
 
   updateCreate(e) {
@@ -24,47 +23,22 @@ class Landing extends Component {
     this.setState({ create });
   }
 
-  updateJoinRoom(e) {
-    e.preventDefault();
-    let joinRoom = !this.state.joinRoom;
-    this.setState({ joinRoom });
-  }
-
   render() {
-    if (!this.state.create && !this.state.joinRoom) {
-      return (
-        <div className="landing">
-          <div className="landing-container">
-            <h1 className="landing-container-header">Welcome to Word</h1>
-            <div className="landing-container-buttons">
-              <button
-                className="landing-container-button"
-                onClick={this.updateCreate}
-              >
-                Create Game
-              </button>
-              <Link to="/join-room">
-                <button className="landing-container-button">
-                  Join a room
-                </button>
-              </Link>
-            </div>
+    return (
+      <div className="landing">
+        <div className="landing-container">
+          <h1 className="landing-container-header">Welcome to Word</h1>
+          <div className="landing-container-buttons">
+            <Link to="/create-room">
+              <button className="landing-container-button">Create Game</button>
+            </Link>
+            <Link to="/join-room" replace>
+              <button className="landing-container-button">Join a room</button>
+            </Link>
           </div>
         </div>
-      );
-    } else if (this.state.joinRoom && !this.state.create) {
-      return (
-        <div className="landing">
-          <Join updateJoinRoom={this.updateJoinRoom} />
-        </div>
-      );
-    } else if (this.state.create && !this.state.joinRoom) {
-      return (
-        <div>
-          <CreateRoomPage updateCreate={this.updateCreate} />
-        </div>
-      );
-    }
+      </div>
+    );
   }
 }
 
