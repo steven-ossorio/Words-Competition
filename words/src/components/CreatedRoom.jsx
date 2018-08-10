@@ -5,6 +5,7 @@ import JoinRoom from "./JoinRoom";
 import Timer from "./Timer";
 import PlayerScore from "./PlayerScore";
 import Letters from "./Letters";
+import * as Papa from "papaparse";
 import WordList from "./WordList";
 import { Link } from "react-router-dom";
 import "./CreatedRoom.css";
@@ -22,7 +23,8 @@ class CreatedRoom extends Component {
       words: [],
       wordsObj: {},
       playersScore: { mike: 3 },
-      writtenWord: ""
+      writtenWord: "",
+      dictionary: {}
     };
 
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
@@ -34,12 +36,43 @@ class CreatedRoom extends Component {
     this.update = this.update.bind(this);
     this.gameStarted = this.gameStarted.bind(this);
     this.setLetters = this.setLetters.bind(this);
+    this.dictionaryParse = this.dictionaryParse.bind(this);
+    this.updateData = this.updateData.bind(this);
+    this.setHash = this.setHash.bind(this);
   }
   componentDidMount() {
+    this.dictionaryParse();
     this.setLetters();
     this.checkIfLoggedIn();
     this.gameStarted();
     this.generateLetters();
+  }
+
+  dictionaryParse() {
+    let csvFilePath = require("../dictionary/dictionary.csv");
+    Papa.parse(csvFilePath, {
+      header: true,
+      download: true,
+      skipEmptyLines: true,
+      complete: this.updateData
+    });
+  }
+
+  updateData(results) {
+    let data = results.data;
+
+    this.setState({ dictionary: data });
+    this.setHash();
+  }
+
+  setHash() {
+    let dictionary = this.state.dictionary;
+    let set = new Set();
+    for (let i = 0; i < dictionary.length; i++) {
+      set.add(dictionary[i]["aa"]);
+    }
+
+    this.setState({ dictionary: set });
   }
 
   gameStarted() {
@@ -109,13 +142,33 @@ class CreatedRoom extends Component {
     if (this.state.wordsObj[word] || word === "") {
       return;
     }
-    let gameID = this.props.match.params.id;
-    let db = firebase.database();
-    db.ref(`Room/${gameID}/words`).push(word);
+
+    let check = this.checkWord(word);
+
+    if (this.state.dictionary.has(word) && check) {
+      let gameID = this.props.match.params.id;
+      let db = firebase.database();
+      db.ref(`Room/${gameID}/words`).push(word);
+    }
 
     this.setState({
       writtenWord: ""
     });
+  }
+
+  checkWord(word) {
+    let letterObj = {};
+    this.state.letters.split(",").forEach(letter => {
+      letterObj[letter] ? (letterObj[letter] += 1) : (letterObj[letter] = 1);
+    });
+    for (let i = 0; i < word.length; i++) {
+      let letter = word[i];
+      if (!letterObj[letter] || letterObj[letter] === 0) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   update(field) {
@@ -163,9 +216,7 @@ class CreatedRoom extends Component {
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
       let collection = snapshot.val();
-      console.log(collection);
       let letters = collection["letters"];
-      console.log(letters);
       this.setState({
         letters
       });
@@ -227,7 +278,6 @@ class CreatedRoom extends Component {
 
   render() {
     if (this.state.startGame) {
-      console.log(this.state.letters);
       return (
         <div className="created-room-container">
           <Timer />

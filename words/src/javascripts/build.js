@@ -74026,6 +74026,10 @@ var _Letters = __webpack_require__(164);
 
 var _Letters2 = _interopRequireDefault(_Letters);
 
+var _papaparse = __webpack_require__(186);
+
+var Papa = _interopRequireWildcard(_papaparse);
+
 var _WordList = __webpack_require__(167);
 
 var _WordList2 = _interopRequireDefault(_WordList);
@@ -74033,6 +74037,8 @@ var _WordList2 = _interopRequireDefault(_WordList);
 var _reactRouterDom = __webpack_require__(15);
 
 __webpack_require__(170);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -74061,7 +74067,8 @@ var CreatedRoom = function (_Component) {
       words: [],
       wordsObj: {},
       playersScore: { mike: 3 },
-      writtenWord: ""
+      writtenWord: "",
+      dictionary: {}
     };
 
     _this.checkIfLoggedIn = _this.checkIfLoggedIn.bind(_this);
@@ -74073,16 +74080,50 @@ var CreatedRoom = function (_Component) {
     _this.update = _this.update.bind(_this);
     _this.gameStarted = _this.gameStarted.bind(_this);
     _this.setLetters = _this.setLetters.bind(_this);
+    _this.dictionaryParse = _this.dictionaryParse.bind(_this);
+    _this.updateData = _this.updateData.bind(_this);
+    _this.setHash = _this.setHash.bind(_this);
     return _this;
   }
 
   _createClass(CreatedRoom, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.dictionaryParse();
       this.setLetters();
       this.checkIfLoggedIn();
       this.gameStarted();
       this.generateLetters();
+    }
+  }, {
+    key: "dictionaryParse",
+    value: function dictionaryParse() {
+      var csvFilePath = __webpack_require__(202);
+      Papa.parse(csvFilePath, {
+        header: true,
+        download: true,
+        skipEmptyLines: true,
+        complete: this.updateData
+      });
+    }
+  }, {
+    key: "updateData",
+    value: function updateData(results) {
+      var data = results.data;
+
+      this.setState({ dictionary: data });
+      this.setHash();
+    }
+  }, {
+    key: "setHash",
+    value: function setHash() {
+      var dictionary = this.state.dictionary;
+      var set = new Set();
+      for (var i = 0; i < dictionary.length; i++) {
+        set.add(dictionary[i]["aa"]);
+      }
+
+      this.setState({ dictionary: set });
     }
   }, {
     key: "gameStarted",
@@ -74158,13 +74199,34 @@ var CreatedRoom = function (_Component) {
       if (this.state.wordsObj[word] || word === "") {
         return;
       }
-      var gameID = this.props.match.params.id;
-      var db = _secretKeys2.default.database();
-      db.ref("Room/" + gameID + "/words").push(word);
+
+      var check = this.checkWord(word);
+
+      if (this.state.dictionary.has(word) && check) {
+        var gameID = this.props.match.params.id;
+        var db = _secretKeys2.default.database();
+        db.ref("Room/" + gameID + "/words").push(word);
+      }
 
       this.setState({
         writtenWord: ""
       });
+    }
+  }, {
+    key: "checkWord",
+    value: function checkWord(word) {
+      var letterObj = {};
+      this.state.letters.split(",").forEach(function (letter) {
+        letterObj[letter] ? letterObj[letter] += 1 : letterObj[letter] = 1;
+      });
+      for (var i = 0; i < word.length; i++) {
+        var letter = word[i];
+        if (!letterObj[letter] || letterObj[letter] === 0) {
+          return false;
+        }
+      }
+
+      return true;
     }
   }, {
     key: "update",
@@ -74219,9 +74281,7 @@ var CreatedRoom = function (_Component) {
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).on("value", function (snapshot) {
         var collection = snapshot.val();
-        console.log(collection);
         var letters = collection["letters"];
-        console.log(letters);
         _this7.setState({
           letters: letters
         });
@@ -74263,7 +74323,6 @@ var CreatedRoom = function (_Component) {
     key: "render",
     value: function render() {
       if (this.state.startGame) {
-        console.log(this.state.letters);
         return _react2.default.createElement(
           "div",
           { className: "created-room-container" },
