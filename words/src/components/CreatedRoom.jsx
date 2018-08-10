@@ -10,6 +10,7 @@ import WordList from "./WordList";
 import { Link } from "react-router-dom";
 import "./CreatedRoom.css";
 import LettersList from "./LettersList";
+import Words from "./Words";
 
 class CreatedRoom extends Component {
   constructor(props) {
@@ -20,18 +21,13 @@ class CreatedRoom extends Component {
       playersID: {},
       loggedIn: false,
       startGame: false,
-      words: [],
-      wordsObj: {},
       playersScore: { mike: 3 },
-      writtenWord: "",
       dictionary: {}
     };
 
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
     this.checkIfInCurrentGame = this.checkIfInCurrentGame.bind(this);
     this.startGame = this.startGame.bind(this);
-    this.wordCollection = this.wordCollection.bind(this);
-    this.addWord = this.addWord.bind(this);
     this.update = this.update.bind(this);
     this.gameStarted = this.gameStarted.bind(this);
     this.dictionaryParse = this.dictionaryParse.bind(this);
@@ -105,66 +101,7 @@ class CreatedRoom extends Component {
     });
     loginPromise.then(id => {
       this.checkIfInCurrentGame(id);
-      this.wordCollection();
     });
-  }
-
-  wordCollection() {
-    let words = [];
-    let wordsObj = {};
-    let gameID = this.props.match.params.id;
-    let db = firebase.database();
-    db.ref(`Room/${gameID}`).on("value", snapshot => {
-      words = [];
-      let collection = snapshot.val();
-      let wordsCollection = collection["words"];
-
-      if (wordsCollection) {
-        Object.keys(wordsCollection).forEach(wordKey => {
-          words.push(wordsCollection[wordKey]);
-          wordsObj[wordsCollection[wordKey]] = true;
-        });
-      }
-
-      this.setState({
-        words,
-        wordsObj
-      });
-    });
-  }
-
-  addWord() {
-    let word = this.state.writtenWord;
-    if (this.state.wordsObj[word] || word === "") {
-      return;
-    }
-
-    let check = this.checkWord(word);
-
-    if (this.state.dictionary.has(word) && check) {
-      let gameID = this.props.match.params.id;
-      let db = firebase.database();
-      db.ref(`Room/${gameID}/words`).push(word);
-    }
-
-    this.setState({
-      writtenWord: ""
-    });
-  }
-
-  checkWord(word) {
-    let letterObj = {};
-    this.state.letters.split(",").forEach(letter => {
-      letterObj[letter] ? (letterObj[letter] += 1) : (letterObj[letter] = 1);
-    });
-    for (let i = 0; i < word.length; i++) {
-      let letter = word[i];
-      if (!letterObj[letter] || letterObj[letter] === 0) {
-        return false;
-      }
-    }
-
-    return true;
   }
 
   update(field) {
@@ -222,20 +159,14 @@ class CreatedRoom extends Component {
           <Timer />
           <div className="game-start-container">
             <Letters gameID={this.props.match.params.id} />
-            <WordList words={this.state.words} />
+            <Words
+              gameID={this.props.match.params.id}
+              dictionary={this.state.dictionary}
+            />
             <PlayerScore
               players={this.state.players}
               playersScore={this.state.playersScore}
             />
-          </div>
-          <div className="input-box">
-            <input
-              onChange={this.update("writtenWord")}
-              type="text"
-              placeholder="Type Word Here"
-              value={this.state.writtenWord}
-            />
-            <button onClick={this.addWord}>Click Me TO Send</button>
           </div>
         </div>
       );
