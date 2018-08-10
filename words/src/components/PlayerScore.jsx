@@ -3,7 +3,6 @@ import "./PlayersScore.css";
 
 export default props => {
   let playerList = props.players.reverse();
-  console.log(props);
   playerList = playerList.map((player, i) => {
     let score = props.playersScore[player];
     return (
@@ -29,5 +28,4 @@ export default props => {
       </table>
     </div>
   );
-  // <ul className="players-container">scoreBoard {playerList}</ul>)
 };
