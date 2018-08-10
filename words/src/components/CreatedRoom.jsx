@@ -6,11 +6,10 @@ import Timer from "./Timer";
 import PlayerScore from "./PlayerScore";
 import Letters from "./Letters";
 import * as Papa from "papaparse";
-import WordList from "./WordList";
 import { Link } from "react-router-dom";
 import "./CreatedRoom.css";
-import LettersList from "./LettersList";
 import Words from "./Words";
+import { PacmanLoader } from "react-spinners";
 
 class CreatedRoom extends Component {
   constructor(props) {
@@ -175,7 +174,10 @@ class CreatedRoom extends Component {
         <div className="created-room-container">
           <div className="created-room-container-inner">
             <h1 className="created-room-container-inner-header">
-              Waiting for players...
+              Waiting for players{" "}
+              <span>
+                <PacmanLoader color={"#123abc"} />
+              </span>
             </h1>
             <h3 className="created-room-container-inner-header-sub">
               <span>Access Code:</span> {this.props.match.params.id}
