@@ -16,6 +16,7 @@ class App extends Component {
           <Route exact path="/waiting-room/:id" component={CreatedRoom} />
           <Route exact path="/join-room" component={Join} />
           <Route exact path="/join-room/:id" component={Join} />
+          {/* <Route exact path="/game/:id" component={GameStart} /> */}
         </header>
       </div>
     );

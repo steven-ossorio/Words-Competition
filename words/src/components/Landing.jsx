@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Landing.css";
-import Join from "./Join";
-import CreateRoomPage from "./CreateRoomPage";
 
 class Landing extends Component {
   constructor(props) {

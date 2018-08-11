@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import firebase from "../firebase/secretKeys";
 import Players from "./Players";
-import Join from "./Join";
 import Timer from "./Timer";
 import PlayerScore from "./PlayerScore";
 import Letters from "./Letters";
@@ -32,11 +31,19 @@ class CreatedRoom extends Component {
     this.dictionaryParse = this.dictionaryParse.bind(this);
     this.updateData = this.updateData.bind(this);
     this.setHash = this.setHash.bind(this);
+    this.updateCurrentPlayers = this.updateCurrentPlayers.bind(this);
   }
   componentDidMount() {
     this.dictionaryParse();
     this.checkIfLoggedIn();
     this.gameStarted();
+    this.updateCurrentPlayers();
+  }
+
+  componentWillUpdate() {
+    if (this.state.loggedIn) {
+      return true;
+    }
   }
 
   dictionaryParse() {
@@ -85,12 +92,14 @@ class CreatedRoom extends Component {
         if (user) {
           window.user = user;
           resolve(user.uid);
+          this.setState({ loggedIn: true });
         } else {
           firebase
             .auth()
             .signInAnonymously()
             .then(() => {
               console.log("logged in");
+              this.setState({ loggedIn: true });
             })
             .catch(err => {
               console.log(err);
@@ -111,8 +120,26 @@ class CreatedRoom extends Component {
     };
   }
 
-  checkIfInCurrentGame(userId) {
+  updateCurrentPlayers() {
     let playersKeysObj = {};
+    let gameID = this.props.match.params.id;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}`).on("value", snapshot => {
+      this.setState({
+        playersID: {}
+      });
+
+      let collection = snapshot.val();
+      let players = collection["players"];
+
+      Object.keys(players).forEach(key => {
+        playersKeysObj[key] = true;
+      });
+      this.setState({ playersID: playersKeysObj });
+    });
+  }
+
+  checkIfInCurrentGame(userId) {
     let gameID = this.props.match.params.id;
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
@@ -124,26 +151,16 @@ class CreatedRoom extends Component {
       let players = collection["players"];
       let newArray = [];
 
-      if (players === undefined) {
-        this.props.history.push("/join-room");
+      if (!this.state.playersID[userId] || !this.state.loggedIn) {
+        this.props.history.push(`/join-room/${gameID}`);
         return;
       }
       Object.keys(players).forEach(id => {
-        if (id === userId) {
-          this.setState({ loggedIn: true });
-        }
         newArray.push(players[id]);
-        playersKeysObj[id] = true;
       });
 
-      if (!this.state.loggedIn) {
-        this.props.history.push("/join-room");
-        return;
-      }
-
       this.setState({
-        players: newArray,
-        playersID: playersKeysObj
+        players: newArray
       });
     });
   }
@@ -157,6 +174,7 @@ class CreatedRoom extends Component {
   }
 
   render() {
+    console.log(this.state.loggedIn);
     if (this.state.startGame) {
       return (
         <div className="created-room-container">
