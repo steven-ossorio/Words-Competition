@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import "./WaitingRoom.css";
 import Words from "./Words";
 import { PacmanLoader } from "react-spinners";
+import GameStart from "./GameStart";
 
 class CreatedRoom extends Component {
   constructor(props) {
@@ -174,22 +175,15 @@ class CreatedRoom extends Component {
   }
 
   render() {
-    console.log(this.state.loggedIn);
     if (this.state.startGame) {
       return (
         <div className="created-room-container">
-          <Timer />
-          <div className="game-start-container">
-            <Letters gameID={this.props.match.params.id} />
-            <Words
-              gameID={this.props.match.params.id}
-              dictionary={this.state.dictionary}
-            />
-            <PlayerScore
-              players={this.state.players}
-              playersScore={this.state.playersScore}
-            />
-          </div>
+          <GameStart
+            gameID={this.props.match.params.id}
+            dictionary={this.state.dictionary}
+            players={this.state.players}
+            playersScore={this.state.playersScore}
+          />
         </div>
       );
     } else if (this.state.loggedIn) {
