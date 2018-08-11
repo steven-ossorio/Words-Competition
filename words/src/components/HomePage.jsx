@@ -22,7 +22,6 @@ class Landing extends Component {
   }
 
   render() {
-    debugger;
     return (
       <div className="landing">
         <div className="landing-container">
