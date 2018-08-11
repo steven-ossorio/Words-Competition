@@ -3,6 +3,7 @@ import Timer from "./Timer";
 import Letters from "./Letters";
 import Words from "./Words";
 import PlayerScore from "./PlayerScore";
+import "./GameStart.css";
 
 export default props => {
   return (

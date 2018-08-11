@@ -4,6 +4,9 @@
   height: 445px;
   background-color: #74ecd0;
   border-radius: 20px; }
+  .created-room .created-room-container .game-start-container {
+    display: flex;
+    justify-content: space-around; }
   .created-room .created-room-container-inner-header {
     border-top: 1px dashed grey;
     padding-top: 25px;

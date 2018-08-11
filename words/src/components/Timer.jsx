@@ -20,7 +20,7 @@ class Timer extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="time-container">
         <div className="time">{this.state.time}</div>
       </div>
     );

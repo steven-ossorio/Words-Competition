@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import firebase from "../firebase/secretKeys";
 import Players from "./Players";
-import Timer from "./Timer";
-import PlayerScore from "./PlayerScore";
-import Letters from "./Letters";
 import * as Papa from "papaparse";
 import { Link } from "react-router-dom";
 import "./WaitingRoom.css";
-import Words from "./Words";
 import { PacmanLoader } from "react-spinners";
 import GameStart from "./GameStart";
 
@@ -132,6 +128,10 @@ class CreatedRoom extends Component {
 
       let collection = snapshot.val();
       let players = collection["players"];
+
+      if (players === undefined) {
+        return;
+      }
 
       Object.keys(players).forEach(key => {
         playersKeysObj[key] = true;

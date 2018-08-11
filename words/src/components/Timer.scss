@@ -2,9 +2,16 @@
   font-family: "time";
   src: url(../fonts/time.ttf);
 }
+.time-container {
+  margin: 0 auto;
+  width: 105px;
+  background-color: blue;
+  border-radius: 50px;
+  margin-top: 20px;
 
-.time {
-  font-family: time;
-  font-size: 80px;
-  text-align: center;
+  .time {
+    font-family: time;
+    font-size: 80px;
+    text-align: center;
+  }
 }
