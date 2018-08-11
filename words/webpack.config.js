@@ -1,4 +1,5 @@
 let path = require("path");
+let webpack = require("webpack");
 
 module.exports = {
   context: path.join(__dirname, "src"),
@@ -67,5 +68,10 @@ module.exports = {
   output: {
     path: __dirname + "/src/javascripts",
     filename: "build.js"
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
+    })
+  ]
 };
