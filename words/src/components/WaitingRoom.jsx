@@ -200,7 +200,6 @@ class CreatedRoom extends Component {
               <h3 className="created-room-container-inner-header-sub">
                 <span>Access Code:</span> {this.props.match.params.id}
               </h3>
-              <Players players={this.state.players} />
               <div className="landing-container-form-buttons">
                 <button
                   className="landing-container-form-button"
@@ -214,6 +213,7 @@ class CreatedRoom extends Component {
                   </button>
                 </Link>
               </div>
+              <Players players={this.state.players} />
             </div>
           </div>
         </div>

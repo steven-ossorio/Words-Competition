@@ -6,8 +6,8 @@ export default props => {
   playerList = props.players.map((player, i) => {
     return (
       <li className="players-container-list" key={i}>
-        <div>{i + 1}</div>
-        <div>{player}</div>
+        <div className="players-container-list-number">{i + 1}</div>
+        <div className="players-container-list-username">{player}</div>
       </li>
     );
   });

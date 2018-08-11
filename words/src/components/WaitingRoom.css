@@ -1,13 +1,15 @@
 .created-room .created-room-container {
   margin: 15% auto;
   width: 900px;
-  height: 445px;
+  height: 320px;
   background-color: #74ecd0;
   border-radius: 20px; }
   .created-room .created-room-container .game-start-container {
     display: flex;
     justify-content: space-around; }
   .created-room .created-room-container-inner-header {
+    display: flex;
+    flex-flow: column;
     border-top: 1px dashed grey;
     padding-top: 25px;
     font-size: 70px;
@@ -21,7 +23,10 @@
     color: transparent;
     letter-spacing: 0.2rem;
     text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+    .created-room .created-room-container-inner-header span {
+      margin: 0 auto; }
   .created-room .created-room-container-inner-header-sub {
+    text-align: center;
     font-size: 20px;
     line-height: 38px;
     letter-spacing: 0.2rem;
@@ -37,3 +42,5 @@
     text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
     .created-room .created-room-container-inner-header-sub span {
       color: black; }
+  .created-room .created-room-container-inner .landing-container-form-buttons {
+    text-align: center; }
