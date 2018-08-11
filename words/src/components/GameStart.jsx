@@ -2,7 +2,7 @@ import React from "react";
 import Timer from "./Timer";
 import Letters from "./Letters";
 import Words from "./Words";
-import PlayerScore from "./PlayerScore";
+import ScoreBoard from "./ScoreBoard";
 import "./GameStart.css";
 
 export default props => {
@@ -12,7 +12,8 @@ export default props => {
       <div className="game-start-container">
         <Letters gameID={props.gameID} />
         <Words gameID={props.gameID} dictionary={props.dictionary} />
-        <PlayerScore
+        <ScoreBoard
+          gameID={props.gameID}
           players={props.players}
           playersScore={props.playersScore}
         />

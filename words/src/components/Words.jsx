@@ -21,6 +21,7 @@ class Words extends Component {
     this.addWord = this.addWord.bind(this);
     this.update = this.update.bind(this);
     this.retreiveLetters = this.retreiveLetters.bind(this);
+    this.addAPoint = this.addAPoint.bind(this);
   }
 
   componentDidMount() {
@@ -77,6 +78,43 @@ class Words extends Component {
     });
   }
 
+  addAPoint() {
+    const loginPromise = new Promise((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          window.user = user;
+          resolve(user.uid);
+        } else {
+          firebase
+            .auth()
+            .signInAnonymously()
+            .then(user => {
+              console.log("logged in");
+              console.log(user);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      });
+    });
+    loginPromise.then(id => {
+      let db = firebase.database();
+      let playerRef = db.ref(`Room/${this.props.gameID}/players/${id}`);
+      playerRef.once("value", snapshot => {
+        let username = snapshot.val();
+        let scoreRef = db.ref(
+          `Room/${this.props.gameID}/scoreBoard/${username}`
+        );
+        scoreRef.once("value", snapshot => {
+          let score = snapshot.val();
+          let update = { [username]: score + 1 };
+          db.ref(`Room/${this.props.gameID}/scoreBoard/`).update(update);
+        });
+      });
+    });
+  }
+
   addWord(e) {
     if (e.charCode === 13) {
       let word = this.state.word;
@@ -90,6 +128,7 @@ class Words extends Component {
         let gameID = this.props.gameID;
         let db = firebase.database();
         db.ref(`Room/${gameID}/words`).push(word);
+        this.addAPoint();
       }
 
       this.setState({
