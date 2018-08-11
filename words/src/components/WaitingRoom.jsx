@@ -6,7 +6,7 @@ import PlayerScore from "./PlayerScore";
 import Letters from "./Letters";
 import * as Papa from "papaparse";
 import { Link } from "react-router-dom";
-import "./CreatedRoom.css";
+import "./WaitingRoom.css";
 import Words from "./Words";
 import { PacmanLoader } from "react-spinners";
 

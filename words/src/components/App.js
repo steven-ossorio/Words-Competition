@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Route } from "react-router-dom";
-import CreatedRoom from "./CreatedRoom";
-import Join from "./Join";
-import CreateRoomPage from "./CreateRoomPage";
+import WaitingRoom from "./WaitingRoom";
+import JoinRoom from "./JoinRoom";
+import CreateRoom from "./CreateRoom";
 import HomePage from "./HomePage";
 
 class App extends Component {
@@ -12,10 +12,10 @@ class App extends Component {
       <div>
         <header>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/create-room" component={CreateRoomPage} />
-          <Route exact path="/waiting-room/:id" component={CreatedRoom} />
-          <Route exact path="/join-room" component={Join} />
-          <Route exact path="/join-room/:id" component={Join} />
+          <Route exact path="/create-room" component={CreateRoom} />
+          <Route exact path="/waiting-room/:id" component={WaitingRoom} />
+          <Route exact path="/join-room" component={JoinRoom} />
+          <Route exact path="/join-room/:id" component={JoinRoom} />
           {/* <Route exact path="/game/:id" component={GameStart} /> */}
         </header>
       </div>

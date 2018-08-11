@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import firebase from "../firebase/secretKeys";
-import "./CreatedRoom.css";
+import "./WaitingRoom.css";
 
 class CreateRoomPage extends Component {
   constructor(props) {
