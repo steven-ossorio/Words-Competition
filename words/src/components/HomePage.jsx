@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./Landing.css";
+import "./HomePage.css";
 
 class Landing extends Component {
   constructor(props) {

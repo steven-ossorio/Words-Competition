@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import firebase from "../firebase/secretKeys";
-import "./Landing.css";
+import "./HomePage.css";
 
 class Join extends Component {
   constructor(props) {
