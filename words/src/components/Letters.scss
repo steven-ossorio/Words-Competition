@@ -1,6 +1,5 @@
 .letters-container {
-  width: 300px;
-
+  width: 400px;
   h1 {
     text-align: center;
     font-size: 50px;
@@ -9,11 +8,47 @@
   &-inner {
     display: flex;
     flex-wrap: wrap;
-    font-size: 55px;
+    font-size: 70px;
     padding: 10px;
 
     div {
       padding: 10px;
+    }
+
+    .letters {
+      margin: 10px;
+      display: inline-block;
+      border: 1px solid #c9ae34;
+      color: #0d0b01;
+      border-radius: 3px 3px 3px 3px;
+      -webkit-border-radius: 3px 3px 3px 3px;
+      -moz-border-radius: 3px 3px 3px 3px;
+      font-family: Comic Sans MS;
+      width: auto;
+      height: auto;
+      font-size: 40px;
+      padding: 10px 30px;
+      box-shadow: inset 0 1px 0 0 #fff6ce, inset 0 -1px 0 0 #e3c852,
+        inset 0 0 0 1px #fce88d, 0 2px 4px 0 #d4d4d4;
+      -moz-box-shadow: inset 0 1px 0 0 #fff6ce, inset 0 -1px 0 0 #e3c852,
+        inset 0 0 0 1px #fce88d, 0 2px 4px 0 #d4d4d4;
+      -webkit-box-shadow: inset 0 1px 0 0 #fff6ce, inset 0 -1px 0 0 #e3c852,
+        inset 0 0 0 1px #fce88d, 0 2px 4px 0 #d4d4d4;
+      text-shadow: 0 1px 0 #ffffff;
+      background-image: linear-gradient(to top, #0de4fc, #92fc5d);
+      background-color: #fce374;
+    }
+    .btn-class:hover,
+    .btn-class:active {
+      border: 1px solid #967d09;
+      color: #705d07;
+      box-shadow: inset 0 1px 0 0 #fff6ce, inset 0 -1px 0 0 #e3c852,
+        inset 0 0 0 1px #fce88d;
+      -moz-box-shadow: inset 0 1px 0 0 #fff6ce, inset 0 -1px 0 0 #e3c852,
+        inset 0 0 0 1px #fce88d;
+      -webkit-box-shadow: inset 0 1px 0 0 #fff6ce, inset 0 -1px 0 0 #e3c852,
+        inset 0 0 0 1px #fce88d;
+      background-color: #fcdf5b;
     }
   }
 }

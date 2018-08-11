@@ -3,7 +3,11 @@ import "./Letters.css";
 
 export default props => {
   let letters = props.letters.split(",").map((letter, i) => {
-    return <div key={i}>{letter}</div>;
+    return (
+      <div className="letters" key={i}>
+        {letter}
+      </div>
+    );
   });
   return (
     <div className="letters-container">

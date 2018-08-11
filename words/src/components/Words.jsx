@@ -63,23 +63,25 @@ class Words extends Component {
     });
   }
 
-  addWord() {
-    let word = this.state.word;
-    if (this.state.wordsObj[word] || word === "") {
-      return;
+  addWord(e) {
+    if (e.charCode === 13) {
+      let word = this.state.word;
+      if (this.state.wordsObj[word] || word === "") {
+        return;
+      }
+
+      let check = this.checkWord(word);
+
+      if (this.props.dictionary.has(word) && check) {
+        let gameID = this.props.gameID;
+        let db = firebase.database();
+        db.ref(`Room/${gameID}/words`).push(word);
+      }
+
+      this.setState({
+        word: ""
+      });
     }
-
-    let check = this.checkWord(word);
-
-    if (this.props.dictionary.has(word) && check) {
-      let gameID = this.props.gameID;
-      let db = firebase.database();
-      db.ref(`Room/${gameID}/words`).push(word);
-    }
-
-    this.setState({
-      word: ""
-    });
   }
 
   checkWord(word) {
@@ -109,14 +111,14 @@ class Words extends Component {
     return (
       <div>
         <WordList words={this.state.words} />
-        <div className="input-box">
+        <div className="word-input-box">
           <input
+            onKeyPress={this.addWord}
             onChange={this.update("word")}
             type="text"
             placeholder="Type Word Here"
             value={this.state.word}
           />
-          <button onClick={this.addWord}>Click Me TO Send</button>
         </div>
       </div>
     );

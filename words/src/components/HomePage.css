@@ -28,7 +28,8 @@
 
 html {
   background-image: url("../img/background.png");
-  background-size: cover; }
+  background-size: cover;
+  overflow: hidden; }
 
 .join-room {
   height: 423px !important; }
