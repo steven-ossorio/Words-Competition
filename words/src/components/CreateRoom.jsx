@@ -64,6 +64,9 @@ class CreateRoomPage extends Component {
       );
       playerScore.onDisconnect().remove();
 
+      let creator = db.ref(`Room/${this.state.roomId}`);
+      creator.child("creator").set(`${id}`);
+
       db.ref(`Room/${this.state.roomId}`)
         .child("gameStarted")
         .set(false);

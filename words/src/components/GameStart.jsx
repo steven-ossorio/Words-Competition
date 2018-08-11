@@ -8,7 +8,7 @@ import "./GameStart.css";
 export default props => {
   return (
     <div className="created-room-container">
-      <Timer />
+      <Timer gameID={props.gameID} />
       <div className="game-start-container">
         <Letters gameID={props.gameID} />
         <Words gameID={props.gameID} dictionary={props.dictionary} />

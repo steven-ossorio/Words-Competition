@@ -12,7 +12,8 @@ class Words extends Component {
       writtenWord: "",
       dictionary: {},
       word: "",
-      letters: ""
+      letters: "",
+      time: 60
     };
 
     this.wordCollection = this.wordCollection.bind(this);
@@ -25,6 +26,7 @@ class Words extends Component {
   componentDidMount() {
     this.wordCollection();
     this.retreiveLetters();
+    this.timer();
   }
 
   retreiveLetters() {
@@ -35,6 +37,18 @@ class Words extends Component {
       let letters = collection["letters"];
       this.setState({
         letters
+      });
+    });
+  }
+
+  timer() {
+    let gameID = this.props.gameID;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}`).on("value", snapshot => {
+      let collection = snapshot.val();
+      let time = collection["time"];
+      this.setState({
+        time
       });
     });
   }
@@ -108,11 +122,16 @@ class Words extends Component {
   }
 
   render() {
+    let inputProps = {};
+    if (this.state.time === 0) {
+      inputProps.disabled = true;
+    }
     return (
       <div>
         <WordList words={this.state.words} />
         <div className="word-input-box">
           <input
+            {...inputProps}
             onKeyPress={this.addWord}
             onChange={this.update("word")}
             type="text"
