@@ -95,7 +95,6 @@ class CreatedRoom extends Component {
             .auth()
             .signInAnonymously()
             .then(() => {
-              console.log("logged in");
               this.setState({ loggedIn: true });
             })
             .catch(err => {
