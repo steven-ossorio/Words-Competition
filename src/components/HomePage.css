@@ -1,0 +1,131 @@
+@font-face {
+  font-family: "crackman";
+  src: url(../fonts/crackman.ttf); }
+
+@font-face {
+  font-family: "animals";
+  src: url(../fonts/Animales.ttf); }
+
+@font-face {
+  font-family: "answer";
+  src: url(../fonts/Answer.ttf); }
+
+@font-face {
+  font-family: "answer3d";
+  src: url(../fonts/Answer3DFilled-Italic.ttf); }
+
+@font-face {
+  font-family: "assyrian";
+  src: url(../fonts/Assyrian.ttf); }
+
+@font-face {
+  font-family: "assyrian3d";
+  src: url(../fonts/Assyrian3D.ttf); }
+
+@font-face {
+  font-family: "facon";
+  src: url(../fonts/Facon.ttf); }
+
+html {
+  background-image: url("../img/background.png");
+  background-size: cover;
+  overflow: hidden; }
+
+.join-room {
+  height: 423px !important; }
+
+.create-room {
+  height: 355px !important; }
+
+.landing-container {
+  margin: 15% auto;
+  width: 900px;
+  height: 245px;
+  background-color: #74ecd0;
+  border-radius: 20px; }
+  .landing-container-header {
+    padding-top: 25px;
+    font-size: 70px;
+    text-align: center;
+    font-family: crackman;
+    letter-spacing: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-image: linear-gradient(to right, blue, red);
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 0.2rem;
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+  .landing-container-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 41px; }
+  .landing-container-button {
+    outline: none;
+    font-family: crackman;
+    font-size: 45px;
+    border: none;
+    height: 38px;
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 38px;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-image: linear-gradient(to right, blue, red);
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 0.2rem;
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+    .landing-container-button:hover {
+      cursor: pointer; }
+  .landing-container-form {
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; }
+    .landing-container-form input[type="text"] {
+      outline: none;
+      font-family: assyrian;
+      margin: 10px auto;
+      text-align: center;
+      letter-spacing: 0.2rem;
+      box-sizing: border-box;
+      border-radius: 5px;
+      width: 280px;
+      height: 48px;
+      font-size: 20px; }
+      .landing-container-form input[type="text"]:hover {
+        cursor: default; }
+    .landing-container-form-buttons {
+      padding-bottom: 40px;
+      margin: 43px 0; }
+    .landing-container-form-button {
+      outline: none;
+      border-radius: 10px;
+      font-family: answer3d;
+      font-size: 45px;
+      border: none;
+      height: 38px;
+      padding: 0 50px;
+      margin: 0 auto;
+      line-height: 38px;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-sizing: border-box;
+      text-transform: uppercase;
+      font-weight: 700;
+      background-image: linear-gradient(to right, blue, red);
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: 0.2rem;
+      text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+      .landing-container-form-button:first-child {
+        margin-right: 20px; }
+      .landing-container-form-button:hover {
+        cursor: pointer; }

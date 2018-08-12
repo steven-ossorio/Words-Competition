@@ -1,0 +1,79 @@
+.word-input-box {
+  text-align: center;
+
+  input[type="text"] {
+    outline: none;
+    font-family: assyrian;
+    margin: 10px auto;
+    text-align: center;
+    letter-spacing: 0.2rem;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 350px;
+    height: 70px;
+    font-size: 35px;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+}
+
+.words-container {
+  width: 700px;
+  &-header {
+    text-align: center;
+    font-size: 50px;
+  }
+
+  &-list {
+    display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+
+    li {
+      padding: 16px;
+      font-size: 50px;
+      background: #eee;
+      border-radius: 0 20px 20px 0;
+      display: block;
+      height: 40px;
+      line-height: 24px;
+      margin: 15px;
+      // padding: 5px 5px 5px 20px;
+      position: relative;
+      text-align: left;
+      color: #56a3d5;
+
+      &:before {
+        content: "";
+        float: left;
+        position: absolute;
+        top: 0;
+        left: -17px;
+        width: 0;
+        height: 38px;
+        border-color: transparent #eee transparent transparent;
+        border-style: solid;
+        border-width: 17px 17px 17px 0;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 35px;
+        left: 2px;
+        float: left;
+        width: 6px;
+        height: 6px;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        background: #fff;
+        -moz-box-shadow: -1px -1px 2px #004977;
+        -webkit-box-shadow: -1px -1px 2px #004977;
+        box-shadow: -1px -1px 2px #004977;
+      }
+    }
+  }
+}

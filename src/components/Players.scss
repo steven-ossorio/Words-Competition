@@ -1,0 +1,58 @@
+@font-face {
+  font-family: "amazon";
+  src: url(../fonts/Amazon.ttf);
+}
+
+@font-face {
+  font-family: "3dlet";
+  src: url(../fonts/3dlet.ttf);
+}
+
+@font-face {
+  font-family: "beyond";
+  src: url(../fonts/Beyond.ttf);
+}
+
+@font-face {
+  font-family: "blox";
+  src: url(../fonts/Blox2.ttf);
+}
+
+@font-face {
+  font-family: "burn";
+  src: url(../fonts/Burn.ttf);
+}
+
+@font-face {
+  font-family: "revolt";
+  src: url(../fonts/Revolt.ttf);
+}
+
+.players-container {
+  width: 500px;
+  margin: 0 auto;
+  font-size: 50px;
+  color: red;
+  &-list {
+    display: flex;
+    justify-content: space-between;
+
+    &-number {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 4rem;
+      background-color: yellow;
+      font-family: "amazon";
+    }
+
+    &-username {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 3rem;
+      background: blue;
+      font-family: "beyond";
+    }
+  }
+}

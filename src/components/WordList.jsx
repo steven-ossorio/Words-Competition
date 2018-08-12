@@ -1,0 +1,14 @@
+import React from "react";
+import "./WordList.css";
+
+export default props => {
+  let words = props.words.map((word, i) => {
+    return <li key={i}>{word}</li>;
+  });
+  return (
+    <div className="words-container">
+      <h1 className="words-container-header">Words</h1>
+      <ul className="words-container-list">{words}</ul>
+    </div>
+  );
+};
