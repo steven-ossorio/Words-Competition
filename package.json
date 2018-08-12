@@ -32,7 +32,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "home-page": "http://www.stevenossorio.com/Words-Competition/public",
+    "home-page": "http://www.stevenossorio.com/Words-Competition/public/index.html",
     "build-css": "node-sass-chokidar src/components -o src/components",
     "watch-css": "npm run build-css && node-sass-chokidar src/components -o src/components --watch --recursive",
     "webpack": "webpack --watch",
