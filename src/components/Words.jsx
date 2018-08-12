@@ -163,6 +163,7 @@ class Words extends Component {
     let inputProps = {};
     if (this.state.time === 0) {
       inputProps.disabled = true;
+      this.props.history.push(`/final-score/${this.props.gameID}`);
       backButton = (
         <div className="word-button">
           <Link className="word-button" to="/">

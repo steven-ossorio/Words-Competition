@@ -11,7 +11,11 @@ export default props => {
       <Timer gameID={props.gameID} />
       <div className="game-start-container">
         <Letters gameID={props.gameID} />
-        <Words gameID={props.gameID} dictionary={props.dictionary} />
+        <Words
+          gameID={props.gameID}
+          dictionary={props.dictionary}
+          history={props.history}
+        />
         <ScoreBoard
           gameID={props.gameID}
           players={props.players}

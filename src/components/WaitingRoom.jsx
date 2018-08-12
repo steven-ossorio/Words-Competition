@@ -192,6 +192,7 @@ class CreatedRoom extends Component {
             dictionary={this.state.dictionary}
             players={this.state.players}
             playersScore={this.state.playersScore}
+            history={this.props.history}
           />
         </div>
       );
