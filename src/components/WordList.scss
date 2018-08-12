@@ -17,6 +17,32 @@
       cursor: default;
     }
   }
+
+  .word-button {
+    outline: none;
+    font-family: crackman;
+    font-size: 45px;
+    border: none;
+    height: 38px;
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 38px;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-image: linear-gradient(to right, blue, red);
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 0.2rem;
+    text-shadow: 0.5rem 1rem 2rem rgba(black, 0.2);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .words-container {

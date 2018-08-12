@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import WordList from "./WordList";
 import firebase from "../firebase/secretKeys";
+import { Link } from "react-router-dom";
 
 class Words extends Component {
   constructor(props) {
@@ -158,9 +159,17 @@ class Words extends Component {
   }
 
   render() {
+    let backButton;
     let inputProps = {};
     if (this.state.time === 0) {
       inputProps.disabled = true;
+      backButton = (
+        <div className="word-button">
+          <Link className="word-button" to="/">
+            <button className="word-button">Go to home page</button>
+          </Link>
+        </div>
+      );
     }
     return (
       <div>
@@ -174,6 +183,7 @@ class Words extends Component {
             placeholder="Type Word Here"
             value={this.state.word}
           />
+          {backButton}
         </div>
       </div>
     );
