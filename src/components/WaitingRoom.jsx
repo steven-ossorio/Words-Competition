@@ -77,6 +77,10 @@ class CreatedRoom extends Component {
       let collection = snapshot.val();
       let startGame = collection["gameStarted"];
 
+      if (startGame === null || startGame === undefined) {
+        return;
+      }
+
       this.setState({
         startGame
       });
