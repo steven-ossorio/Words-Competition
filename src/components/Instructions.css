@@ -1,0 +1,24 @@
+.open-modal-container-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  min-height: 100%;
+  background-color: rgba(0, 0, 255, 0.4); }
+
+.open-modal-container-content {
+  width: 900px;
+  height: 80%;
+  margin: 0 auto;
+  background-color: white;
+  text-align: center; }
+  .open-modal-container-content-close-modal {
+    display: block;
+    text-align: right;
+    font-size: 30px; }
+  .open-modal-container-content-description {
+    font-size: 20px; }
+  .open-modal-container-content-img {
+    margin-top: 5rem;
+    height: 500px; }

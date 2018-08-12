@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Instructions from "./Instructions";
 import "./HomePage.css";
 
 class Landing extends Component {
@@ -26,6 +27,9 @@ class Landing extends Component {
       <div className="landing">
         <div className="landing-container">
           <h1 className="landing-container-header">Welcome to Word</h1>
+          <h3>
+            <Instructions />
+          </h3>
           <div className="landing-container-buttons">
             <Link to="/create-room">
               <button className="landing-container-button">Create Game</button>
