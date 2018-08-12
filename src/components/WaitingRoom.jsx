@@ -151,10 +151,16 @@ class CreatedRoom extends Component {
       let players = collection["players"];
       let newArray = [];
 
+      if (players === undefined) {
+        this.props.history.push("/");
+        return;
+      }
+
       if (!this.state.playersID[userId] || !this.state.loggedIn) {
         this.props.history.push(`/join-room/${gameID}`);
         return;
       }
+
       Object.keys(players).forEach(id => {
         newArray.push(players[id]);
       });
