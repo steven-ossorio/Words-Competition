@@ -137,12 +137,14 @@ class Words extends Component {
         let db = firebase.database();
         db.ref(`Room/${gameID}/words`).push(word);
         this.addAPoint();
-      }
 
-      this.setState({
-        word: "",
-        errors: ""
-      });
+        this.setState({
+          word: "",
+          errors: ""
+        });
+      } else {
+        this.setState({ errors: 'Dictionary says: "Not a real word"' });
+      }
     }
   }
 
