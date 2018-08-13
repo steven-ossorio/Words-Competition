@@ -24,7 +24,7 @@ class ScoreBoard extends Component {
     db.ref(`Room/${gameID}`).on("value", snapshot => {
       let collection = snapshot.val();
       let playersScore = collection["scoreBoard"];
-      if (playersScore === undefined) {
+      if (playersScore === undefined || playersScore === null) {
         return;
       }
       Object.keys(playersScore).forEach(username => {

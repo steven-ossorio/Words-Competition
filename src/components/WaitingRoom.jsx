@@ -158,7 +158,7 @@ class CreatedRoom extends Component {
       let players = collection["players"];
       let newArray = [];
 
-      if (players === undefined) {
+      if (players === undefined || players === null) {
         this.props.history.push("/");
         return;
       }
