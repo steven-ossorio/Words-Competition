@@ -54,6 +54,7 @@ html {
     font-weight: 700;
     background-image: linear-gradient(to right, blue, red);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
     letter-spacing: 0.2rem;
     text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
