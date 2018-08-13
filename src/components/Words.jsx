@@ -14,7 +14,8 @@ class Words extends Component {
       dictionary: {},
       word: "",
       letters: "",
-      time: 60
+      time: 60,
+      errors: ""
     };
 
     this.wordCollection = this.wordCollection.bind(this);
@@ -116,11 +117,22 @@ class Words extends Component {
   addWord(e) {
     if (e.charCode === 13) {
       let word = this.state.word;
-      if (this.state.wordsObj[word] || word === "") {
+      if (word === "") {
+        console.log("can't be blank");
+        this.setState({ errors: "Can't be blank" });
+        return;
+      } else if (this.state.wordsObj[word]) {
+        console.log("hit alreadt exist");
+        this.setState({ errors: "Word already exists" });
         return;
       }
 
       let check = this.checkWord(word);
+
+      if (!check) {
+        this.setState({ errors: "That isn't an actual word" });
+        return;
+      }
 
       if (this.props.dictionary.has(word) && check) {
         let gameID = this.props.gameID;
@@ -130,7 +142,8 @@ class Words extends Component {
       }
 
       this.setState({
-        word: ""
+        word: "",
+        errors: ""
       });
     }
   }
@@ -164,6 +177,11 @@ class Words extends Component {
       inputProps.disabled = true;
       this.props.history.push(`/final-score/${this.props.gameID}`);
     }
+    let errors = "";
+    if (this.state.errors.length > 0) {
+      errors = <div className="create-errors">{this.state.errors}</div>;
+    }
+
     return (
       <div>
         <WordList words={this.state.words} />
@@ -176,6 +194,7 @@ class Words extends Component {
             placeholder="Type Word Here"
             value={this.state.word}
           />
+          {errors}
         </div>
       </div>
     );
