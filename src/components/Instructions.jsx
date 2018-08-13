@@ -29,14 +29,17 @@ class Instructions extends Component {
                 X
               </span>
               <h1 className="open-modal-container-content-header">
-                Basic Description
+                Welcome! to <span>Words</span>
               </h1>
               <p className="open-modal-container-content-description">
-                What this application is about.
+                A competition you've have yet to experience. Through the use of
+                9 letters given, how many words can you come up with from a
+                collection of 128,800 words in the english dictionary? sit back,
+                grab a friend and let the competition, START!.
               </p>
               <img
                 className="open-modal-container-content-img"
-                src={require("../img/background.png")}
+                src={require("../img/instruction.png")}
                 alt=""
               />
             </div>
@@ -46,7 +49,9 @@ class Instructions extends Component {
     } else {
       return (
         <div>
-          <div onClick={this.updateModal}>Instructions</div>
+          <div className="close-modal" onClick={this.updateModal}>
+            Instructions
+          </div>
         </div>
       );
     }

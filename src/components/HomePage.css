@@ -32,10 +32,10 @@ html {
   overflow: hidden; }
 
 .join-room {
-  height: 423px !important; }
+  height: 385px !important; }
 
 .create-room {
-  height: 355px !important; }
+  height: 320px !important; }
 
 .landing-container {
   margin: 15% auto;
@@ -44,6 +44,7 @@ html {
   background-color: #74ecd0;
   border-radius: 20px; }
   .landing-container-header {
+    margin-bottom: 25px;
     padding-top: 25px;
     font-size: 70px;
     text-align: center;

@@ -32,6 +32,22 @@
     &-img {
       margin-top: 5rem;
       height: 500px;
+      width: inherit;
     }
+  }
+}
+
+.close-modal {
+  text-align: center;
+  font-weight: 700;
+  background-image: linear-gradient(to right, blue, red);
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.2rem;
+  text-shadow: 0.5rem 1rem 2rem rgba(black, 0.2);
+  margin-bottom: 30px;
+
+  &:hover {
+    cursor: pointer;
   }
 }
