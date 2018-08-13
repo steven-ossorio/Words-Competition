@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import WordList from "./WordList";
 import firebase from "../firebase/secretKeys";
-import { Link } from "react-router-dom";
 
 class Words extends Component {
   constructor(props) {

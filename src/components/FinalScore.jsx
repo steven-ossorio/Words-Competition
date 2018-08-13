@@ -44,10 +44,23 @@ class FinalScore extends Component {
     let scoreBoard;
     if (this.state.sortedKeys.length > 0) {
       scoreBoard = this.state.sortedKeys.map((key, i) => {
+        let firstScore = "";
+        if (i === 0) {
+          firstScore = (
+            <span className="list-item-rank first-rank">{i + 1}</span>
+          );
+        } else {
+          firstScore = <span className="list-item-rank">{i + 1}</span>;
+        }
         return (
           <li className="list-item">
-            <span className="list-item-username">{key}</span>
-            <span className="list-item-score">{this.state.sortedScore[i]}</span>
+            {firstScore}
+            <div className="list-item-container">
+              <span className="list-item-username">{key}</span>
+              <span className="list-item-score">
+                {this.state.sortedScore[i]}
+              </span>
+            </div>
           </li>
         );
       });

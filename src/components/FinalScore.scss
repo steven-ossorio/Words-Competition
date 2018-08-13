@@ -1,16 +1,84 @@
+@font-face {
+  font-family: "crackman";
+  src: url(../fonts/crackman.ttf);
+}
+
+@font-face {
+  font-family: "animals";
+  src: url(../fonts/Animales.ttf);
+}
+
+@font-face {
+  font-family: "answer";
+  src: url(../fonts/Answer.ttf);
+}
+
+@font-face {
+  font-family: "answer3d";
+  src: url(../fonts/Answer3DFilled-Italic.ttf);
+}
+
+@font-face {
+  font-family: "assyrian";
+  src: url(../fonts/Assyrian.ttf);
+}
+
+@font-face {
+  font-family: "assyrian3d";
+  src: url(../fonts/Assyrian3D.ttf);
+}
+
+@font-face {
+  font-family: "facon";
+  src: url(../fonts/Facon.ttf);
+}
+
 .final-score-container {
+  margin-top: 5rem;
   text-align: center;
 
   &-title {
-    font-size: 65px;
+    font-size: 6rem;
+    font-family: assyrian;
+    letter-spacing: 0.7rem;
+    font-weight: 700;
   }
-
-  .list-item {
-    font-size: 40px;
-    width: 500px;
+  &-list-container {
     margin: 0 auto;
-    display: flex;
-    justify-content: space-around;
+    width: 500px;
+
+    .list-item {
+      font-family: assyrian3d;
+      font-size: 3.5rem;
+      width: 500px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      margin: 3rem 0;
+      padding: 1rem;
+      border-radius: 10px;
+
+      &-rank {
+        background-color: #93eed7;
+        padding: 1rem;
+        border-radius: 10px;
+      }
+
+      &-container {
+        background-color: #93eed7;
+        padding: 1rem;
+        border-radius: 10px;
+        &-username {
+          background-color: #93eed7;
+        }
+
+        &-score {
+          background-color: #93eed7;
+          padding: 1rem;
+          border-radius: 10px;
+        }
+      }
+    }
   }
 
   &-buttons {
@@ -52,4 +120,8 @@
       }
     }
   }
+}
+
+.first-rank {
+  background-color: gold !important;
 }
