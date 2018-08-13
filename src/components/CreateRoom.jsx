@@ -9,7 +9,8 @@ class CreateRoomPage extends Component {
 
     this.state = {
       username: "",
-      roomId: ""
+      roomId: "",
+      errors: ""
     };
 
     this.createUser = this.createUser.bind(this);
@@ -25,7 +26,16 @@ class CreateRoomPage extends Component {
     });
   }
 
-  createUser() {
+  createUser(e) {
+    if (this.state.username === "") {
+      e.preventDefault();
+      this.setState({
+        errors: "Username can't be blank"
+      });
+
+      return;
+    }
+
     const loginPromise = new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -67,6 +77,11 @@ class CreateRoomPage extends Component {
       db.ref(`Room/${this.state.roomId}`)
         .child("gameStarted")
         .set(false);
+
+      this.setState({
+        username: "",
+        errors: ""
+      });
     });
   }
 
@@ -79,6 +94,11 @@ class CreateRoomPage extends Component {
   }
 
   render() {
+    let errors = "";
+    if (this.state.errors.length > 0) {
+      errors = <div className="create-errors">{this.state.errors}</div>;
+    }
+
     return (
       <div className="landing">
         <div className="landing-container create-room">
@@ -89,10 +109,12 @@ class CreateRoomPage extends Component {
               placeholder="Enter a username"
               onChange={this.update("username")}
             />
+            {errors}
             <div className="landing-container-form-buttons">
               <Link to={`/waiting-room/${this.state.roomId}`} replace>
                 <button
                   className="landing-container-form-button"
+                  id="create-button"
                   onClick={this.createUser}
                 >
                   Create a Room

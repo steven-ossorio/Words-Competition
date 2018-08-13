@@ -130,11 +130,14 @@ class CreatedRoom extends Component {
       });
 
       let collection = snapshot.val();
-      let players = collection["players"];
 
-      if (players === undefined || players === null) {
+      if (
+        collection["players"] === undefined ||
+        collection["players"] === null
+      ) {
         return;
       }
+      let players = collection["players"];
 
       Object.keys(players).forEach(key => {
         playersKeysObj[key] = true;

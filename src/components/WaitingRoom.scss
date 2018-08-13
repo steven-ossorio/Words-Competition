@@ -14,7 +14,6 @@
       &-header {
         display: flex;
         flex-flow: column;
-        border-top: 1px dashed grey;
         padding-top: 25px;
         font-size: 70px;
         text-align: center;
@@ -35,6 +34,7 @@
 
       &-header-sub {
         span {
+          text-transform: uppercase;
           color: black;
         }
 
@@ -45,7 +45,7 @@
         text-transform: uppercase;
         white-space: nowrap;
         box-sizing: border-box;
-        text-transform: uppercase;
+        text-transform: none;
         font-weight: 700;
         background-image: linear-gradient(to right, blue, red);
         -webkit-background-clip: text;

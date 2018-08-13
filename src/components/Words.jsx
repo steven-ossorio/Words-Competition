@@ -159,18 +159,10 @@ class Words extends Component {
   }
 
   render() {
-    let backButton;
     let inputProps = {};
     if (this.state.time === 0) {
       inputProps.disabled = true;
       this.props.history.push(`/final-score/${this.props.gameID}`);
-      backButton = (
-        <div className="word-button">
-          <Link className="word-button" to="/">
-            <button className="word-button">Go to home page</button>
-          </Link>
-        </div>
-      );
     }
     return (
       <div>
@@ -184,7 +176,6 @@ class Words extends Component {
             placeholder="Type Word Here"
             value={this.state.word}
           />
-          {backButton}
         </div>
       </div>
     );

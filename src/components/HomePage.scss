@@ -111,6 +111,31 @@ html {
       justify-content: center;
       flex-direction: column;
 
+      .create-errors {
+        margin-top: 15px;
+        padding: 5px;
+        position: relative;
+        background: #bb3500;
+        border-radius: 0.4em;
+        width: 250px;
+        margin: 0 auto;
+        font: bold;
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 0;
+          height: 0;
+          border: 10px solid transparent;
+          border-bottom-color: #bb3b00;
+          border-top: 0;
+          margin-left: -15px;
+          margin-top: -10px;
+        }
+      }
+
       input[type="text"] {
         outline: none;
         font-family: assyrian;

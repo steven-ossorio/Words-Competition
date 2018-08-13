@@ -10,7 +10,6 @@
   .created-room .created-room-container-inner-header {
     display: flex;
     flex-flow: column;
-    border-top: 1px dashed grey;
     padding-top: 25px;
     font-size: 70px;
     text-align: center;
@@ -33,7 +32,7 @@
     text-transform: uppercase;
     white-space: nowrap;
     box-sizing: border-box;
-    text-transform: uppercase;
+    text-transform: none;
     font-weight: 700;
     background-image: linear-gradient(to right, blue, red);
     -webkit-background-clip: text;
@@ -41,6 +40,7 @@
     letter-spacing: 0.2rem;
     text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
     .created-room .created-room-container-inner-header-sub span {
+      text-transform: uppercase;
       color: black; }
   .created-room .created-room-container-inner .landing-container-form-buttons {
     text-align: center; }
