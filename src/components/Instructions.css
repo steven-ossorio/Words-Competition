@@ -10,7 +10,7 @@
 .open-modal-container-content {
   width: 900px;
   height: 80%;
-  margin: 0 auto;
+  margin: 4rem auto 0 auto;
   background-color: white;
   text-align: center; }
   .open-modal-container-content-close-modal {
