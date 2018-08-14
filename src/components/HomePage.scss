@@ -79,10 +79,13 @@
   src: url(../fonts/Flaticon.ttf);
 }
 
-html {
-  background-image: url("../img/background.png");
-  background-size: cover;
+body {
+  background: url("../img/background.png") no-repeat center center fixed;
   overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .join-room {
