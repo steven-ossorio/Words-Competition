@@ -9,7 +9,8 @@ class Join extends Component {
 
     this.state = {
       username: "",
-      accesscode: ""
+      accesscode: "",
+      errors: ""
     };
 
     this.createUser = this.createUser.bind(this);
@@ -17,12 +18,26 @@ class Join extends Component {
   }
 
   componentDidMount() {
-    if (this.props.match.params.id !== "") {
+    if (this.props.match.params.id !== undefined) {
       this.setState({ accesscode: this.props.match.params.id });
     }
   }
 
-  createUser() {
+  createUser(e) {
+    if (this.state.username === "") {
+      e.preventDefault();
+      this.setState({
+        errors: "Username can't be blank"
+      });
+      return;
+    } else if (this.state.accesscode === "") {
+      e.preventDefault();
+      this.setState({
+        errors: "Access Code can't be blank"
+      });
+      return;
+    }
+
     const loginPromise = new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -40,20 +55,18 @@ class Join extends Component {
       });
     });
     loginPromise.then(id => {
-      if (this.state.username !== "") {
-        let db = firebase.database();
-        let playersRef = db.ref(`Room/${this.state.accesscode}/players`);
-        playersRef.child(`${id}`).set(`${this.state.username}`);
-        let player = db.ref(`Room/${this.state.accesscode}/players/${id}`);
-        player.onDisconnect().remove();
+      let db = firebase.database();
+      let playersRef = db.ref(`Room/${this.state.accesscode}/players`);
+      playersRef.child(`${id}`).set(`${this.state.username}`);
+      let player = db.ref(`Room/${this.state.accesscode}/players/${id}`);
+      player.onDisconnect().remove();
 
-        let scoreBoard = db.ref(`Room/${this.state.accesscode}/scoreBoard`);
-        scoreBoard.child(`${this.state.username}`).set(0);
-        let playerScore = db.ref(
-          `Room/${this.state.accesscode}/scoreBoard/${this.state.username}`
-        );
-        playerScore.onDisconnect().remove();
-      }
+      let scoreBoard = db.ref(`Room/${this.state.accesscode}/scoreBoard`);
+      scoreBoard.child(`${this.state.username}`).set(0);
+      let playerScore = db.ref(
+        `Room/${this.state.accesscode}/scoreBoard/${this.state.username}`
+      );
+      playerScore.onDisconnect().remove();
     });
   }
 
@@ -66,6 +79,7 @@ class Join extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="landing">
         <div className="landing-container join-room">
@@ -85,7 +99,7 @@ class Join extends Component {
             />
             <div className="landing-container-form-buttons">
               <Link to={`/waiting-room/${this.state.accesscode}`}>
-                <i class="fas fa-door-open" />
+                <i className="fas fa-door-open" />
                 <button
                   className="landing-container-form-button"
                   onClick={this.createUser}
@@ -94,7 +108,7 @@ class Join extends Component {
                 </button>
               </Link>
               <Link to="/" replace>
-                <i class="fas fa-arrow-circle-left" />
+                <i className="fas fa-arrow-circle-left" />
                 <button className="landing-container-form-button">
                   Go Back
                 </button>
