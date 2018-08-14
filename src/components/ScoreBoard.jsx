@@ -7,7 +7,8 @@ class ScoreBoard extends Component {
     super(props);
 
     this.state = {
-      scoreBoard: {}
+      scoreBoard: {},
+      time: ""
     };
 
     this.updateScoreBoard = this.updateScoreBoard.bind(this);

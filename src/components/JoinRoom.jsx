@@ -85,6 +85,7 @@ class Join extends Component {
             />
             <div className="landing-container-form-buttons">
               <Link to={`/waiting-room/${this.state.accesscode}`}>
+                <i class="fas fa-door-open" />
                 <button
                   className="landing-container-form-button"
                   onClick={this.createUser}
@@ -93,6 +94,7 @@ class Join extends Component {
                 </button>
               </Link>
               <Link to="/" replace>
+                <i class="fas fa-arrow-circle-left" />
                 <button className="landing-container-form-button">
                   Go Back
                 </button>

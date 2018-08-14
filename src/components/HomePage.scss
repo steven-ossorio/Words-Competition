@@ -136,6 +136,8 @@ body {
           text-align: center;
           font-size: 55px;
           padding: 5px;
+          text-decoration: none;
+          color: purple;
         }
 
         text-decoration: none;
@@ -176,6 +178,7 @@ body {
       display: flex;
       justify-content: center;
       flex-direction: column;
+      margin-top: 45px;
 
       .create-errors {
         margin-top: 15px;
@@ -221,15 +224,31 @@ body {
       }
 
       &-buttons {
+        display: flex;
+        justify-content: space-around;
         padding-bottom: 40px;
-        margin: 43px 0;
+
+        a {
+          i {
+            text-align: center;
+            font-size: 55px;
+            padding: 5px;
+            text-decoration: none;
+            color: purple;
+          }
+
+          text-decoration: none;
+          display: flex;
+          flex-flow: column;
+          justify-content: center;
+        }
       }
 
       &-button {
         outline: none;
         border-radius: 10px;
         font-family: qubioshadow;
-        font-size: 45px;
+        font-size: 35px;
         border: none;
         height: 38px;
         padding: 0 50px;

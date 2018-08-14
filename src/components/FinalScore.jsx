@@ -35,7 +35,6 @@ class FinalScore extends Component {
       sortedKeys.forEach(key => {
         sortedScore.push(scoreObj[key]);
       });
-
       this.setState({ sortedKeys, sortedScore });
     });
   }

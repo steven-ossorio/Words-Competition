@@ -113,6 +113,8 @@ class CreateRoomPage extends Component {
             {errors}
             <div className="landing-container-form-buttons">
               <Link to={`/waiting-room/${this.state.roomId}`} replace>
+                <i class="fas fa-gamepad" />
+
                 <button
                   className="landing-container-form-button"
                   id="create-button"
@@ -122,6 +124,8 @@ class CreateRoomPage extends Component {
                 </button>
               </Link>
               <Link to="/" replace>
+                <i class="fas fa-arrow-circle-left" />
+
                 <button className="landing-container-form-button">
                   Go Back
                 </button>

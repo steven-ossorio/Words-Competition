@@ -35,6 +35,10 @@ class Landing extends Component {
               <i class="fas fa-gamepad" />
               <button className="landing-container-button">Create Game</button>
             </Link>
+            <Link to="/rank" replace>
+              <i class="fas fa-trophy" />
+              <button className="landing-container-button">Rank</button>
+            </Link>
             <Link to="/join-room" replace>
               <i class="fas fa-door-open" />
               <button className="landing-container-button">Join a room</button>

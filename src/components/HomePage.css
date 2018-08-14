@@ -116,7 +116,9 @@ body {
       .landing-container-buttons a i {
         text-align: center;
         font-size: 55px;
-        padding: 5px; }
+        padding: 5px;
+        text-decoration: none;
+        color: purple; }
   .landing-container-button {
     outline: none;
     font-family: qubioshadow;
@@ -143,7 +145,8 @@ body {
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    flex-direction: column; }
+    flex-direction: column;
+    margin-top: 45px; }
     .landing-container-form .create-errors {
       margin-top: 15px;
       padding: 5px;
@@ -180,13 +183,25 @@ body {
       .landing-container-form input[type="text"]:hover {
         cursor: default; }
     .landing-container-form-buttons {
-      padding-bottom: 40px;
-      margin: 43px 0; }
+      display: flex;
+      justify-content: space-around;
+      padding-bottom: 40px; }
+      .landing-container-form-buttons a {
+        text-decoration: none;
+        display: flex;
+        flex-flow: column;
+        justify-content: center; }
+        .landing-container-form-buttons a i {
+          text-align: center;
+          font-size: 55px;
+          padding: 5px;
+          text-decoration: none;
+          color: purple; }
     .landing-container-form-button {
       outline: none;
       border-radius: 10px;
       font-family: qubioshadow;
-      font-size: 45px;
+      font-size: 35px;
       border: none;
       height: 38px;
       padding: 0 50px;
