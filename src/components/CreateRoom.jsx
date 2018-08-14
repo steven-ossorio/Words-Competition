@@ -108,6 +108,7 @@ class CreateRoomPage extends Component {
               type="text"
               placeholder="Enter a username"
               onChange={this.update("username")}
+              maxLength="10"
             />
             {errors}
             <div className="landing-container-form-buttons">
