@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "qubioshadow";
+  src: url(../fonts/qubioshadow.ttf);
+}
+
 .created-room {
   .created-room-container {
     margin: 15% auto;
@@ -15,9 +20,9 @@
         display: flex;
         flex-flow: column;
         padding-top: 25px;
-        font-size: 70px;
+        font-size: 60px;
         text-align: center;
-        font-family: crackman;
+        font-family: qubioshadow;
         letter-spacing: 1rem;
         text-transform: uppercase;
         font-weight: 700;
@@ -29,6 +34,7 @@
 
         span {
           margin: 0 auto;
+          padding-top: 1.5rem;
         }
       }
 

@@ -102,7 +102,7 @@ class CreateRoomPage extends Component {
     return (
       <div className="landing">
         <div className="landing-container create-room">
-          <h1 className="landing-container-header">Welcome to Word</h1>
+          <h1 className="landing-container-header">Welcome to Words</h1>
           <form className="landing-container-form">
             <input
               type="text"

@@ -26,7 +26,7 @@ class Landing extends Component {
     return (
       <div className="landing">
         <div className="landing-container">
-          <h1 className="landing-container-header">Welcome to Word</h1>
+          <h1 className="landing-container-header">Welcome to Words</h1>
           <h3>
             <Instructions />
           </h3>
