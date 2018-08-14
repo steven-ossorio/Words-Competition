@@ -2,6 +2,10 @@
   font-family: "qubioshadow";
   src: url(../fonts/qubioshadow.ttf); }
 
+@font-face {
+  font-family: "answer";
+  src: url(../fonts/Answer.ttf); }
+
 .created-room .created-room-container {
   margin: 15% auto;
   width: 900px;
@@ -31,7 +35,8 @@
       padding-top: 1.5rem; }
   .created-room .created-room-container-inner-header-sub {
     text-align: center;
-    font-size: 20px;
+    font-family: answer;
+    font-size: 1.6rem;
     line-height: 38px;
     letter-spacing: 0.2rem;
     text-transform: uppercase;
@@ -46,6 +51,8 @@
     text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
     .created-room .created-room-container-inner-header-sub span {
       text-transform: uppercase;
-      color: black; }
+      color: black;
+      font-family: qubioshadow;
+      font-size: 1.6rem; }
   .created-room .created-room-container-inner .landing-container-form-buttons {
     text-align: center; }
