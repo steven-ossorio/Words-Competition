@@ -32,6 +32,7 @@ class Landing extends Component {
           </h3>
           <div className="landing-container-buttons">
             <Link to="/create-room">
+              <i class="fas fa-gamepad" />
               <button className="landing-container-button">Create Game</button>
             </Link>
             <Link to="/join-room" replace>

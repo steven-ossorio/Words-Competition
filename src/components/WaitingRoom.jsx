@@ -16,7 +16,7 @@ class CreatedRoom extends Component {
       playersID: {},
       loggedIn: false,
       startGame: false,
-      playersScore: { mike: 3 },
+      playersScore: {},
       dictionary: {}
     };
 
@@ -29,6 +29,7 @@ class CreatedRoom extends Component {
     this.updateData = this.updateData.bind(this);
     this.setHash = this.setHash.bind(this);
     this.updateCurrentPlayers = this.updateCurrentPlayers.bind(this);
+    this.removePlayer = this.removePlayer.bind(this);
   }
   componentDidMount() {
     this.dictionaryParse();
@@ -75,15 +76,46 @@ class CreatedRoom extends Component {
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
       let collection = snapshot.val();
-      let startGame = collection["gameStarted"];
-
-      if (startGame === null || startGame === undefined) {
+      if (
+        collection["gameStarted"] === null ||
+        collection["gameStarted"] === undefined
+      ) {
         return;
       }
+
+      let startGame = collection["gameStarted"];
 
       this.setState({
         startGame
       });
+    });
+  }
+
+  removePlayer() {
+    const loginPromise = new Promise((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          window.user = user;
+          resolve(user.uid);
+          this.setState({ loggedIn: true });
+        } else {
+          firebase
+            .auth()
+            .signInAnonymously()
+            .then(() => {
+              this.setState({ loggedIn: true });
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      });
+    });
+    loginPromise.then(id => {
+      let gameID = this.props.match.params.id;
+      let db = firebase.database();
+
+      db.ref(`Room/${gameID}/players/${id}`).remove();
     });
   }
 
@@ -221,7 +253,10 @@ class CreatedRoom extends Component {
                   Start Game
                 </button>
                 <Link to="/" replace>
-                  <button className="landing-container-form-button">
+                  <button
+                    onClick={this.removePlayer}
+                    className="landing-container-form-button"
+                  >
                     Go Back
                   </button>
                 </Link>

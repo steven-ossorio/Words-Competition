@@ -62,6 +62,10 @@
   font-family: "stoica";
   src: url(../fonts/Stoica.ttf); }
 
+@font-face {
+  font-family: "flat";
+  src: url(../fonts/Flaticon.ttf); }
+
 html {
   background-image: url("../img/background.png");
   background-size: cover;

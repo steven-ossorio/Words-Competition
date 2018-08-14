@@ -157,6 +157,8 @@ class Words extends Component {
       if (!letterObj[letter] || letterObj[letter] === 0) {
         return false;
       }
+
+      letterObj[letter] -= 1;
     }
 
     return true;
