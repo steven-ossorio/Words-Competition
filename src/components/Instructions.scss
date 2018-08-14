@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "qubioshadow";
+  src: url(../fonts/qubioshadow.ttf);
+}
+
 .open-modal-container {
   &-background {
     position: fixed;
@@ -22,6 +27,7 @@
       font-size: 30px;
       margin-right: 2rem;
       padding-top: 1rem;
+      font-family: qubioshadow;
 
       &:hover {
         cursor: pointer;
@@ -41,14 +47,16 @@
 }
 
 .close-modal {
+  font-family: qubioshadow;
   text-align: center;
   font-weight: 700;
   background-image: linear-gradient(to right, blue, red);
   -webkit-background-clip: text;
   color: transparent;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.3rem;
   text-shadow: 0.5rem 1rem 2rem rgba(black, 0.2);
   margin-bottom: 30px;
+  font-size: 2rem;
 
   &:hover {
     cursor: pointer;

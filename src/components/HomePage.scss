@@ -33,6 +33,47 @@
   src: url(../fonts/Facon.ttf);
 }
 
+@font-face {
+  font-family: "condition";
+  src: url(../fonts/condition.ttf);
+}
+
+@font-face {
+  font-family: "condition3d";
+  src: url(../fonts/condition3d.ttf);
+}
+
+@font-face {
+  font-family: "edit";
+  src: url(../fonts/editpoint.ttf);
+}
+
+@font-face {
+  font-family: "editf";
+  src: url(../fonts/editpointfill.ttf);
+}
+
+@font-face {
+  font-family: "grow";
+  src: url(../fonts/growlyns.ttf);
+}
+@font-face {
+  font-family: "qu";
+  src: url(../fonts/qubio.ttf);
+}
+@font-face {
+  font-family: "qubioshadow";
+  src: url(../fonts/qubioshadow.ttf);
+}
+@font-face {
+  font-family: "rad";
+  src: url(../fonts/radcliffe.ttf);
+}
+@font-face {
+  font-family: "stoica";
+  src: url(../fonts/Stoica.ttf);
+}
+
 html {
   background-image: url("../img/background.png");
   background-size: cover;
@@ -60,7 +101,7 @@ html {
       padding-top: 25px;
       font-size: 70px;
       text-align: center;
-      font-family: crackman;
+      font-family: qubioshadow;
       letter-spacing: 1rem;
       text-transform: uppercase;
       font-weight: 700;
@@ -80,7 +121,7 @@ html {
 
     &-button {
       outline: none;
-      font-family: crackman;
+      font-family: qubioshadow;
       font-size: 45px;
       border: none;
       height: 38px;
@@ -88,7 +129,6 @@ html {
       margin: 0 auto;
       line-height: 38px;
       letter-spacing: 0.2rem;
-      text-transform: uppercase;
       white-space: nowrap;
       box-sizing: border-box;
       text-transform: uppercase;
@@ -138,7 +178,7 @@ html {
 
       input[type="text"] {
         outline: none;
-        font-family: assyrian;
+        font-family: rad;
         margin: 10px auto;
         text-align: center;
         letter-spacing: 0.2rem;
@@ -147,6 +187,7 @@ html {
         width: 280px;
         height: 48px;
         font-size: 20px;
+        text-transform: none;
 
         &:hover {
           cursor: default;
@@ -161,17 +202,14 @@ html {
       &-button {
         outline: none;
         border-radius: 10px;
-        font-family: answer3d;
+        font-family: qubioshadow;
         font-size: 45px;
-        // background-color: transparent;
-        // border: 1px solid #bbb;
         border: none;
         height: 38px;
         padding: 0 50px;
         margin: 0 auto;
         line-height: 38px;
         letter-spacing: 0.2rem;
-        text-transform: uppercase;
         white-space: nowrap;
         box-sizing: border-box;
         text-transform: uppercase;
@@ -181,10 +219,6 @@ html {
         color: transparent;
         letter-spacing: 0.2rem;
         text-shadow: 0.5rem 1rem 2rem rgba(black, 0.2);
-
-        &:first-child {
-          margin-right: 20px;
-        }
 
         &:hover {
           cursor: pointer;
