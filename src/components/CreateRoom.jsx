@@ -10,7 +10,8 @@ class CreateRoomPage extends Component {
     this.state = {
       username: "",
       roomId: "",
-      errors: ""
+      errors: "",
+      isMounted: false
     };
 
     this.createUser = this.createUser.bind(this);
@@ -18,11 +19,20 @@ class CreateRoomPage extends Component {
   }
 
   componentDidMount() {
-    let db = firebase.database();
-    let roomRefKey = db.ref("Room").push().key;
-    this.setState({
-      roomId: roomRefKey
+    this.setState({ isMounted: true }, () => {
+      if (this.state.isMounted) {
+        this.setState({ isMounted: false });
+        let db = firebase.database();
+        let roomRefKey = db.ref("Room").push().key;
+        this.setState({
+          roomId: roomRefKey
+        });
+      }
     });
+  }
+
+  componentWillUnmount() {
+    this.setState({ isMounted: false });
   }
 
   createUser(e) {
@@ -79,10 +89,12 @@ class CreateRoomPage extends Component {
         .child("gameStarted")
         .set(false);
 
-      this.setState({
-        username: "",
-        errors: ""
-      });
+      if (this.state.isMounted) {
+        this.setState({
+          username: "",
+          errors: ""
+        });
+      }
     });
   }
 

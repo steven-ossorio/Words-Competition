@@ -8,14 +8,24 @@ class ScoreBoard extends Component {
 
     this.state = {
       scoreBoard: {},
-      time: ""
+      time: "",
+      isMounted: false
     };
 
     this.updateScoreBoard = this.updateScoreBoard.bind(this);
   }
 
   componentDidMount() {
-    this.updateScoreBoard();
+    this.setState({ isMounted: true }, () => {
+      if (this.state.isMounted) {
+        this.setState({ isMounted: false });
+        this.updateScoreBoard();
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({ isMounted: false });
   }
 
   updateScoreBoard() {
@@ -32,7 +42,9 @@ class ScoreBoard extends Component {
         scoreBoard[username] = playersScore[username];
       });
 
-      this.setState({ scoreBoard });
+      if (this.state.isMounted) {
+        this.setState({ scoreBoard });
+      }
     });
   }
 

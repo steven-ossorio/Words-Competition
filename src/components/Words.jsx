@@ -13,8 +13,9 @@ class Words extends Component {
       dictionary: {},
       word: "",
       letters: "",
-      time: 60,
-      errors: ""
+      time: "",
+      errors: "",
+      isMounted: false
     };
 
     this.wordCollection = this.wordCollection.bind(this);
@@ -26,9 +27,23 @@ class Words extends Component {
   }
 
   componentDidMount() {
-    this.wordCollection();
-    this.retreiveLetters();
-    this.timer();
+    this.setState({ isMounted: true }, () => {
+      if (this.state.isMounted) {
+        this.wordCollection();
+        this.retreiveLetters();
+        this.timer();
+      }
+    });
+  }
+
+  componentWillMount() {
+    if (this.state.time === 0) {
+      this.props.history.push(`/final-score/${this.props.gameID}`);
+    }
+  }
+
+  componentWillUnmount() {
+    this.setState({ isMounted: false });
   }
 
   retreiveLetters() {
@@ -49,9 +64,18 @@ class Words extends Component {
     db.ref(`Room/${gameID}`).on("value", snapshot => {
       let collection = snapshot.val();
       let time = collection["time"];
-      this.setState({
-        time
-      });
+      if (this.state.isMounted) {
+        this.setState({
+          time
+        });
+
+        if (this.state.time === 0) {
+          let pause = setInterval(() => {
+            this.props.history.push(`/final-score/${this.props.gameID}`);
+            clearInterval(pause);
+          }, 1000);
+        }
+      }
     });
   }
 
@@ -179,7 +203,6 @@ class Words extends Component {
     let inputProps = {};
     if (this.state.time === 0) {
       inputProps.disabled = true;
-      this.props.history.push(`/final-score/${this.props.gameID}`);
     }
     let errors = "";
     if (this.state.errors.length > 0) {

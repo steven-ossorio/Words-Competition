@@ -10,7 +10,7 @@ class Join extends Component {
     this.state = {
       username: "",
       accesscode: "",
-      errors: ""
+      errors: {}
     };
 
     this.createUser = this.createUser.bind(this);
@@ -30,7 +30,10 @@ class Join extends Component {
     ) {
       e.preventDefault();
       this.setState({
-        errors: "Both can't be blank"
+        errors: {
+          username: "Username can't be blank",
+          accesscode: "Access Code can't be blank"
+        }
       });
       return;
     }
@@ -38,7 +41,7 @@ class Join extends Component {
     if (this.state.username.length === 0) {
       e.preventDefault();
       this.setState({
-        errors: "Username can't be blank"
+        errors: { username: "Username can't be blank", accesscode: "" }
       });
       return;
     }
@@ -46,7 +49,7 @@ class Join extends Component {
     if (this.state.accesscode.length === 0) {
       e.preventDefault();
       this.setState({
-        errors: "Access Code can't be blank"
+        errors: { username: "", accesscode: "Access Code can't be blank" }
       });
       return;
     }
@@ -92,23 +95,37 @@ class Join extends Component {
   }
 
   render() {
+    let usernameError = this.state.errors["username"] ? (
+      <div className="create-errors">{this.state.errors["username"]}</div>
+    ) : (
+      ""
+    );
+    let accesscodeError = this.state.errors["accesscode"] ? (
+      <div className="create-errors">{this.state.errors["accesscode"]}</div>
+    ) : (
+      ""
+    );
     return (
       <div className="landing">
         <div className="landing-container join-room">
           <h1 className="landing-container-header">Welcome to Word</h1>
           <form className="landing-container-form">
-            <input
-              type="text"
-              placeholder="Enter a username"
-              onChange={this.update("username")}
-              value={this.state.username}
-            />
+            <div>
+              <input
+                type="text"
+                placeholder="Enter a username"
+                onChange={this.update("username")}
+                value={this.state.username}
+              />
+              {usernameError}
+            </div>
             <input
               type="text"
               placeholder="Enter Access Code"
               onChange={this.update("accesscode")}
               value={this.state.accesscode}
             />
+            {accesscodeError}
             <div className="landing-container-form-buttons">
               <Link
                 onClick={this.createUser}

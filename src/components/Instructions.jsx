@@ -16,14 +16,24 @@ class Instructions extends Component {
   }
 
   panelForward() {
-    let currentIndex =
-      this.state.currentIndex === 1 ? 0 : (this.state.currentIndex += 1);
+    let currentIndex;
+    if (this.state.currentIndex === 1) {
+      currentIndex = 0;
+    } else {
+      currentIndex = this.state.currentIndex;
+      currentIndex += 1;
+    }
     this.setState({ currentIndex });
   }
 
   panelBack() {
-    let currentIndex =
-      this.state.currentIndex === 0 ? 1 : (this.state.currentIndex -= 1);
+    let currentIndex;
+    if (this.state.currentIndex === 0) {
+      currentIndex = 1;
+    } else {
+      currentIndex = this.state.currentIndex;
+      currentIndex -= 1;
+    }
     this.setState({ currentIndex });
   }
 

@@ -20,7 +20,8 @@ class CreatedRoom extends Component {
       dictionary: {},
       backgroundColors: [],
       colors: [],
-      roomCreator: false
+      roomCreator: false,
+      isMounted: false
     };
 
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
@@ -35,10 +36,15 @@ class CreatedRoom extends Component {
     this.removePlayer = this.removePlayer.bind(this);
   }
   componentDidMount() {
-    this.dictionaryParse();
-    this.checkIfLoggedIn();
-    this.gameStarted();
-    this.updateCurrentPlayers();
+    this.setState({ isMounted: true }, () => {
+      if (this.state.isMounted) {
+        this.setState({ isMounted: false });
+        this.dictionaryParse();
+        this.checkIfLoggedIn();
+        this.gameStarted();
+        this.updateCurrentPlayers();
+      }
+    });
   }
 
   componentWillUpdate() {

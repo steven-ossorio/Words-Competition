@@ -47,7 +47,7 @@ class FinalScore extends Component {
         let firstScore = "";
         if (i === 0) {
           firstScore = (
-            <span className="list-item-rank first-rank">
+            <span key={i} className="list-item-rank first-rank">
               <i className="far fa-star" />
               <span>{i + 1}</span>
             </span>
