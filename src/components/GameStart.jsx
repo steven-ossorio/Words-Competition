@@ -20,6 +20,8 @@ export default props => {
           gameID={props.gameID}
           players={props.players}
           playersScore={props.playersScore}
+          colors={props.colors}
+          backgroundColors={props.backgroundColors}
         />
       </div>
     </div>

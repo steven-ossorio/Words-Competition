@@ -255,6 +255,8 @@ class CreatedRoom extends Component {
             gameID={this.props.match.params.id}
             dictionary={this.state.dictionary}
             players={this.state.players}
+            colors={this.state.colors}
+            backgroundColors={this.state.backgroundColors}
             playersScore={this.state.playersScore}
             history={this.props.history}
           />

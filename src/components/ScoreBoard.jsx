@@ -40,8 +40,13 @@ class ScoreBoard extends Component {
     let playerList = this.props.players.reverse();
     playerList = playerList.map((player, i) => {
       let score = this.state.scoreBoard[player];
+      let backgroundColor = this.props.backgroundColors[i];
       return (
-        <tr className="players-container-list" key={i}>
+        <tr
+          style={{ backgroundColor: `${backgroundColor}` }}
+          className="players-container-list"
+          key={i}
+        >
           <td>{i + 1}</td>
           <td>{player}</td>
           <td>{score}</td>

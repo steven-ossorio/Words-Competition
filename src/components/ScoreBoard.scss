@@ -1,6 +1,4 @@
 .players-score-container {
-  background-color: purple;
-
   h1 {
     text-align: center;
     font-size: 50px;
@@ -9,6 +7,7 @@
     width: 400px;
 
     tr {
+      padding: 10px;
       display: flex;
       justify-content: space-between;
       font-size: 30px;
