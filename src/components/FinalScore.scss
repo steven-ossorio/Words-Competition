@@ -33,6 +33,11 @@
   src: url(../fonts/Facon.ttf);
 }
 
+@font-face {
+  font-family: "qubioshadow";
+  src: url(../fonts/qubioshadow.ttf);
+}
+
 .final-score-container {
   margin-top: 5rem;
   text-align: center;
@@ -63,11 +68,12 @@
         border-radius: 10px;
       }
 
+      &-username {
+        margin-right: 20px;
+      }
       &-container {
         padding: 1rem;
         border-radius: 10px;
-        &-username {
-        }
 
         &-score {
           padding: 1rem;
@@ -82,7 +88,6 @@
     justify-content: space-around;
     width: 500px;
     margin: 0 auto;
-    margin-top: 5rem;
 
     &-button-container {
       margin: 10px;
@@ -91,7 +96,8 @@
       border-radius: 15px;
       .button {
         outline: none;
-        font-family: crackman;
+        font-weight: bold;
+        // font-family: qubioshadow;
         font-size: 45px;
         border: none;
         height: 38px;
@@ -103,14 +109,15 @@
         white-space: nowrap;
         box-sizing: border-box;
         text-transform: uppercase;
-        font-weight: 700;
-        background-image: linear-gradient(to right, #93eed7, #2c6a67);
+        background-image: linear-gradient(to right, #93eed7, #13f3e8);
         -webkit-background-clip: text;
         color: transparent;
-        letter-spacing: 0.2rem;
         text-shadow: 0.5rem 1rem 2rem rgba(black, 0.2);
+        transition: all 0.2s ease-in-out;
 
         &:hover {
+          font-size: 50px;
+          transform: scale(1.1);
           cursor: pointer;
         }
       }
@@ -120,4 +127,8 @@
 
 .first-rank {
   background-color: gold !important;
+  i {
+    padding: 10px;
+    font-size: 30px;
+  }
 }

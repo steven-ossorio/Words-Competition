@@ -26,6 +26,10 @@
   font-family: "facon";
   src: url(../fonts/Facon.ttf); }
 
+@font-face {
+  font-family: "qubioshadow";
+  src: url(../fonts/qubioshadow.ttf); }
+
 .final-score-container {
   margin-top: 5rem;
   text-align: center; }
@@ -50,6 +54,8 @@
       .final-score-container-list-container .list-item-rank {
         padding: 1rem;
         border-radius: 10px; }
+      .final-score-container-list-container .list-item-username {
+        margin-right: 20px; }
       .final-score-container-list-container .list-item-container {
         padding: 1rem;
         border-radius: 10px; }
@@ -60,8 +66,7 @@
     display: flex;
     justify-content: space-around;
     width: 500px;
-    margin: 0 auto;
-    margin-top: 5rem; }
+    margin: 0 auto; }
     .final-score-container-buttons-button-container {
       margin: 10px;
       background-color: black;
@@ -69,7 +74,7 @@
       border-radius: 15px; }
       .final-score-container-buttons-button-container .button {
         outline: none;
-        font-family: crackman;
+        font-weight: bold;
         font-size: 45px;
         border: none;
         height: 38px;
@@ -81,14 +86,18 @@
         white-space: nowrap;
         box-sizing: border-box;
         text-transform: uppercase;
-        font-weight: 700;
-        background-image: linear-gradient(to right, #93eed7, #2c6a67);
+        background-image: linear-gradient(to right, #93eed7, #13f3e8);
         -webkit-background-clip: text;
         color: transparent;
-        letter-spacing: 0.2rem;
-        text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+        text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease-in-out; }
         .final-score-container-buttons-button-container .button:hover {
+          font-size: 50px;
+          transform: scale(1.1);
           cursor: pointer; }
 
 .first-rank {
   background-color: gold !important; }
+  .first-rank i {
+    padding: 10px;
+    font-size: 30px; }
