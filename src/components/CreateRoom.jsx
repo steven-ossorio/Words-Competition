@@ -45,7 +45,9 @@ class CreateRoomPage extends Component {
           firebase
             .auth()
             .signInAnonymously()
-            .then(() => {})
+            .then(user => {
+              resolve(user.uid);
+            })
             .catch(err => {
               console.log(err);
             });

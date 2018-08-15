@@ -165,14 +165,9 @@ class CreatedRoom extends Component {
       });
 
       let collection = snapshot.val();
-
-      if (collection === null) {
-        return;
-      }
-
       if (
-        collection["players"] === undefined ||
-        collection["players"] === null
+        collection["players"] === null ||
+        collection["players"] === undefined
       ) {
         return;
       }

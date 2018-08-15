@@ -24,6 +24,7 @@ class Join extends Component {
   }
 
   createUser(e) {
+    e.preventDefault();
     if (this.state.username.length === 0) {
       e.preventDefault();
       this.setState({
@@ -57,22 +58,6 @@ class Join extends Component {
       });
     });
     loginPromise.then(id => {
-      if (this.state.username.length === 0) {
-        e.preventDefault();
-        this.setState({
-          errors: "Username can't be blank"
-        });
-        return;
-      }
-
-      if (this.state.accesscode.length === 0) {
-        e.preventDefault();
-        this.setState({
-          errors: "Access Code can't be blank"
-        });
-        return;
-      }
-
       let db = firebase.database();
       let playersRef = db.ref(`Room/${this.state.accesscode}/players`);
       playersRef.child(`${id}`).set(`${this.state.username}`);

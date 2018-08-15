@@ -115,7 +115,7 @@ class Words extends Component {
 
   addWord(e) {
     if (e.charCode === 13) {
-      let word = this.state.word;
+      let word = this.state.word.toLowerCase();
       if (word === "") {
         this.setState({ errors: "Can't be blank" });
         return;

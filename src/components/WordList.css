@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "rad";
+  src: url(../fonts/radcliffe.ttf); }
+
 .word-input-box {
   text-align: center; }
   .word-input-box .create-errors {
@@ -23,7 +27,7 @@
       margin-top: -10px; }
   .word-input-box input[type="text"] {
     outline: none;
-    font-family: assyrian;
+    font-family: rad;
     margin: 10px auto;
     text-align: center;
     letter-spacing: 0.2rem;
