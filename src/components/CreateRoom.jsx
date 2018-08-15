@@ -35,14 +35,6 @@ class CreateRoomPage extends Component {
       return;
     }
 
-    if (this.state.roomId.length === 0) {
-      let db = firebase.database();
-      let roomRefKey = db.ref("Room").push().key;
-      this.setState({
-        roomId: roomRefKey
-      });
-    }
-
     const loginPromise = new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {

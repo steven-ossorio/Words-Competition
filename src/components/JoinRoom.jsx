@@ -92,7 +92,6 @@ class Join extends Component {
   }
 
   render() {
-    console.log(this.state.errors);
     return (
       <div className="landing">
         <div className="landing-container join-room">
