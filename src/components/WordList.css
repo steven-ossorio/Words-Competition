@@ -65,7 +65,12 @@
   width: 700px; }
   .words-container-header {
     text-align: center;
-    font-size: 50px; }
+    font-size: 50px;
+    font-family: condition;
+    font-size: 5rem;
+    background-color: rgba(100, 200, 255, 0.5);
+    padding: 10px;
+    border-radius: 20px; }
   .words-container-list {
     display: flex;
     list-style-type: none;
