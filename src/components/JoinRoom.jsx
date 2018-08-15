@@ -24,13 +24,15 @@ class Join extends Component {
   }
 
   createUser(e) {
-    if (this.state.username === "") {
+    if (this.state.username.length === 0) {
       e.preventDefault();
       this.setState({
         errors: "Username can't be blank"
       });
       return;
-    } else if (this.state.accesscode === "") {
+    }
+
+    if (this.state.accesscode.length === 0) {
       e.preventDefault();
       this.setState({
         errors: "Access Code can't be blank"
@@ -55,6 +57,22 @@ class Join extends Component {
       });
     });
     loginPromise.then(id => {
+      if (this.state.username.length === 0) {
+        e.preventDefault();
+        this.setState({
+          errors: "Username can't be blank"
+        });
+        return;
+      }
+
+      if (this.state.accesscode.length === 0) {
+        e.preventDefault();
+        this.setState({
+          errors: "Access Code can't be blank"
+        });
+        return;
+      }
+
       let db = firebase.database();
       let playersRef = db.ref(`Room/${this.state.accesscode}/players`);
       playersRef.child(`${id}`).set(`${this.state.username}`);
@@ -79,7 +97,6 @@ class Join extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="landing">
         <div className="landing-container join-room">

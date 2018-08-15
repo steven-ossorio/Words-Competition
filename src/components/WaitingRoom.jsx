@@ -76,6 +76,9 @@ class CreatedRoom extends Component {
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
       let collection = snapshot.val();
+      if (collection === null) {
+        return;
+      }
       if (
         collection["gameStarted"] === null ||
         collection["gameStarted"] === undefined
