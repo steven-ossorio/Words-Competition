@@ -9,14 +9,20 @@ class FinalScore extends Component {
 
     this.state = {
       sortedKeys: [],
-      sortedScore: []
+      sortedScore: [],
+      isMounted: false
     };
 
     this.finalScore = this.finalScore.bind(this);
   }
 
   componentDidMount() {
-    this.finalScore();
+    this.setState({ isMounted: true }, () => {
+      if (this.state.isMounted) {
+        this.setState({ isMounted: false });
+        this.finalScore();
+      }
+    });
   }
 
   finalScore() {
