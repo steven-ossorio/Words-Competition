@@ -42,9 +42,7 @@ class ScoreBoard extends Component {
         scoreBoard[username] = playersScore[username];
       });
 
-      if (this.state.isMounted) {
-        this.setState({ scoreBoard });
-      }
+      this.setState({ scoreBoard });
     });
   }
 

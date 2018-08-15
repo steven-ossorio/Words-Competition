@@ -69,7 +69,6 @@ class CreatedRoom extends Component {
 
   updateData(results) {
     let data = results.data;
-
     this.setState({ dictionary: data });
     this.setHash();
   }
@@ -80,7 +79,6 @@ class CreatedRoom extends Component {
     for (let i = 0; i < dictionary.length; i++) {
       set.add(dictionary[i]["aa"]);
     }
-
     this.setState({ dictionary: set });
   }
 
@@ -100,15 +98,14 @@ class CreatedRoom extends Component {
       }
 
       let startGame = collection["gameStarted"];
-      if (this.state.isMounted) {
-        this.setState({
-          startGame
-        });
-      }
+      this.setState({
+        startGame
+      });
     });
   }
 
-  removePlayer() {
+  removePlayer(e) {
+    e.preventDefault();
     const loginPromise = new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -135,6 +132,9 @@ class CreatedRoom extends Component {
       let db = firebase.database();
 
       db.ref(`Room/${gameID}/players/${id}`).remove();
+      this.props.history.push({
+        pathname: "/"
+      });
     });
   }
 
@@ -150,7 +150,9 @@ class CreatedRoom extends Component {
             .auth()
             .signInAnonymously()
             .then(() => {
-              this.setState({ loggedIn: true });
+              if (this.state.isMounted) {
+                this.setState({ loggedIn: true });
+              }
             })
             .catch(err => {
               console.log(err);
@@ -176,11 +178,9 @@ class CreatedRoom extends Component {
     let gameID = this.props.match.params.id;
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
-      if (this.state.isMounted) {
-        this.setState({
-          playersID: {}
-        });
-      }
+      this.setState({
+        playersID: {}
+      });
 
       let collection = snapshot.val();
       if (
@@ -195,9 +195,7 @@ class CreatedRoom extends Component {
         playersKeysObj[key] = true;
       });
 
-      if (this.state.isMounted) {
-        this.setState({ playersID: playersKeysObj });
-      }
+      this.setState({ playersID: playersKeysObj });
     });
   }
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import firebase from "../firebase/secretKeys";
 import "./WaitingRoom.css";
 
@@ -16,12 +15,12 @@ class CreateRoomPage extends Component {
 
     this.createUser = this.createUser.bind(this);
     this.update = this.update.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   componentDidMount() {
     this.setState({ isMounted: true }, () => {
       if (this.state.isMounted) {
-        this.setState({ isMounted: false });
         let db = firebase.database();
         let roomRefKey = db.ref("Room").push().key;
         this.setState({
@@ -36,8 +35,8 @@ class CreateRoomPage extends Component {
   }
 
   createUser(e) {
+    e.preventDefault();
     if (this.state.username === "") {
-      e.preventDefault();
       this.setState({
         errors: "Username can't be blank"
       });
@@ -89,12 +88,25 @@ class CreateRoomPage extends Component {
         .child("gameStarted")
         .set(false);
 
-      if (this.state.isMounted) {
-        this.setState({
-          username: "",
-          errors: ""
-        });
-      }
+      this.setState({ isMounted: true }, () => {
+        if (this.state.isMounted) {
+          this.setState({
+            username: "",
+            errors: ""
+          });
+        }
+      });
+
+      this.props.history.push({
+        pathname: `/waiting-room/${this.state.roomId}`
+      });
+    });
+  }
+
+  goBack(e) {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: "/"
     });
   }
 
@@ -125,11 +137,7 @@ class CreateRoomPage extends Component {
             />
             {errors}
             <div className="landing-container-form-buttons">
-              <Link
-                onClick={this.createUser}
-                to={`/waiting-room/${this.state.roomId}`}
-                replace
-              >
+              <div onClick={this.createUser}>
                 <i className="fas fa-gamepad" />
                 <button
                   className="landing-container-form-button"
@@ -137,13 +145,13 @@ class CreateRoomPage extends Component {
                 >
                   Create a Room
                 </button>
-              </Link>
-              <Link to="/" replace>
+              </div>
+              <div onClick={this.goBack}>
                 <i className="fas fa-arrow-circle-left" />
                 <button className="landing-container-form-button">
                   Go Back
                 </button>
-              </Link>
+              </div>
             </div>
           </form>
         </div>

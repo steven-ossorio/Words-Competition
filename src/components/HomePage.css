@@ -108,11 +108,13 @@ body {
     display: flex;
     justify-content: space-between;
     padding-bottom: 41px; }
+    .landing-container-buttons div,
     .landing-container-buttons a {
       text-decoration: none;
       display: flex;
       flex-flow: column;
       justify-content: center; }
+      .landing-container-buttons div i,
       .landing-container-buttons a i {
         text-align: center;
         font-size: 55px;
@@ -185,12 +187,12 @@ body {
       display: flex;
       justify-content: space-around;
       padding-bottom: 40px; }
-      .landing-container-form-buttons a {
+      .landing-container-form-buttons div {
         text-decoration: none;
         display: flex;
         flex-flow: column;
         justify-content: center; }
-        .landing-container-form-buttons a i {
+        .landing-container-form-buttons div i {
           text-align: center;
           font-size: 55px;
           padding: 5px;

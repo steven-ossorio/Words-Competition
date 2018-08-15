@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import firebase from "../firebase/secretKeys";
 import "./HomePage.css";
 
@@ -16,6 +15,7 @@ class Join extends Component {
 
     this.createUser = this.createUser.bind(this);
     this.update = this.update.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   componentDidMount() {
@@ -35,34 +35,28 @@ class Join extends Component {
       this.state.accesscode.length === 0
     ) {
       e.preventDefault();
-      if (this.setState.isMounted) {
-        this.setState({
-          errors: {
-            username: "Username can't be blank",
-            accesscode: "Access Code can't be blank"
-          }
-        });
-      }
+      this.setState({
+        errors: {
+          username: "Username can't be blank",
+          accesscode: "Access Code can't be blank"
+        }
+      });
       return;
     }
 
     if (this.state.username.length === 0) {
       e.preventDefault();
-      if (this.setState.isMounted) {
-        this.setState({
-          errors: { username: "Username can't be blank", accesscode: "" }
-        });
-      }
+      this.setState({
+        errors: { username: "Username can't be blank", accesscode: "" }
+      });
       return;
     }
 
     if (this.state.accesscode.length === 0) {
       e.preventDefault();
-      if (this.setState.isMounted) {
-        this.setState({
-          errors: { username: "", accesscode: "Access Code can't be blank" }
-        });
-      }
+      this.setState({
+        errors: { username: "", accesscode: "Access Code can't be blank" }
+      });
       return;
     }
 
@@ -95,6 +89,17 @@ class Join extends Component {
         `Room/${this.state.accesscode}/scoreBoard/${this.state.username}`
       );
       playerScore.onDisconnect().remove();
+
+      this.props.history.push({
+        pathname: `/waiting-room/${this.state.accesscode}`
+      });
+    });
+  }
+
+  goBack(e) {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: "/"
     });
   }
 
@@ -139,21 +144,18 @@ class Join extends Component {
             />
             {accesscodeError}
             <div className="landing-container-form-buttons">
-              <Link
-                onClick={this.createUser}
-                to={`/waiting-room/${this.state.accesscode}`}
-              >
+              <div onClick={this.createUser}>
                 <i className="fas fa-door-open" />
                 <button className="landing-container-form-button">
                   Join a Room
                 </button>
-              </Link>
-              <Link to="/" replace>
+              </div>
+              <div onClick={this.goBack}>
                 <i className="fas fa-arrow-circle-left" />
                 <button className="landing-container-form-button">
                   Go Back
                 </button>
-              </Link>
+              </div>
             </div>
           </form>
         </div>

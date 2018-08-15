@@ -64,17 +64,15 @@ class Words extends Component {
     db.ref(`Room/${gameID}`).on("value", snapshot => {
       let collection = snapshot.val();
       let time = collection["time"];
-      if (this.state.isMounted) {
-        this.setState({
-          time
-        });
+      this.setState({
+        time
+      });
 
-        if (this.state.time === 0) {
-          let pause = setInterval(() => {
-            this.props.history.push(`/final-score/${this.props.gameID}`);
-            clearInterval(pause);
-          }, 1000);
-        }
+      if (this.state.time === 0) {
+        let pause = setInterval(() => {
+          this.props.history.push(`/final-score/${this.props.gameID}`);
+          clearInterval(pause);
+        }, 1000);
       }
     });
   }
