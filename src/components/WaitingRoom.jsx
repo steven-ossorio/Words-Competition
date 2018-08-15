@@ -35,6 +35,7 @@ class CreatedRoom extends Component {
     this.updateCurrentPlayers = this.updateCurrentPlayers.bind(this);
     this.removePlayer = this.removePlayer.bind(this);
   }
+
   componentDidMount() {
     this.setState({ isMounted: true }, () => {
       if (this.state.isMounted) {
@@ -113,7 +114,9 @@ class CreatedRoom extends Component {
         if (user) {
           window.user = user;
           resolve(user.uid);
-          this.setState({ loggedIn: true });
+          if (this.state.signInAnonymously) {
+            this.setState({ loggedIn: true });
+          }
         } else {
           firebase
             .auth()

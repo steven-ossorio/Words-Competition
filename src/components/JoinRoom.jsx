@@ -10,7 +10,8 @@ class Join extends Component {
     this.state = {
       username: "",
       accesscode: "",
-      errors: {}
+      errors: {},
+      isMounted: false
     };
 
     this.createUser = this.createUser.bind(this);
@@ -18,9 +19,14 @@ class Join extends Component {
   }
 
   componentDidMount() {
+    this.setState({ isMounted: true });
     if (this.props.match.params.id !== undefined) {
       this.setState({ accesscode: this.props.match.params.id });
     }
+  }
+
+  componentWillUnmount() {
+    this.setState({ isMounted: false });
   }
 
   createUser(e) {
@@ -29,28 +35,34 @@ class Join extends Component {
       this.state.accesscode.length === 0
     ) {
       e.preventDefault();
-      this.setState({
-        errors: {
-          username: "Username can't be blank",
-          accesscode: "Access Code can't be blank"
-        }
-      });
+      if (this.setState.isMounted) {
+        this.setState({
+          errors: {
+            username: "Username can't be blank",
+            accesscode: "Access Code can't be blank"
+          }
+        });
+      }
       return;
     }
 
     if (this.state.username.length === 0) {
       e.preventDefault();
-      this.setState({
-        errors: { username: "Username can't be blank", accesscode: "" }
-      });
+      if (this.setState.isMounted) {
+        this.setState({
+          errors: { username: "Username can't be blank", accesscode: "" }
+        });
+      }
       return;
     }
 
     if (this.state.accesscode.length === 0) {
       e.preventDefault();
-      this.setState({
-        errors: { username: "", accesscode: "Access Code can't be blank" }
-      });
+      if (this.setState.isMounted) {
+        this.setState({
+          errors: { username: "", accesscode: "Access Code can't be blank" }
+        });
+      }
       return;
     }
 
