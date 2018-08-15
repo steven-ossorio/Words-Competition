@@ -48,7 +48,7 @@ class FinalScore extends Component {
         if (i === 0) {
           firstScore = (
             <span className="list-item-rank first-rank">
-              <i class="far fa-star" />
+              <i className="far fa-star" />
               <span>{i + 1}</span>
             </span>
           );
