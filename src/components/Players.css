@@ -26,21 +26,24 @@
   width: 500px;
   margin: 0 auto;
   font-size: 50px;
-  color: red; }
+  color: red;
+  overflow-y: scroll;
+  max-height: 350px;
+  margin-top: 50px; }
   .players-container-list {
+    border-radius: 1rem;
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-between;
+    margin: 3px; }
     .players-container-list-number {
       margin: 10px;
       padding: 10px;
       border-radius: 10px;
       font-size: 4rem;
-      background-color: yellow;
       font-family: "amazon"; }
     .players-container-list-username {
       margin: 10px;
-      padding: 10px;
+      padding: 20px;
       border-radius: 10px;
       font-size: 3rem;
-      background: blue;
       font-family: "beyond"; }

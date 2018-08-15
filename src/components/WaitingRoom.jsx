@@ -17,7 +17,9 @@ class CreatedRoom extends Component {
       loggedIn: false,
       startGame: false,
       playersScore: {},
-      dictionary: {}
+      dictionary: {},
+      backgroundColors: [],
+      colors: []
     };
 
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
@@ -191,6 +193,8 @@ class CreatedRoom extends Component {
       let collection = snapshot.val();
       let players = collection["players"];
       let newArray = [];
+      let backgroundColors = this.state.backgroundColors;
+      let colors = this.state.colors;
 
       if (players === undefined || players === null) {
         this.props.history.push("/");
@@ -206,8 +210,24 @@ class CreatedRoom extends Component {
         newArray.push(players[id]);
       });
 
+      for (let i = 0; i < newArray.length; i++) {
+        if (
+          this.state.backgroundColors[i] === undefined &&
+          this.state.colors[i] === undefined
+        ) {
+          let backgroundColor =
+            "#" + Math.floor(Math.random() * 16777215).toString(16);
+          backgroundColors.push(backgroundColor);
+
+          let color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+          colors.push(color);
+        }
+      }
+
       this.setState({
-        players: newArray
+        players: newArray,
+        colors,
+        backgroundColors
       });
     });
   }
@@ -259,11 +279,15 @@ class CreatedRoom extends Component {
                     onClick={this.removePlayer}
                     className="landing-container-form-button"
                   >
-                    Go Back
+                    Leave Room
                   </button>
                 </Link>
               </div>
-              <Players players={this.state.players} />
+              <Players
+                colors={this.state.colors}
+                backgroundColors={this.state.backgroundColors}
+                players={this.state.players}
+              />
             </div>
           </div>
         </div>
