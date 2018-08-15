@@ -38,13 +38,16 @@ class CreatedRoom extends Component {
   componentDidMount() {
     this.setState({ isMounted: true }, () => {
       if (this.state.isMounted) {
-        this.setState({ isMounted: false });
         this.dictionaryParse();
         this.checkIfLoggedIn();
         this.gameStarted();
         this.updateCurrentPlayers();
       }
     });
+  }
+
+  componentWillUnmount() {
+    this.setState({ isMounted: false });
   }
 
   componentWillUpdate() {
@@ -96,10 +99,11 @@ class CreatedRoom extends Component {
       }
 
       let startGame = collection["gameStarted"];
-
-      this.setState({
-        startGame
-      });
+      if (this.state.isMounted) {
+        this.setState({
+          startGame
+        });
+      }
     });
   }
 
@@ -169,9 +173,11 @@ class CreatedRoom extends Component {
     let gameID = this.props.match.params.id;
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
-      this.setState({
-        playersID: {}
-      });
+      if (this.state.isMounted) {
+        this.setState({
+          playersID: {}
+        });
+      }
 
       let collection = snapshot.val();
       if (
@@ -185,7 +191,10 @@ class CreatedRoom extends Component {
       Object.keys(players).forEach(key => {
         playersKeysObj[key] = true;
       });
-      this.setState({ playersID: playersKeysObj });
+
+      if (this.state.isMounted) {
+        this.setState({ playersID: playersKeysObj });
+      }
     });
   }
 
