@@ -20,7 +20,6 @@ class CreateRoomPage extends Component {
   componentDidMount() {
     let db = firebase.database();
     let roomRefKey = db.ref("Room").push().key;
-
     this.setState({
       roomId: roomRefKey
     });
@@ -34,6 +33,14 @@ class CreateRoomPage extends Component {
       });
 
       return;
+    }
+
+    if (this.state.roomId.length === 0) {
+      let db = firebase.database();
+      let roomRefKey = db.ref("Room").push().key;
+      this.setState({
+        roomId: roomRefKey
+      });
     }
 
     const loginPromise = new Promise((resolve, reject) => {
@@ -116,7 +123,6 @@ class CreateRoomPage extends Component {
             <div className="landing-container-form-buttons">
               <Link to={`/waiting-room/${this.state.roomId}`} replace>
                 <i className="fas fa-gamepad" />
-
                 <button
                   className="landing-container-form-button"
                   id="create-button"
@@ -127,7 +133,6 @@ class CreateRoomPage extends Component {
               </Link>
               <Link to="/" replace>
                 <i className="fas fa-arrow-circle-left" />
-
                 <button className="landing-container-form-button">
                   Go Back
                 </button>

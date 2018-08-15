@@ -24,7 +24,6 @@ class Join extends Component {
   }
 
   createUser(e) {
-    e.preventDefault();
     if (this.state.username.length === 0) {
       e.preventDefault();
       this.setState({
@@ -100,12 +99,12 @@ class Join extends Component {
               value={this.state.accesscode}
             />
             <div className="landing-container-form-buttons">
-              <Link to={`/waiting-room/${this.state.accesscode}`}>
+              <Link
+                onClick={this.createUser}
+                to={`/waiting-room/${this.state.accesscode}`}
+              >
                 <i className="fas fa-door-open" />
-                <button
-                  className="landing-container-form-button"
-                  onClick={this.createUser}
-                >
+                <button className="landing-container-form-button">
                   Join a Room
                 </button>
               </Link>
