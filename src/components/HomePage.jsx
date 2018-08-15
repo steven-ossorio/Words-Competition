@@ -16,10 +16,10 @@ export default () => {
             <i className="fas fa-gamepad" />
             <button className="landing-container-button">Create Game</button>
           </Link>
-          <Link to="/rank" replace>
+          {/* <Link to="/rank" replace>
             <i className="fas fa-trophy" />
             <button className="landing-container-button">Rank</button>
-          </Link>
+          </Link> */}
           <Link to="/join-room" replace>
             <i className="fas fa-door-open" />
             <button className="landing-container-button">Join a room</button>
