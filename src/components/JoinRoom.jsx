@@ -24,6 +24,17 @@ class Join extends Component {
   }
 
   createUser(e) {
+    if (
+      this.state.username.length === 0 &&
+      this.state.accesscode.length === 0
+    ) {
+      e.preventDefault();
+      this.setState({
+        errors: "Both can't be blank"
+      });
+      return;
+    }
+
     if (this.state.username.length === 0) {
       e.preventDefault();
       this.setState({
@@ -81,6 +92,7 @@ class Join extends Component {
   }
 
   render() {
+    console.log(this.state.errors);
     return (
       <div className="landing">
         <div className="landing-container join-room">

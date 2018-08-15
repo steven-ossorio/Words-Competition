@@ -121,12 +121,15 @@ class CreateRoomPage extends Component {
             />
             {errors}
             <div className="landing-container-form-buttons">
-              <Link to={`/waiting-room/${this.state.roomId}`} replace>
+              <Link
+                onClick={this.createUser}
+                to={`/waiting-room/${this.state.roomId}`}
+                replace
+              >
                 <i className="fas fa-gamepad" />
                 <button
                   className="landing-container-form-button"
                   id="create-button"
-                  onClick={this.createUser}
                 >
                   Create a Room
                 </button>
