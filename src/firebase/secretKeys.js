@@ -1,4 +1,6 @@
-import * as firebase from "firebase";
+import * as firebase from "firebase/app";
+import "firebase/database";
+import "firebase/auth";
 import Config from "./firebaseConfigs.js";
 
 let config = {

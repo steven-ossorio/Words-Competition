@@ -19,11 +19,7 @@ module.exports = {
       },
       {
         test: [/\.scss$/, /\.css$/],
-        use: [
-          "style-loader", // creates style nodes from JS strings
-          "css-loader", // translates CSS into CommonJS
-          "sass-loader"
-        ]
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.svg$/,
@@ -36,8 +32,8 @@ module.exports = {
           {
             loader: "image-webpack-loader",
             options: {
-              bypassOnDebug: true, // webpack@1.x
-              disable: true // webpack@2.x and newer
+              bypassOnDebug: true,
+              disable: true
             }
           }
         ]
