@@ -6,10 +6,25 @@ class Instructions extends Component {
     super(props);
 
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      currentIndex: 0
     };
 
     this.updateModal = this.updateModal.bind(this);
+    this.panelForward = this.panelForward.bind(this);
+    this.panelBack = this.panelBack.bind(this);
+  }
+
+  panelForward() {
+    let currentIndex =
+      this.state.currentIndex === 1 ? 0 : (this.state.currentIndex += 1);
+    this.setState({ currentIndex });
+  }
+
+  panelBack() {
+    let currentIndex =
+      this.state.currentIndex === 0 ? 1 : (this.state.currentIndex -= 1);
+    this.setState({ currentIndex });
   }
 
   updateModal() {
@@ -18,6 +33,11 @@ class Instructions extends Component {
   }
   render() {
     if (this.state.modalOpen) {
+      let one = [
+        require("../img/landing-page.png"),
+        require("../img/create-page.png")
+      ];
+      let img = one[this.state.currentIndex];
       return (
         <div className="open-modal-container">
           <div className="open-modal-container-background">
@@ -36,9 +56,13 @@ class Instructions extends Component {
                 them to see who can create the most words from a list of
                 letters. Think you got the skills? let the game begin!
               </p>
+              <button onClick={this.panelBack}>Click me to go back</button>
+              <button onClick={this.panelForward}>
+                Click me for next picture
+              </button>
               <img
                 className="open-modal-container-content-img"
-                src={require("../img/instruction.png")}
+                src={img}
                 alt=""
               />
             </div>
