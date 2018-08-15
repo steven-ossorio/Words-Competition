@@ -17,7 +17,7 @@ class Instructions extends Component {
 
   panelForward() {
     let currentIndex;
-    if (this.state.currentIndex === 1) {
+    if (this.state.currentIndex === 4) {
       currentIndex = 0;
     } else {
       currentIndex = this.state.currentIndex;
@@ -29,7 +29,7 @@ class Instructions extends Component {
   panelBack() {
     let currentIndex;
     if (this.state.currentIndex === 0) {
-      currentIndex = 1;
+      currentIndex = 4;
     } else {
       currentIndex = this.state.currentIndex;
       currentIndex -= 1;
@@ -45,7 +45,10 @@ class Instructions extends Component {
     if (this.state.modalOpen) {
       let one = [
         require("../img/landing-page.png"),
-        require("../img/create-page.png")
+        require("../img/create-page.png"),
+        require("../img/waiting-page.png"),
+        require("../img/game-page.png"),
+        require("../img/final-page.png")
       ];
       let img = one[this.state.currentIndex];
       return (
