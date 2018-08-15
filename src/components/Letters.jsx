@@ -7,7 +7,8 @@ class Letters extends Component {
     super(props);
 
     this.state = {
-      letters: ""
+      letters: "",
+      isMounted: false
     };
 
     this.setLetters = this.setLetters.bind(this);
@@ -15,8 +16,16 @@ class Letters extends Component {
   }
 
   componentDidMount() {
-    this.generateLetters();
-    this.setLetters();
+    this.setState({ isMounted: true }, () => {
+      if (this.state.isMounted) {
+        this.generateLetters();
+        this.setLetters();
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({ isMounted: false });
   }
 
   setLetters() {

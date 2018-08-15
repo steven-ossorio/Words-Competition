@@ -69,10 +69,10 @@ class Instructions extends Component {
                 them to see who can create the most words from a list of
                 letters. Think you got the skills? let the game begin!
               </p>
-              <button onClick={this.panelBack}>Click me to go back</button>
-              <button onClick={this.panelForward}>
-                Click me for next picture
-              </button>
+              <div className="arrows">
+                <i onClick={this.panelBack} className="fas fa-arrow-left" />
+                <i onClick={this.panelForward} className="fas fa-arrow-right" />
+              </div>
               <img
                 className="open-modal-container-content-img"
                 src={img}

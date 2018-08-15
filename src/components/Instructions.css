@@ -29,6 +29,11 @@
   .open-modal-container-content-description {
     font-size: 20px;
     padding: 2rem; }
+  .open-modal-container-content .arrows {
+    display: flex;
+    justify-content: space-around; }
+    .open-modal-container-content .arrows i {
+      font-size: 35px; }
   .open-modal-container-content-img {
     height: 500px;
     width: inherit; }
