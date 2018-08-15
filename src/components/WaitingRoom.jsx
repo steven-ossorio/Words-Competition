@@ -19,7 +19,8 @@ class CreatedRoom extends Component {
       playersScore: {},
       dictionary: {},
       backgroundColors: [],
-      colors: []
+      colors: [],
+      roomCreator: false
     };
 
     this.checkIfLoggedIn = this.checkIfLoggedIn.bind(this);
@@ -224,10 +225,16 @@ class CreatedRoom extends Component {
         }
       }
 
+      let roomCreator;
+      if (collection["creator"] === userId) {
+        roomCreator = true;
+      }
+
       this.setState({
         players: newArray,
         colors,
-        backgroundColors
+        backgroundColors,
+        roomCreator
       });
     });
   }
@@ -254,6 +261,17 @@ class CreatedRoom extends Component {
         </div>
       );
     } else if (this.state.loggedIn) {
+      let startButton = "";
+      if (this.state.roomCreator) {
+        startButton = (
+          <button
+            className="landing-container-form-button"
+            onClick={this.startGame}
+          >
+            Start Game
+          </button>
+        );
+      }
       return (
         <div className="created-room">
           <div className="created-room-container">
@@ -268,12 +286,7 @@ class CreatedRoom extends Component {
                 <span>Access Code:</span> {this.props.match.params.id}
               </h3>
               <div className="landing-container-form-buttons">
-                <button
-                  className="landing-container-form-button"
-                  onClick={this.startGame}
-                >
-                  Start Game
-                </button>
+                {startButton}
                 <Link to="/" replace>
                   <button
                     onClick={this.removePlayer}

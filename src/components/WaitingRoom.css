@@ -34,6 +34,8 @@
       margin: 0 auto;
       padding-top: 1.5rem; }
   .created-room .created-room-container-inner-header-sub {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
     text-align: center;
     font-family: answer;
     font-size: 1.6rem;

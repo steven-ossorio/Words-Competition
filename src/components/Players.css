@@ -29,7 +29,7 @@
   color: red;
   overflow-y: scroll;
   max-height: 350px;
-  margin-top: 50px; }
+  margin-top: 2rem; }
   .players-container-list {
     border-radius: 1rem;
     display: flex;
