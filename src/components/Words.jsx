@@ -117,17 +117,20 @@ class Words extends Component {
     if (e.charCode === 13) {
       let word = this.state.word.toLowerCase();
       if (word === "") {
-        this.setState({ errors: "Can't be blank" });
+        this.setState({ errors: "Can't be blank", word: "" });
         return;
       } else if (this.state.wordsObj[word]) {
-        this.setState({ errors: "Word already exists" });
+        this.setState({ errors: "Word already exists", word: "" });
         return;
       }
 
       let check = this.checkWord(word);
 
       if (!check) {
-        this.setState({ errors: 'Dictionary says: "Not a real word"' });
+        this.setState({
+          errors: 'Dictionary says: "Not a real word"',
+          word: ""
+        });
         return;
       }
 

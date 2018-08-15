@@ -7,13 +7,15 @@ class Timer extends Component {
     super(props);
 
     this.state = {
-      time: 60
+      time: 60,
+      tenSeconds: false
     };
   }
 
   componentDidMount() {
     let countDown = setInterval(() => {
-      this.setState({ time: this.state.time - 1 });
+      let tenSeconds = this.state.time <= 10 ? true : false;
+      this.setState({ time: this.state.time - 1, tenSeconds });
       if (this.state.time === 0) {
         clearInterval(countDown);
       }
@@ -23,8 +25,12 @@ class Timer extends Component {
     }, 1000);
   }
   render() {
+    let color = "";
+    if (this.state.tenSeconds) {
+      color = "#ff0000";
+    }
     return (
-      <div className="time-container">
+      <div style={{ color: `${color}` }} className="time-container">
         <div className="time">{this.state.time}</div>
       </div>
     );
