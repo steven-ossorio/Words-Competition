@@ -38,27 +38,22 @@
     margin: 0 auto;
     width: 500px; }
     .final-score-container-list-container .list-item {
+      padding-top: 6px;
       font-family: assyrian3d;
       font-size: 3.5rem;
       width: 500px;
       margin: 0 auto;
       display: flex;
       justify-content: space-around;
-      margin: 3rem 0;
-      padding: 1rem;
+      margin: 2rem 0;
       border-radius: 10px; }
       .final-score-container-list-container .list-item-rank {
-        background-color: #93eed7;
         padding: 1rem;
         border-radius: 10px; }
       .final-score-container-list-container .list-item-container {
-        background-color: #93eed7;
         padding: 1rem;
         border-radius: 10px; }
-        .final-score-container-list-container .list-item-container-username {
-          background-color: #93eed7; }
         .final-score-container-list-container .list-item-container-score {
-          background-color: #93eed7;
           padding: 1rem;
           border-radius: 10px; }
   .final-score-container-buttons {

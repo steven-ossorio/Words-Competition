@@ -43,16 +43,26 @@ class FinalScore extends Component {
     let scoreBoard;
     if (this.state.sortedKeys.length > 0) {
       scoreBoard = this.state.sortedKeys.map((key, i) => {
+        let backgroundColor = "";
         let firstScore = "";
         if (i === 0) {
           firstScore = (
-            <span className="list-item-rank first-rank">{i + 1}</span>
+            <span className="list-item-rank first-rank">
+              <i class="far fa-star" />
+              <span>{i + 1}</span>
+            </span>
           );
+          backgroundColor = "#FFD700";
         } else {
           firstScore = <span className="list-item-rank">{i + 1}</span>;
+          backgroundColor =
+            "#" + Math.floor(Math.random() * 16777215).toString(16);
         }
         return (
-          <li className="list-item">
+          <li
+            style={{ backgroundColor: `${backgroundColor}` }}
+            className="list-item"
+          >
             {firstScore}
             <div className="list-item-container">
               <span className="list-item-username">{key}</span>
