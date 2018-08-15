@@ -89,7 +89,7 @@ class Words extends Component {
 
       if (wordsCollection) {
         Object.keys(wordsCollection).forEach(wordKey => {
-          words.push(wordsCollection[wordKey]);
+          words.unshift(wordsCollection[wordKey]);
           wordsObj[wordsCollection[wordKey]] = true;
         });
       }
@@ -209,8 +209,9 @@ class Words extends Component {
 
     return (
       <div>
-        <WordList words={this.state.words} />
         <div className="word-input-box">
+          <h1 className="words-container-header">Words</h1>
+
           <input
             {...inputProps}
             onKeyPress={this.addWord}
@@ -220,6 +221,7 @@ class Words extends Component {
             value={this.state.word}
           />
           {errors}
+          <WordList words={this.state.words} />
         </div>
       </div>
     );

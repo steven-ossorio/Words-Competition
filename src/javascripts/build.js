@@ -43697,7 +43697,7 @@ var Words = function (_Component) {
 
         if (wordsCollection) {
           Object.keys(wordsCollection).forEach(function (wordKey) {
-            words.push(wordsCollection[wordKey]);
+            words.unshift(wordsCollection[wordKey]);
             wordsObj[wordsCollection[wordKey]] = true;
           });
         }
@@ -43823,10 +43823,14 @@ var Words = function (_Component) {
       return _react2.default.createElement(
         "div",
         null,
-        _react2.default.createElement(_WordList2.default, { words: this.state.words }),
         _react2.default.createElement(
           "div",
           { className: "word-input-box" },
+          _react2.default.createElement(
+            "h1",
+            { className: "words-container-header" },
+            "Words"
+          ),
           _react2.default.createElement("input", _extends({}, inputProps, {
             onKeyPress: this.addWord,
             onChange: this.update("word"),
@@ -43834,7 +43838,8 @@ var Words = function (_Component) {
             placeholder: "Type Word Here",
             value: this.state.word
           })),
-          errors
+          errors,
+          _react2.default.createElement(_WordList2.default, { words: this.state.words })
         )
       );
     }
@@ -43875,11 +43880,6 @@ exports.default = function (props) {
   return _react2.default.createElement(
     "div",
     { className: "words-container" },
-    _react2.default.createElement(
-      "h1",
-      { className: "words-container-header" },
-      "Words"
-    ),
     _react2.default.createElement(
       "ul",
       { className: "words-container-list" },

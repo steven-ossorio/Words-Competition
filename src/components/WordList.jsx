@@ -7,7 +7,6 @@ export default props => {
   });
   return (
     <div className="words-container">
-      <h1 className="words-container-header">Words</h1>
       <ul className="words-container-list">{words}</ul>
     </div>
   );
