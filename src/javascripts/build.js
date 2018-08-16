@@ -44032,6 +44032,7 @@ var ScoreBoard = function (_Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.setState({ isMounted: false });
+      var gameID = this.props.gameID;
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).off("value");
     }
