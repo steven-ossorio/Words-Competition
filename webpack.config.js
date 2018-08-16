@@ -63,7 +63,7 @@ module.exports = {
   resolve: { extensions: [".js", ".jsx", ".scss", ".png"] },
   output: {
     path: __dirname + "/src/javascripts",
-    filename: "build.js"
+    filename: "bundle.js"
   },
   plugins: [
     new webpack.DefinePlugin({
