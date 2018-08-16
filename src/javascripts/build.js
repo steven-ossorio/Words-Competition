@@ -43648,6 +43648,10 @@ var Words = function (_Component) {
       if (this.state.time === 0) {
         this.props.history.push("/final-score/" + this.props.gameID);
       }
+
+      var gameID = this.props.gameID;
+      var db = _secretKeys2.default.database();
+      db.ref("Room/" + gameID).off("value");
     }
   }, {
     key: "componentWillUnmount",
@@ -44028,6 +44032,8 @@ var ScoreBoard = function (_Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.setState({ isMounted: false });
+      var db = _secretKeys2.default.database();
+      db.ref("Room/" + gameID).off("value");
     }
   }, {
     key: "updateScoreBoard",

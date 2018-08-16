@@ -40,6 +40,10 @@ class Words extends Component {
     if (this.state.time === 0) {
       this.props.history.push(`/final-score/${this.props.gameID}`);
     }
+
+    let gameID = this.props.gameID;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}`).off("value");
   }
 
   componentWillUnmount() {

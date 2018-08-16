@@ -26,6 +26,8 @@ class ScoreBoard extends Component {
 
   componentWillUnmount() {
     this.setState({ isMounted: false });
+    let db = firebase.database();
+    db.ref(`Room/${gameID}`).off("value");
   }
 
   updateScoreBoard() {
