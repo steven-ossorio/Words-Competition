@@ -30,11 +30,12 @@ class Join extends Component {
   }
 
   createUser(e) {
+    e.preventDefault();
+
     if (
       this.state.username.length === 0 &&
       this.state.accesscode.length === 0
     ) {
-      e.preventDefault();
       this.setState({
         errors: {
           username: "Username can't be blank",
@@ -45,7 +46,6 @@ class Join extends Component {
     }
 
     if (this.state.username.length === 0) {
-      e.preventDefault();
       this.setState({
         errors: { username: "Username can't be blank", accesscode: "" }
       });
@@ -53,7 +53,6 @@ class Join extends Component {
     }
 
     if (this.state.accesscode.length === 0) {
-      e.preventDefault();
       this.setState({
         errors: { username: "", accesscode: "Access Code can't be blank" }
       });
@@ -69,7 +68,9 @@ class Join extends Component {
           firebase
             .auth()
             .signInAnonymously()
-            .then(() => {})
+            .then(user => {
+              resolve(user.uid);
+            })
             .catch(err => {
               console.log(err);
             });
@@ -82,6 +83,11 @@ class Join extends Component {
       playersRef.child(`${id}`).set(`${this.state.username}`);
       let player = db.ref(`Room/${this.state.accesscode}/players/${id}`);
       player.onDisconnect().remove();
+
+      let allPlayers = db.ref(`Room/${this.state.accesscode}/all-players`);
+      allPlayers.child(`${id}`).set(true);
+      let allPlayer = db.ref(`Room/${this.state.accesscode}/all-players/${id}`);
+      allPlayer.onDisconnect().remove();
 
       let scoreBoard = db.ref(`Room/${this.state.accesscode}/scoreBoard`);
       scoreBoard.child(`${this.state.username}`).set(0);

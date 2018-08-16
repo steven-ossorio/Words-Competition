@@ -47,7 +47,7 @@ class Instructions extends Component {
         require("../img/landing-page.png"),
         require("../img/create-page.png"),
         require("../img/waiting-page.png"),
-        require("../img/game-page.png"),
+        require("../img/game-page2.png"),
         require("../img/final-page.png")
       ];
       let img = one[this.state.currentIndex];

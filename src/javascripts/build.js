@@ -15824,8 +15824,6 @@ var _papaparse = __webpack_require__(166);
 
 var Papa = _interopRequireWildcard(_papaparse);
 
-var _reactRouterDom = __webpack_require__(20);
-
 __webpack_require__(69);
 
 var _reactSpinners = __webpack_require__(182);
@@ -15877,6 +15875,7 @@ var CreatedRoom = function (_Component) {
     _this.setHash = _this.setHash.bind(_this);
     _this.updateCurrentPlayers = _this.updateCurrentPlayers.bind(_this);
     _this.removePlayer = _this.removePlayer.bind(_this);
+    _this.goBack = _this.goBack.bind(_this);
     return _this;
   }
 
@@ -15898,6 +15897,9 @@ var CreatedRoom = function (_Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.setState({ isMounted: false });
+      var gameID = this.props.match.params.id;
+      var db = _secretKeys2.default.database();
+      db.ref("Room/" + gameID).off("value");
     }
   }, {
     key: "componentWillUpdate",
@@ -15921,8 +15923,10 @@ var CreatedRoom = function (_Component) {
     key: "updateData",
     value: function updateData(results) {
       var data = results.data;
-      this.setState({ dictionary: data });
-      this.setHash();
+      if (this.state.isMounted) {
+        this.setState({ dictionary: data });
+        this.setHash();
+      }
     }
   }, {
     key: "setHash",
@@ -15949,11 +15953,12 @@ var CreatedRoom = function (_Component) {
         if (collection["gameStarted"] === null || collection["gameStarted"] === undefined) {
           return;
         }
-
         var startGame = collection["gameStarted"];
-        _this3.setState({
-          startGame: startGame
-        });
+        if (_this3.state.isMounted) {
+          _this3.setState({
+            startGame: startGame
+          });
+        }
       });
     }
   }, {
@@ -16033,10 +16038,6 @@ var CreatedRoom = function (_Component) {
       var gameID = this.props.match.params.id;
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).on("value", function (snapshot) {
-        _this7.setState({
-          playersID: {}
-        });
-
         var collection = snapshot.val();
         if (collection["players"] === null || collection["players"] === undefined) {
           return;
@@ -16047,7 +16048,9 @@ var CreatedRoom = function (_Component) {
           playersKeysObj[key] = true;
         });
 
-        _this7.setState({ playersID: playersKeysObj });
+        if (_this7.state.isMounted) {
+          _this7.setState({ playersID: playersKeysObj });
+        }
       });
     }
   }, {
@@ -16058,9 +16061,9 @@ var CreatedRoom = function (_Component) {
       var gameID = this.props.match.params.id;
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).on("value", function (snapshot) {
-        _this8.setState({
-          players: []
-        });
+        // this.setState({
+        //   players: []
+        // });
 
         var collection = snapshot.val();
         var players = collection["players"];
@@ -16096,23 +16099,33 @@ var CreatedRoom = function (_Component) {
         if (collection["creator"] === userId) {
           roomCreator = true;
         }
-
-        _this8.setState({
-          players: newArray,
-          colors: colors,
-          backgroundColors: backgroundColors,
-          roomCreator: roomCreator
-        });
+        if (_this8.state.isMounted) {
+          _this8.setState({
+            players: newArray,
+            colors: colors,
+            backgroundColors: backgroundColors,
+            roomCreator: roomCreator
+          });
+        }
       });
     }
   }, {
     key: "startGame",
-    value: function startGame() {
+    value: function startGame(e) {
+      e.preventDefault();
       var gameID = this.props.match.params.id;
       var db = _secretKeys2.default.database();
       var updateObj = { gameStarted: true };
       db.ref("Room/" + gameID).update(updateObj);
       this.setState({ startGame: true });
+    }
+  }, {
+    key: "goBack",
+    value: function goBack(e) {
+      e.preventDefault();
+      this.props.history.push({
+        pathname: "/"
+      });
     }
   }, {
     key: "render",
@@ -16179,14 +16192,11 @@ var CreatedRoom = function (_Component) {
                 { className: "landing-container-form-buttons" },
                 startButton,
                 _react2.default.createElement(
-                  _reactRouterDom.Link,
-                  { to: "/", replace: true },
+                  "div",
+                  { onClick: this.removePlayer },
                   _react2.default.createElement(
                     "button",
-                    {
-                      onClick: this.removePlayer,
-                      className: "landing-container-form-button"
-                    },
+                    { className: "landing-container-form-button" },
                     "Leave Room"
                   )
                 )
@@ -44324,8 +44334,9 @@ var Join = function (_Component) {
     value: function createUser(e) {
       var _this2 = this;
 
+      e.preventDefault();
+
       if (this.state.username.length === 0 && this.state.accesscode.length === 0) {
-        e.preventDefault();
         this.setState({
           errors: {
             username: "Username can't be blank",
@@ -44336,7 +44347,6 @@ var Join = function (_Component) {
       }
 
       if (this.state.username.length === 0) {
-        e.preventDefault();
         this.setState({
           errors: { username: "Username can't be blank", accesscode: "" }
         });
@@ -44344,7 +44354,6 @@ var Join = function (_Component) {
       }
 
       if (this.state.accesscode.length === 0) {
-        e.preventDefault();
         this.setState({
           errors: { username: "", accesscode: "Access Code can't be blank" }
         });
@@ -44357,7 +44366,9 @@ var Join = function (_Component) {
             window.user = user;
             resolve(user.uid);
           } else {
-            _secretKeys2.default.auth().signInAnonymously().then(function () {}).catch(function (err) {
+            _secretKeys2.default.auth().signInAnonymously().then(function (user) {
+              resolve(user.uid);
+            }).catch(function (err) {
               console.log(err);
             });
           }
@@ -44369,6 +44380,11 @@ var Join = function (_Component) {
         playersRef.child("" + id).set("" + _this2.state.username);
         var player = db.ref("Room/" + _this2.state.accesscode + "/players/" + id);
         player.onDisconnect().remove();
+
+        var allPlayers = db.ref("Room/" + _this2.state.accesscode + "/all-players");
+        allPlayers.child("" + id).set(true);
+        var allPlayer = db.ref("Room/" + _this2.state.accesscode + "/all-players/" + id);
+        allPlayer.onDisconnect().remove();
 
         var scoreBoard = db.ref("Room/" + _this2.state.accesscode + "/scoreBoard");
         scoreBoard.child("" + _this2.state.username).set(0);
@@ -44674,6 +44690,7 @@ var CreateRoomPage = function (_Component) {
       var _this3 = this;
 
       e.preventDefault();
+
       if (this.state.username === "") {
         this.setState({
           errors: "Username can't be blank"
@@ -44970,7 +44987,7 @@ var Instructions = function (_Component) {
     key: "render",
     value: function render() {
       if (this.state.modalOpen) {
-        var one = [__webpack_require__(245), __webpack_require__(246), __webpack_require__(247), __webpack_require__(248), __webpack_require__(249)];
+        var one = [__webpack_require__(245), __webpack_require__(246), __webpack_require__(247), __webpack_require__(257), __webpack_require__(249)];
         var img = one[this.state.currentIndex];
         return _react2.default.createElement(
           "div",
@@ -45118,19 +45135,14 @@ module.exports = __webpack_require__.p + "2d281cfd5ac7b97fe62f493bfd4dc00d.png";
 /* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "35b3c76ea452aecf7a2cfedaeaafca64.png";
+module.exports = __webpack_require__.p + "015c173598de66091a3c742c834e2942.png";
 
 /***/ }),
-/* 248 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "8aa02d4cf875890766115a66e2a28edb.png";
-
-/***/ }),
+/* 248 */,
 /* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "8f9c6400aaa33b78f6423ad7db67214e.png";
+module.exports = __webpack_require__.p + "97860157ca3fe059fb7798e70fa08d53.png";
 
 /***/ }),
 /* 250 */
@@ -45547,6 +45559,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * limitations under the License.
  */
 
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "b423d4c5d492808853eefc10f8bb61d0.png";
 
 /***/ })
 /******/ ]);

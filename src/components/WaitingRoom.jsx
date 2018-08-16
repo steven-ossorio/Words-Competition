@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import firebase from "../firebase/secretKeys";
 import Players from "./Players";
 import * as Papa from "papaparse";
-import { Link } from "react-router-dom";
 import "./WaitingRoom.css";
 import { PacmanLoader } from "react-spinners";
 import GameStart from "./GameStart";
@@ -34,6 +33,7 @@ class CreatedRoom extends Component {
     this.setHash = this.setHash.bind(this);
     this.updateCurrentPlayers = this.updateCurrentPlayers.bind(this);
     this.removePlayer = this.removePlayer.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +49,9 @@ class CreatedRoom extends Component {
 
   componentWillUnmount() {
     this.setState({ isMounted: false });
+    let gameID = this.props.match.params.id;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}`).off("value");
   }
 
   componentWillUpdate() {
@@ -69,8 +72,10 @@ class CreatedRoom extends Component {
 
   updateData(results) {
     let data = results.data;
-    this.setState({ dictionary: data });
-    this.setHash();
+    if (this.state.isMounted) {
+      this.setState({ dictionary: data });
+      this.setHash();
+    }
   }
 
   setHash() {
@@ -96,11 +101,12 @@ class CreatedRoom extends Component {
       ) {
         return;
       }
-
       let startGame = collection["gameStarted"];
-      this.setState({
-        startGame
-      });
+      if (this.state.isMounted) {
+        this.setState({
+          startGame
+        });
+      }
     });
   }
 
@@ -178,10 +184,6 @@ class CreatedRoom extends Component {
     let gameID = this.props.match.params.id;
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
-      this.setState({
-        playersID: {}
-      });
-
       let collection = snapshot.val();
       if (
         collection["players"] === null ||
@@ -195,7 +197,9 @@ class CreatedRoom extends Component {
         playersKeysObj[key] = true;
       });
 
-      this.setState({ playersID: playersKeysObj });
+      if (this.state.isMounted) {
+        this.setState({ playersID: playersKeysObj });
+      }
     });
   }
 
@@ -203,9 +207,9 @@ class CreatedRoom extends Component {
     let gameID = this.props.match.params.id;
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
-      this.setState({
-        players: []
-      });
+      // this.setState({
+      //   players: []
+      // });
 
       let collection = snapshot.val();
       let players = collection["players"];
@@ -245,22 +249,31 @@ class CreatedRoom extends Component {
       if (collection["creator"] === userId) {
         roomCreator = true;
       }
-
-      this.setState({
-        players: newArray,
-        colors,
-        backgroundColors,
-        roomCreator
-      });
+      if (this.state.isMounted) {
+        this.setState({
+          players: newArray,
+          colors,
+          backgroundColors,
+          roomCreator
+        });
+      }
     });
   }
 
-  startGame() {
+  startGame(e) {
+    e.preventDefault();
     let gameID = this.props.match.params.id;
     let db = firebase.database();
     let updateObj = { gameStarted: true };
     db.ref(`Room/${gameID}`).update(updateObj);
     this.setState({ startGame: true });
+  }
+
+  goBack(e) {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: "/"
+    });
   }
 
   render() {
@@ -305,14 +318,11 @@ class CreatedRoom extends Component {
               </h3>
               <div className="landing-container-form-buttons">
                 {startButton}
-                <Link to="/" replace>
-                  <button
-                    onClick={this.removePlayer}
-                    className="landing-container-form-button"
-                  >
+                <div onClick={this.removePlayer}>
+                  <button className="landing-container-form-button">
                     Leave Room
                   </button>
-                </Link>
+                </div>
               </div>
               <Players
                 colors={this.state.colors}

@@ -36,6 +36,7 @@ class CreateRoomPage extends Component {
 
   createUser(e) {
     e.preventDefault();
+
     if (this.state.username === "") {
       this.setState({
         errors: "Username can't be blank"
