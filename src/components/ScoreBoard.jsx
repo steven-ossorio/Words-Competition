@@ -16,16 +16,10 @@ class ScoreBoard extends Component {
   }
 
   componentDidMount() {
-    this.setState({ isMounted: true }, () => {
-      if (this.state.isMounted) {
-        this.setState({ isMounted: false });
-        this.updateScoreBoard();
-      }
-    });
+    this.updateScoreBoard();
   }
 
   componentWillUnmount() {
-    this.setState({ isMounted: false });
     let gameID = this.props.gameID;
     let db = firebase.database();
     db.ref(`Room/${gameID}`).off("value");
@@ -50,7 +44,7 @@ class ScoreBoard extends Component {
   }
 
   render() {
-    let playerList = this.props.players.reverse();
+    let playerList = this.props.players;
     playerList = playerList.map((player, i) => {
       let score = this.state.scoreBoard[player];
       let backgroundColor = this.props.backgroundColors[i];

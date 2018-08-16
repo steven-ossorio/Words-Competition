@@ -2,8 +2,7 @@ import React from "react";
 import "./Players.css";
 
 export default props => {
-  let playerList = props.players.reverse();
-  playerList = props.players.map((player, i) => {
+  let playerList = props.players.map((player, i) => {
     let color = props.colors[i];
     let backgroundColor = props.backgroundColors[i];
     return (

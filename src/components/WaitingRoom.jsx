@@ -228,7 +228,7 @@ class CreatedRoom extends Component {
       }
 
       Object.keys(players).forEach(id => {
-        newArray.push(players[id]);
+        newArray.unshift(players[id]);
       });
 
       for (let i = 0; i < newArray.length; i++) {

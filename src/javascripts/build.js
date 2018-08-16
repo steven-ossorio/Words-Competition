@@ -16082,7 +16082,7 @@ var CreatedRoom = function (_Component) {
         }
 
         Object.keys(players).forEach(function (id) {
-          newArray.push(players[id]);
+          newArray.unshift(players[id]);
         });
 
         for (var i = 0; i < newArray.length; i++) {
@@ -34155,8 +34155,7 @@ __webpack_require__(131);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
-  var playerList = props.players.reverse();
-  playerList = props.players.map(function (player, i) {
+  var playerList = props.players.map(function (player, i) {
     var color = props.colors[i];
     var backgroundColor = props.backgroundColors[i];
     return _react2.default.createElement(
@@ -44023,19 +44022,11 @@ var ScoreBoard = function (_Component) {
   _createClass(ScoreBoard, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
-      this.setState({ isMounted: true }, function () {
-        if (_this2.state.isMounted) {
-          _this2.setState({ isMounted: false });
-          _this2.updateScoreBoard();
-        }
-      });
+      this.updateScoreBoard();
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      this.setState({ isMounted: false });
       var gameID = this.props.gameID;
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).off("value");
@@ -44043,7 +44034,7 @@ var ScoreBoard = function (_Component) {
   }, {
     key: "updateScoreBoard",
     value: function updateScoreBoard() {
-      var _this3 = this;
+      var _this2 = this;
 
       var scoreBoard = {};
       var gameID = this.props.gameID;
@@ -44058,18 +44049,18 @@ var ScoreBoard = function (_Component) {
           scoreBoard[username] = playersScore[username];
         });
 
-        _this3.setState({ scoreBoard: scoreBoard });
+        _this2.setState({ scoreBoard: scoreBoard });
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
-      var playerList = this.props.players.reverse();
+      var playerList = this.props.players;
       playerList = playerList.map(function (player, i) {
-        var score = _this4.state.scoreBoard[player];
-        var backgroundColor = _this4.props.backgroundColors[i];
+        var score = _this3.state.scoreBoard[player];
+        var backgroundColor = _this3.props.backgroundColors[i];
         return _react2.default.createElement(
           "tr",
           {
