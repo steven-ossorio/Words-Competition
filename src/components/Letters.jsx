@@ -7,7 +7,7 @@ class Letters extends Component {
     super(props);
 
     this.state = {
-      letters: "",
+      letters: [],
       isMounted: false
     };
 
@@ -16,16 +16,16 @@ class Letters extends Component {
   }
 
   componentDidMount() {
-    this.setState({ isMounted: true }, () => {
-      if (this.state.isMounted) {
-        this.generateLetters();
-        this.setLetters();
-      }
-    });
+    this.setState({ isMounted: true });
+    this.generateLetters();
+    this.setLetters();
   }
 
   componentWillUnmount() {
     this.setState({ isMounted: false });
+    let gameID = this.props.gameID;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}`).off("value");
   }
 
   setLetters() {
@@ -33,10 +33,12 @@ class Letters extends Component {
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
       let collection = snapshot.val();
-      let letters = collection["letters"];
-      this.setState({
-        letters
-      });
+      let letters = collection["letters"].split(",");
+      if (this.state.isMounted) {
+        this.setState({
+          letters
+        });
+      }
     });
   }
 

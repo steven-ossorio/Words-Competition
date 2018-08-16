@@ -43214,7 +43214,8 @@ var Timer = function (_Component) {
 
     _this.state = {
       time: 60,
-      tenSeconds: false
+      tenSeconds: false,
+      isMounted: false
     };
     return _this;
   }
@@ -43224,9 +43225,12 @@ var Timer = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      this.setState({ isMounted: true });
       var countDown = setInterval(function () {
         var tenSeconds = _this2.state.time <= 10 ? true : false;
-        _this2.setState({ time: _this2.state.time - 1, tenSeconds: tenSeconds });
+        if (_this2.state.isMounted) {
+          _this2.setState({ time: _this2.state.time - 1, tenSeconds: tenSeconds });
+        }
         if (_this2.state.time === 0) {
           clearInterval(countDown);
         }
@@ -43378,7 +43382,7 @@ var Letters = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Letters.__proto__ || Object.getPrototypeOf(Letters)).call(this, props));
 
     _this.state = {
-      letters: "",
+      letters: [],
       isMounted: false
     };
 
@@ -43390,33 +43394,33 @@ var Letters = function (_Component) {
   _createClass(Letters, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
-      this.setState({ isMounted: true }, function () {
-        if (_this2.state.isMounted) {
-          _this2.generateLetters();
-          _this2.setLetters();
-        }
-      });
+      this.setState({ isMounted: true });
+      this.generateLetters();
+      this.setLetters();
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       this.setState({ isMounted: false });
+      var gameID = this.props.gameID;
+      var db = _secretKeys2.default.database();
+      db.ref("Room/" + gameID).off("value");
     }
   }, {
     key: "setLetters",
     value: function setLetters() {
-      var _this3 = this;
+      var _this2 = this;
 
       var gameID = this.props.gameID;
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).on("value", function (snapshot) {
         var collection = snapshot.val();
-        var letters = collection["letters"];
-        _this3.setState({
-          letters: letters
-        });
+        var letters = collection["letters"].split(",");
+        if (_this2.state.isMounted) {
+          _this2.setState({
+            letters: letters
+          });
+        }
       });
     }
   }, {
@@ -43476,7 +43480,7 @@ __webpack_require__(217);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (props) {
-  var letters = props.letters.split(",").map(function (letter, i) {
+  var letters = props.letters.map(function (letter, i) {
     return _react2.default.createElement(
       "div",
       { className: "letters", key: i },

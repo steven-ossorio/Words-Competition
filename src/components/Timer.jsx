@@ -8,14 +8,18 @@ class Timer extends Component {
 
     this.state = {
       time: 60,
-      tenSeconds: false
+      tenSeconds: false,
+      isMounted: false
     };
   }
 
   componentDidMount() {
+    this.setState({ isMounted: true });
     let countDown = setInterval(() => {
       let tenSeconds = this.state.time <= 10 ? true : false;
-      this.setState({ time: this.state.time - 1, tenSeconds });
+      if (this.state.isMounted) {
+        this.setState({ time: this.state.time - 1, tenSeconds });
+      }
       if (this.state.time === 0) {
         clearInterval(countDown);
       }

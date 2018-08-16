@@ -2,7 +2,7 @@ import React from "react";
 import "./Letters.css";
 
 export default props => {
-  let letters = props.letters.split(",").map((letter, i) => {
+  let letters = props.letters.map((letter, i) => {
     return (
       <div className="letters" key={i}>
         {letter}
