@@ -28,6 +28,12 @@ class Timer extends Component {
       timeRef.child("time").set(this.state.time);
     }, 1000);
   }
+
+  componentWillUnmount() {
+    this.setState({ isMounted: false });
+    let db = firebase.database();
+    db.ref(`Room/${this.props.gameID}`).off("value");
+  }
   render() {
     let color = "";
     if (this.state.tenSeconds) {

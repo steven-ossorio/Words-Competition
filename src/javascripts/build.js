@@ -43239,6 +43239,13 @@ var Timer = function (_Component) {
       }, 1000);
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.setState({ isMounted: false });
+      var db = _secretKeys2.default.database();
+      db.ref("Room/" + this.props.gameID).off("value");
+    }
+  }, {
     key: "render",
     value: function render() {
       var color = "";
