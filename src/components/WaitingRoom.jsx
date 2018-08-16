@@ -207,9 +207,9 @@ class CreatedRoom extends Component {
     let gameID = this.props.match.params.id;
     let db = firebase.database();
     db.ref(`Room/${gameID}`).on("value", snapshot => {
-      // this.setState({
-      //   players: []
-      // });
+      this.setState({
+        players: []
+      });
 
       let collection = snapshot.val();
       let players = collection["players"];

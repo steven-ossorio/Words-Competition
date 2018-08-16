@@ -16061,9 +16061,9 @@ var CreatedRoom = function (_Component) {
       var gameID = this.props.match.params.id;
       var db = _secretKeys2.default.database();
       db.ref("Room/" + gameID).on("value", function (snapshot) {
-        // this.setState({
-        //   players: []
-        // });
+        _this8.setState({
+          players: []
+        });
 
         var collection = snapshot.val();
         var players = collection["players"];
