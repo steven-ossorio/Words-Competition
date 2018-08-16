@@ -43225,6 +43225,9 @@ var Timer = function (_Component) {
       var _this2 = this;
 
       this.setState({ isMounted: true });
+      if (this.state.time === 0) {
+        return;
+      }
       var countDown = setInterval(function () {
         var tenSeconds = _this2.state.time <= 10 ? true : false;
         if (_this2.state.isMounted) {

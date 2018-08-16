@@ -15,6 +15,9 @@ class Timer extends Component {
 
   componentDidMount() {
     this.setState({ isMounted: true });
+    if (this.state.time === 0) {
+      return;
+    }
     let countDown = setInterval(() => {
       let tenSeconds = this.state.time <= 10 ? true : false;
       if (this.state.isMounted) {
