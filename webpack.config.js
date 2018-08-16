@@ -1,9 +1,7 @@
 let path = require("path");
 let webpack = require("webpack");
-const env = process.env.NODE_ENV;
 
 module.exports = {
-  mode: env || "development",
   context: path.join(__dirname, "src"),
   entry: "./index.js",
   module: {
