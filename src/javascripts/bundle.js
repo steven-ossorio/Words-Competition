@@ -43867,7 +43867,7 @@ var Words = function (_Component) {
 
         if (!check) {
           this.setState({
-            errors: 'Dictionary says: "Not a real word"',
+            errors: "Must use given letters only",
             word: ""
           });
           return;
@@ -43884,7 +43884,10 @@ var Words = function (_Component) {
             errors: ""
           });
         } else {
-          this.setState({ errors: 'Dictionary says: "Not a real word"' });
+          this.setState({
+            errors: 'Dictionary says: "Not a real word"',
+            word: ""
+          });
         }
       }
     }

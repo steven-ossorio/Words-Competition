@@ -97,6 +97,102 @@ Disconnect is as simple as simply changing the on to off. This will cause the we
 Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the _class component
 ```
 
+#### Firebase Auth
+
+Currently a user isn't allowed to make an official account. This produced a minor problem in figuring out if a user has already joined the game or not through their unique ID usually given upon signing up. Such case can be resolved though the use of Firebase Auth package. Within the package there is a function called 'signInAnonymously'.
+
+```javascript
+firebase.auth().signInAnonymously();
+```
+
+Just as the function name implies, it'll anonymously sign in a user by providing a key which we assign to the window. The key given normally exist for about an hour within a user catch but it helps for us to check whether the set user ID alreadt exist in the collection of IDs we included to the game. The randomly generated ID also allows for users to create an official account if such functionality was included.
+
+```javascript
+const loginPromise = new Promise((resolve, reject) => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      window.user = user;
+      resolve(user.uid);
+    } else {
+      firebase
+        .auth()
+        .signInAnonymously()
+        .then(user => {
+          resolve(user.uid);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  });
+});
+```
+
+In order to make sure we recieved the ID before proceeding to creating a user in the database, a promise was used. Once a user ID has been created and it's been resolved, we called then in order to use the return ID.
+
+```javascript
+loginPromise.then(id => {
+      let db = firebase.database();
+      let playersRef = db.ref(`Room/${this.state.accesscode}/players`);
+      playersRef.child(`${id}`).set(`${this.state.username}`);
+      let player = db.ref(`Room/${this.state.accesscode}/players/${id}`);
+      player.onDisconnect().remove();
+```
+
+A reference is kept of the specific user. The reason for such a reference is to make sure when a user refreshes the page or loses connection, their information will be removed from the current game. This action can be seen in the last line as it checks if the user has disconnected then runs remove once successful.
+
+### Word
+
+A word, before it is included to the array of submitted words goes through various condition checking before it can be submitted. The first step is to check if the input doesn't break any of the error handling as follows:
+
+```javascript
+  addWord(e) {
+      let word = this.state.word.toLowerCase();
+      if (word === "") {
+        this.setState({ errors: "Can't be blank", word: "" });
+        return;
+      } else if (this.state.wordsObj[word]) {
+        this.setState({ errors: "Word already exists", word: "" });
+        return;
+      }
+```
+
+Input is checked on two different levels. First to check if the input is empty, in which case a user can't send data to the backend. The second case is if a word alreadyt exists within the an object of words collected. As mentioned earlier, a Hash Table was used due to it's O(1) look up for quick checks. Words submitted were as well converted to lowercase since all words in the dictionary are lowered cased. Should the case proceed on the next phase, it'll be within the check function.
+
+```javascript
+  checkWord(word) {
+    let letterObj = {};
+    this.state.letters.split(",").forEach(letter => {
+      letterObj[letter] ? (letterObj[letter] += 1) : (letterObj[letter] = 1);
+    });
+    for (let i = 0; i < word.length; i++) {
+      let letter = word[i];
+      if (!letterObj[letter] || letterObj[letter] === 0) {
+        return false;
+      }
+
+      letterObj[letter] -= 1;
+    }
+
+    return true;
+  }
+```
+
+The main use of checkWord is to make sure the word the player is trying to submit, has valid letters. The return value is a boolean since if it actually returns false, an error is add such as "Not using given letters". Last step is to check if the word being submitted is an actual word. This is done by checking the dictionary Set created, such lookup take O(1) time complexity which is extremly fast even though we have 120,000+ words in the Set.
+
+```javascript
+  if (this.props.dictionary.has(word) && check) {
+    let gameID = this.props.gameID;
+    let db = firebase.database();
+    db.ref(`Room/${gameID}/words`).push(word);
+    this.addAPoint();
+
+    this.setState({
+      word: "",
+      errors: ""
+    });
+```
+
 ## TODO
 
 - Implent a ranking page of the top 10 highest scores of all time.
@@ -108,3 +204,7 @@ Warning: setState(...): Can only update a mounted or mounting component. This us
 ## License
 
 <a rel="license" href="http://www.wtfpl.net/">WTFPL</a>
+
+```
+
+```

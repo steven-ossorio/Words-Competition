@@ -154,7 +154,7 @@ class Words extends Component {
 
       if (!check) {
         this.setState({
-          errors: 'Dictionary says: "Not a real word"',
+          errors: "Must use given letters only",
           word: ""
         });
         return;
@@ -171,7 +171,10 @@ class Words extends Component {
           errors: ""
         });
       } else {
-        this.setState({ errors: 'Dictionary says: "Not a real word"' });
+        this.setState({
+          errors: 'Dictionary says: "Not a real word"',
+          word: ""
+        });
       }
     }
   }
