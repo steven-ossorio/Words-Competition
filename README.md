@@ -76,11 +76,11 @@ The function _on_ which is seen on line 5 is used in order to create a websocket
   - GameID
     - Any changes from here
 
-Once changes do occur and update are done within React. The DOM will automatically be updated to show the changes that have occured. Within this function, two different types of data structures can be found, an Array and a Hash Table. One can normally see unshift as not optimal without a ring buffer since it'll produce an O(n) as each word needs to be shifted one to the right before places a new element to the front. Though that is the case, for this scenario we can see it as O(1) since a newly created game will at most have 20-30 words generated within 60 seconds and we wanted to keep track of words being in order. A replacement data structure for this scenario would have been a Linked List due to its O(1) pushing to the front and same O(n) look up. Second is the Hash Table, which could have been replaced with a Set due to the unrequired need of a value. Though that is the case, the functionality still words the same where we use it's O(1) look up to check if a word has already been used. Reason for not using an Array is because it'll be O(n)
+Once changes do occur and update are done within React. The DOM will automatically be updated to show the changes that have occured. Within this function, two different types of data structures can be found, an Array and a Hash Table. One can normally see unshift as not optimal without a ring buffer since it'll produce an O(n) as each word needs to be shifted one to the right before places a new element to the front. Though that is the case, for this scenario we can see it as O(1) since a newly created game will at most have 20-30 words generated within 60 seconds and we wanted to keep track of words being in order. A replacement data structure for this scenario would have been a Linked List due to its O(1) pushing to the front and same O(n) look up. Second is the Hash Table, which could have been replaced with a Set due to the unrequired need of a value. Though that is the case, the functionality still words the same where we use it's O(1) look up to check if a word has already been used.
 
 #### Firebase minor issue when Unmounting a component (React)
 
-Much similar to when we "subscribe" to listening/connecting to the backend in order to recieve realtime data, one must also not forget to disconnect when a component is unmounting. Such a solution is very simple by just providing the off function onto our previous reference.
+When using the .on function, what we are technically doing is subscribing to the backend by creating an active websocket for realtime data. This can cause an unexpected error when component unmounts which is why it's required to disconnect/close the websocket when unmounting a component. "One wouldn't fly a plane to a different destination with the door open, I hope".
 
 ```javascript
   componentWillUnmount() {
@@ -91,7 +91,7 @@ Much similar to when we "subscribe" to listening/connecting to the backend in or
   }
 ```
 
-If a person forgets to disconnect, it'll produce an error such as
+Disconnect is as simple as simply changing the on to off. This will cause the websocket to stop listening right before the component has successfully unmounted. The type of error that comes without disconnecting is as follows:
 
 ```javascript
 Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the _class component
