@@ -143,16 +143,23 @@ body {
     .landing-container-button:hover {
       cursor: pointer; }
   .landing-container-form {
+    position: relative;
     text-align: center;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin-top: 45px; }
+    .landing-container-form .username-error {
+      top: 20% !important; }
+    .landing-container-form .accesscode-error {
+      top: 47% !important; }
     .landing-container-form .create-errors {
+      position: absolute;
+      top: 32%;
+      left: 36%;
       margin-top: 15px;
       padding: 5px;
-      position: relative;
       background: #bb3500;
       border-radius: 0.4em;
       width: 250px;

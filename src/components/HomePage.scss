@@ -174,6 +174,7 @@ body {
     }
 
     &-form {
+      position: relative;
       text-align: center;
       margin: 0 auto;
       display: flex;
@@ -181,10 +182,19 @@ body {
       flex-direction: column;
       margin-top: 45px;
 
+      .username-error {
+        top: 20% !important;
+      }
+
+      .accesscode-error {
+        top: 47% !important;
+      }
       .create-errors {
+        position: absolute;
+        top: 32%;
+        left: 36%;
         margin-top: 15px;
         padding: 5px;
-        position: relative;
         background: #bb3500;
         border-radius: 0.4em;
         width: 250px;

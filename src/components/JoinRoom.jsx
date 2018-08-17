@@ -119,12 +119,16 @@ class Join extends Component {
 
   render() {
     let usernameError = this.state.errors["username"] ? (
-      <div className="create-errors">{this.state.errors["username"]}</div>
+      <div className="create-errors username-error">
+        {this.state.errors["username"]}
+      </div>
     ) : (
       ""
     );
     let accesscodeError = this.state.errors["accesscode"] ? (
-      <div className="create-errors">{this.state.errors["accesscode"]}</div>
+      <div className="create-errors accesscode-error">
+        {this.state.errors["accesscode"]}
+      </div>
     ) : (
       ""
     );
