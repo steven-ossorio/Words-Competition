@@ -1,6 +1,6 @@
 # Words
 
-A fun and fast paced word game using react.js on the frontend while using firebase useful websocket to keep track of changes in the game.
+A fun, fast and competative game which expects users to create as many words as possible within 60 seconds. Words front end was build with the use of [React.JS][https://reactjs.org/] and it's backend through the use of [Firebase][https://firebase.google.com/docs/].
 
 ## Contents
 
@@ -68,7 +68,7 @@ wordCollection() {
 
 The on within Firebase creats a connection to the backend where it'll constantly be listening for changes to occur. This connection allows for each user to listen and see changes occur as React components are updated due to changes in the state. There are two data structures used for this solution, an array and a hash table. Normally, unshift wouldn't be a good idea do to it's O(n) time in adding an element as it needs to shift every element a space to the right. Though that is the case, for this scenario we can see it as O(1) due to the low amount of words that will be within the array within 60 seconds. Second is the Hash table, upon looking at the solution, a Set could have been used as well since a key:value pair wasn't required. Both provide an O(1) search. This is important for when we want to make sure the word hasn't been used thus far.
 
-#### Firebase Bug
+#### Firebase minor issue when Unmounting a component (React)
 
 Much similar to when we "subscribe" to listening/connecting to the backend in order to recieve realtime data, one must also not forget to disconnect when a component is unmounting. Such a solution is very simple by just providing the off function onto our previous reference.
 
@@ -93,7 +93,6 @@ Warning: setState(...): Can only update a mounted or mounting component. This us
 - Add playable music for entertainment.
 - Allow up to only 4 players per room.
 - Opportunity to create an account in order to keep track of scores.
-- Follow DRY principle by refactoring reusable code.
 - Make game visually compatible across all borwsers.
 
 ## License
