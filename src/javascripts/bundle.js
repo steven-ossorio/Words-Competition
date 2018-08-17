@@ -15784,7 +15784,13 @@ var CreatedRoom = function (_Component) {
         var gameID = _this4.props.match.params.id;
         var db = _secretKeys2.default.database();
 
-        db.ref("Room/" + gameID + "/players/" + id).remove();
+        var playersRef = db.ref("Room/" + gameID + "/players/" + id);
+        playersRef.once("value", function (snapshot) {
+          db.ref("Room/" + gameID + "/scoreBoard/" + snapshot.val()).remove();
+        });
+
+        playersRef.remove();
+
         _this4.props.history.push({
           pathname: "/"
         });

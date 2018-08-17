@@ -137,7 +137,13 @@ class CreatedRoom extends Component {
       let gameID = this.props.match.params.id;
       let db = firebase.database();
 
-      db.ref(`Room/${gameID}/players/${id}`).remove();
+      let playersRef = db.ref(`Room/${gameID}/players/${id}`);
+      playersRef.once("value", snapshot => {
+        db.ref(`Room/${gameID}/scoreBoard/${snapshot.val()}`).remove();
+      });
+
+      playersRef.remove();
+
       this.props.history.push({
         pathname: "/"
       });
