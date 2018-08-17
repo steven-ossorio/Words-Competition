@@ -5,6 +5,7 @@ A fun, fast and competative game which expects users to create as many words as 
 ## Contents
 
 1. [Overview](#overview)
+   [Dictionary](#dictionary)
 1. [TODO](#todo)
 1. [License](#license)
 
