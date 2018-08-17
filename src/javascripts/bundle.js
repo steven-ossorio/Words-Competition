@@ -34200,24 +34200,10 @@ c){a=new Sl(a);c({INTERNAL:{getUid:r(a.getUid,a),getToken:r(a.cc,a),addAuthToken
 
 /***/ }),
 /* 126 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var config = {
-  apiKey: "AIzaSyDYGCVSwlV1cK5tVAZ0FJruJ2Z8g3-hMms",
-  authDomain: "words-b9f14.firebaseapp.com",
-  databaseURL: "https://words-b9f14.firebaseio.com",
-  projectId: "words-b9f14",
-  storageBucket: "words-b9f14.appspot.com",
-  messagingSenderId: "456007546970"
-};
-
-exports.default = config;
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/steven/Desktop/Words/src/firebase/firebaseConfigs.js'");
 
 /***/ }),
 /* 127 */
