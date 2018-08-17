@@ -10,14 +10,18 @@ A fun, fast and competative game which expects users to create as many words as 
 
 ## Overview
 
-Words is a fast pace solo/multi player game, where each individual tries to create as many words as possible. Through the generation of 9 random
-letters, a person must use those letters to think of a word.
+Words can be enjoyed by playing a solo round or inviting friends through an access code given to you upon creating a game.
 
 ### Rules
 
-- If a word has already been written, you can't create that word.
-- Point given to the first person who sends it.
-- A dictionary will check for valid English words (spanding over 100,000 words).
+The rules are simple and as follows:
+
+- Only the creator will be able to start the game.
+- One a word is in the word box, it can't be written again.
+- A point will be given to each word approved and send.
+  - First condition is the word follows the rule of only using the generated letters.
+  - Second condition is it exist within the dictionary as a valid word.
+  - Last condition is to check wheather the word has already been used or not.
 
 ### Dictionary
 
