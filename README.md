@@ -5,13 +5,17 @@ A fun, fast and competative game which expects users to create as many words as 
 ## Contents
 
 1. [Overview](#overview)
-   [Dictionary](#dictionary)
 1. [TODO](#todo)
 1. [License](#license)
 
 ## Overview
 
 Words can be enjoyed by playing a solo round or inviting friends through an access code given to you upon creating a game.
+
+- [Rules](#rules)
+- [Dictionary](#dictionary)
+- [Firebase](#firebase)
+- [Word](#word)
 
 ### Rules
 
